@@ -3,6 +3,7 @@ Volunteer portal for community arts festivals, built on React and Node
 ## Table of Contents
 
 - [Environment Setup](#environment-setup)
+- [Core Technologies](#core-technologies)
 - [Folder Structure](#folder-structure)
 - [Available Scripts](#available-scripts)
   - [yarn server](#yarn-server)
