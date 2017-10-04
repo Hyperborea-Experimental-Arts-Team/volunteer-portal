@@ -8,9 +8,6 @@
 }
 
 .reversed .logo {
-  -webkit-animation-direction: reverse;
-  -moz-animation-direction: reverse;
-  -o-animation-direction: reverse;
   animation-direction: reverse;
 }
 
