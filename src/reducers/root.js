@@ -6,6 +6,9 @@
  * @since Oct 2017
  **/
 
-export default (state = {}, action) => {
-  return state;
-}
+import { combineReducers } from 'redux'
+import splash from './splash';
+
+export default combineReducers({
+  splash
+});

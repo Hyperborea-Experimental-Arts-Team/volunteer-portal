@@ -7,6 +7,13 @@
   height: 80px;
 }
 
+.reversed .logo {
+  -webkit-animation-direction: reverse;
+  -moz-animation-direction: reverse;
+  -o-animation-direction: reverse;
+  animation-direction: reverse;
+}
+
 .header {
   background-color: #222;
   height: 150px;

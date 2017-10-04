@@ -10,16 +10,22 @@ import React from 'react';
 import logo from '../images/logo.svg';
 import styles from './Splash.css';
 
-const Splash = () => (
-  <div className={styles.Splash}>
-    <header className={styles.header}>
-      <img src={logo} className={styles.logo} alt="logo" />
-      <h1 className={styles.title}>ENLIST NOW</h1>
-    </header>
-    <p className={styles.intro}>
-      Service guarantees citizenship
-    </p>
-  </div>
-);
+const Splash = ({ reverse, onLogoClick }) => {
+  const className = [ styles.Splash ];
+  if (reverse) {
+    className.push(styles.reversed);
+  }
+  return (
+    <div className={className.join(' ')}>
+      <header className={styles.header}>
+        <img src={logo} className={styles.logo} alt="logo" onClick={ () => onLogoClick() } />
+        <h1 className={styles.title}>ENLIST NOW</h1>
+      </header>
+      <p className={styles.intro}>
+        Service guarantees citizenship
+      </p>
+    </div>
+  );
+};
 
 export default Splash;
