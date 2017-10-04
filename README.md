@@ -12,7 +12,6 @@ Volunteer portal for community arts festivals, built on React and Node
   - [yarn build](#yarn-build)
 - [Running Tests](#running-tests)
   - [Filename Conventions](#filename-conventions)
-  - [Command Line Interface](#command-line-interface)
   - [Version Control Integration](#version-control-integration)
   - [Writing Tests](#writing-tests)
 
@@ -91,12 +90,6 @@ Jest will look for test files with any of the following popular naming conventio
 * Files with `.spec.js` suffix.
 
 The `.test.js` / `.spec.js` files (or the `__tests__` folders) can be located at any depth under the `src` top level folder.
-
-### Command Line Interface
-
-When you run `yarn test`, Jest will launch in the watch mode. Every time you save a file, it will re-run the tests, just like `yarn start` recompiles the code.
-
-![Jest watch mode](http://facebook.github.io/jest/img/blog/15-watch.gif)
 
 ### Writing Tests
 
