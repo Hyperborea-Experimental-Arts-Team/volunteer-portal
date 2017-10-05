@@ -57,7 +57,9 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "server": "node server/index.js"
+    "server": "node server/index.js",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -101,6 +103,9 @@
     "extends": "react-app"
   },
   "devDependencies": {
-    "redux-devtools": "^3.4.0"
+    "redux-devtools": "^3.4.0",
+    "@storybook/react": "^3.2.12",
+    "@storybook/addon-actions": "^3.2.12",
+    "@storybook/addon-links": "^3.2.12"
   }
 }
