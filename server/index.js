@@ -11,9 +11,16 @@
 const express = require('express');
 const config = require('config');
 const path = require('path');
+const passport = require('passport');
+const session = require('express-session');
 const api = require('./api');
 
 const app = express();
+
+// Configure passport for authentication
+app.use(session({ secret: 'thisistotallysecure' }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'build')));

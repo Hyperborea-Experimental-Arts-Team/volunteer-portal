@@ -1,0 +1,12 @@
+.Button {
+    width: 200px;
+    border-radius: 4px;
+    border: 1px solid #333;
+    text-align: center;
+    cursor: pointer;
+    line-height: 40px;
+}
+
+.Button:hover {
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+}

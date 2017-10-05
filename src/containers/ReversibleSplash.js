@@ -1,4 +1,4 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { reverseSpin } from '../actions/splash';
 import Splash from '../components/Splash';
 
