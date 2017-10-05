@@ -46,6 +46,7 @@ volunteer-portal/
     images/       - Images needed by React components
     reducers/     - Redux reducers
   test/           - Tests
+  stories/        - Component definitions for Storybook
 ```
 
 ## Available Scripts
