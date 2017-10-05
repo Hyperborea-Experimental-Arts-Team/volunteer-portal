@@ -29,6 +29,7 @@ Volunteer portal for community arts festivals, built on React and Node
 * [Express](https://expressjs.com/) - Web framework running on NodeJS, serves the API and the React SPA
 * [Redux](http://redux.js.org/) - State management library that enforces uni-directional data flow
 * [React](https://reactjs.org/) - Library for building declarative user interfaces
+* [Storybook](https://storybook.js.org/) - Environment for viewing and testing React components in isolation
 
 ## Folder Structure
 
@@ -76,6 +77,12 @@ See the section about [running tests](#running-tests) for more information.
 
 Builds the app for production to the `build` folder.
 This must be done before the app can be served by Express.
+
+
+### `yarn storybook`
+
+Launches the storybook environment, allowing you to view and interact 
+with React components without running the actual app.
 
 ## Running Tests
 
