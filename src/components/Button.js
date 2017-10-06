@@ -8,8 +8,8 @@
 import React from 'react';
 import styles from './Button.css';
 
-export default ({ text, onClick }) => {
+export default ({ text, type, onClick }) => {
   return (
-    <div className={styles.Button} onClick={onClick}>{text}</div>
+    <button className={styles.Button} type={type} onClick={onClick}>{text}</button>
   );
 };

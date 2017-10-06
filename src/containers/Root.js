@@ -12,7 +12,7 @@ import splashReducer from '../reducers/splash';
 import authReducer from '../reducers/auth';
 
 import ReversibleSplash from '../containers/ReversibleSplash';
-import Login from '../components/Login';
+import LoginForm from '../components/LoginForm';
 import PrivateRoute from './PrivateRoute';
 
 // Create browser history object
@@ -39,7 +39,7 @@ export default () => (
     <ConnectedRouter history={history}>
       <div>
         <PrivateRoute exact path="/" component={ReversibleSplash} />
-        <Route path="/login" component={Login} />
+        <Route path="/login" component={LoginForm} />
       </div>
     </ConnectedRouter>
   </Provider>
