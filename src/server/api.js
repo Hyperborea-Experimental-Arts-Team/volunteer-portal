@@ -5,8 +5,9 @@
  * @author mtownsend
  * @since Oct 2017
  **/
+import express from 'express';
 
-const router = require('express').Router();
+const router = express.Router();
 
 router.get('/test', (request, response) => {
   response.json({'data' : 'Nyan'});
@@ -16,4 +17,4 @@ router.post('/test', (request, response) => {
   response.json({'data' : 'Butts'});
 });
 
-module.exports = router;
+export default router;

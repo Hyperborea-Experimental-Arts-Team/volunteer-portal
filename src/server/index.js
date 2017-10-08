@@ -8,12 +8,12 @@
 
 'use strict';
 
-const express = require('express');
-const config = require('config');
-const path = require('path');
-const passport = require('passport');
-const session = require('express-session');
-const api = require('./api');
+import express from 'express';
+import config from 'config';
+import path from 'path';
+import passport from 'passport';
+import session from 'express-session';
+import api from './api';
 
 const app = express();
 
@@ -23,14 +23,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Serve static assets
-app.use(express.static(path.resolve(__dirname, '..', 'build')));
+app.use(express.static(path.resolve(__dirname, '..', 'client')));
 
 // Send all api requests to the api router
 app.use('/api', api);
 
 // Send everything else to index.html, so react-router renders the route in the client
 app.get('*', (request, response) => {
-  response.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
+  response.sendFile(path.resolve(__dirname, '..', 'client', 'index.html'));
 });
 
 const server = app.listen(config.get('server.port'), function () {
