@@ -11,7 +11,7 @@ import Button from './Button';
 import AuthButton from '../containers/AuthButton';
 import TextInput from './TextInput';
 import { login, logout } from '../actions/auth';
-import styles from './LoginForm.css';
+//import styles from './LoginForm.css';
 
 class LoginForm extends React.Component {
 
@@ -52,7 +52,7 @@ class LoginForm extends React.Component {
     const { email, password, submitted } = this.state;
 
     return (
-      <form className={styles.LoginForm} onSubmit={this.handleSubmit}>
+      <form  onSubmit={this.handleSubmit}>
         THIS IS THE LOGIN PAGE
         <TextInput name="email" value={email} placeholder="Email Address" onChange={this.handleChange} />
         <TextInput name="password" value={password} placeholder="Password" onChange={this.handleChange} />

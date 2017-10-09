@@ -7,21 +7,17 @@
  **/
 
 import React from 'react';
-import logo from '../images/logo.svg';
-import styles from './Splash.css';
+//import logo from '../images/logo.svg';
+//import styles from './Splash.css';
 
 const Splash = ({ reverse, onLogoClick }) => {
-  const className = [ styles.Splash ];
-  if (reverse) {
-    className.push(styles.reversed);
-  }
+
   return (
-    <div className={className.join(' ')}>
-      <header className={styles.header}>
-        <img src={logo} className={styles.logo} alt="logo" onClick={ () => onLogoClick() } />
-        <h1 className={styles.title}>ENLIST NOW</h1>
+    <div >
+      <header >
+        <h1 >ENLIST NOW</h1>
       </header>
-      <p className={styles.intro}>
+      <p >
         Service guarantees citizenship
       </p>
     </div>

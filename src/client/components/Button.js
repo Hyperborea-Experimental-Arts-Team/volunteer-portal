@@ -6,10 +6,10 @@
  **/
 
 import React from 'react';
-import styles from './Button.css';
+//import styles from './Button.css';
 
 export default ({ text, type, onClick }) => {
   return (
-    <button className={styles.Button} type={type} onClick={onClick}>{text}</button>
+    <button  type={type} onClick={onClick}>{text}</button>
   );
 };

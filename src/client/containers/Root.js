@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-import createHistory from 'history/createBrowserHistory';
+import { createBrowserHistory, createMemoryHistory } from 'history';
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux'
 
 import splashReducer from '../reducers/splash';
@@ -15,8 +15,9 @@ import ReversibleSplash from '../containers/ReversibleSplash';
 import LoginForm from '../components/LoginForm';
 import PrivateRoute from './PrivateRoute';
 
-// Create browser history object
-const history = createHistory();
+
+const history = createMemoryHistory(); // createBrowserHistory();
+
 const loggerMiddleware = createLogger();
 const routeMiddleware = routerMiddleware(history);
 
