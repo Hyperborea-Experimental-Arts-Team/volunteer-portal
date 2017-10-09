@@ -59,6 +59,8 @@ In the project directory, you can run:
 Runs the entire application in development mode. Changes in the source will be visible without rebuilding, and changes
 to the React application will be hot-reloaded. 
 
+The React application will start on port 3000, with the API on port 3001.
+
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ### `yarn build`
