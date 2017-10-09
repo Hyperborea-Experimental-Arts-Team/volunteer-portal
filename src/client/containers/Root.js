@@ -10,6 +10,7 @@ import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-r
 
 import splashReducer from '../reducers/splash';
 import authReducer from '../reducers/auth';
+import cacheReducer from '../reducers/serviceCache';
 
 import ReversibleSplash from '../containers/ReversibleSplash';
 import LoginForm from '../components/LoginForm';
@@ -25,7 +26,8 @@ const store = createStore(
   combineReducers({
     splash: splashReducer,
     auth: authReducer,
-    router: routerReducer
+    router: routerReducer,
+    serviceCache: cacheReducer
   }),
   applyMiddleware(
     thunkMiddleware,
