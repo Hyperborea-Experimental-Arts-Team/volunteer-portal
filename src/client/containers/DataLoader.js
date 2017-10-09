@@ -27,7 +27,8 @@ class DataLoader extends React.Component {
     const {
       serviceCall,
       serviceCache,
-      component: Component
+      component: Component,
+      ...rest
     } = this.props;
     const data = serviceCache[serviceCall];
 
@@ -38,7 +39,7 @@ class DataLoader extends React.Component {
 
     // Render the child Component with the response data
     return (
-      <Component {...data} />
+      <Component {...data} {...rest} />
     );
   }
 
