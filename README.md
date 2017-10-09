@@ -39,7 +39,6 @@ volunteer-portal/
   config/         - Configuration files
   public/         - Static files that don't get processed by React
   scripts/        - Support scripts for build/test/deploy tasks
-  server/         - Server logic for the JSON REST API
   src/            - Uncompiled source code
     server/       - Source for the server application
     client/       - Source for the client application
