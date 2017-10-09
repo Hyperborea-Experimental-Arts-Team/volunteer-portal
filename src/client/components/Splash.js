@@ -10,6 +10,9 @@ import React from 'react';
 import logo from '../images/logo.svg';
 import styles from './Splash.css';
 
+import DataLoader from '../containers/DataLoader';
+import JsonView from './JsonView'
+
 const Splash = ({ reverse, onLogoClick }) => {
   const className = [ styles.Splash ];
   if (reverse) {
@@ -24,6 +27,9 @@ const Splash = ({ reverse, onLogoClick }) => {
       <p className={styles.intro}>
         Service guarantees citizenship
       </p>
+      <div className={styles.dataView}>
+        <DataLoader serviceCall="test" component={JsonView} />
+      </div>
     </div>
   );
 };
