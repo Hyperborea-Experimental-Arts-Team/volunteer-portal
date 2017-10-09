@@ -40,7 +40,7 @@ export default () => (
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <div>
-        <PrivateRoute exact path="/" component={ReversibleSplash} />
+        <PrivateRoute path="/" component={ReversibleSplash} />
         <Route path="/login" component={LoginForm} />
       </div>
     </ConnectedRouter>

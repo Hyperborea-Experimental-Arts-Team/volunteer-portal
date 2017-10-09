@@ -19,7 +19,7 @@ class LoginForm extends React.Component {
     super(props);
 
     // reset login status
-    this.props.dispatch(logout());
+    this.props.onLogout();
 
     this.state = {
       email: '',
@@ -41,10 +41,7 @@ class LoginForm extends React.Component {
 
     this.setState({ submitted: true });
     const { email, password } = this.state;
-    const { dispatch } = this.props;
-    if (email && password) {
-      dispatch(login(email, password));
-    }
+    email && password && this.props.onLogin(email, password);
   }
 
   render() {
@@ -69,4 +66,11 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(LoginForm);
+function mapDispatchToProps(dispatch) {
+  return {
+    onLogin: (email, password) => dispatch(login(email, password)),
+    onLogout: () => dispatch(logout())
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

@@ -5,20 +5,24 @@
  * @since Oct 2017
  **/
 import { push } from 'react-router-redux';
+import * as api from '../api';
 
 export const LOGGED_IN = 'LOGGED_IN';
 export const LOG_OUT = 'LOG_OUT';
 
-function loggedIn(email) {
-  return { type: LOGGED_IN, email };
+function loggedIn(user) {
+  return { type: LOGGED_IN, user };
 }
 
 export function login(email, password) {
-  // TODO: Actually call the server and authenticate
-  return dispatch => {
-    dispatch(loggedIn(email));
-    dispatch(push('/'));
-  };
+
+  return dispatch =>
+    // TODO: Hash the password
+    api.post('auth', { email, password }).then(response => {
+      // TODO: Handle invalid login
+      dispatch(loggedIn({ email: response.email }));
+      dispatch(push('/'));
+    });
 }
 
 export function logout() {
