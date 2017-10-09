@@ -10,11 +10,11 @@ import express from 'express';
 const router = express.Router();
 
 router.get('/test', (request, response) => {
-  response.json({'data' : 'Nyan'});
+  response.json({'data' : 'Butts'});
 });
 
 router.post('/test', (request, response) => {
-  response.json({'data' : 'Butts'});
+  response.json({'data' : 'Nyan'});
 });
 
 export default router;

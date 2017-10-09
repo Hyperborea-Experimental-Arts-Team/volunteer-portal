@@ -26,6 +26,7 @@ Volunteer portal for community arts festivals, built on React and Node
 ## Core Technologies
 
 * [NodeJS](https://nodejs.org) - Server-side javascript runtime environment
+* [Babel](https://babeljs.io) - Javascript compiler
 * [Express](https://expressjs.com/) - Web framework running on NodeJS, serves the API and the React SPA
 * [Redux](http://redux.js.org/) - State management library that enforces uni-directional data flow
 * [React](https://reactjs.org/) - Library for building declarative user interfaces
@@ -35,17 +36,18 @@ Volunteer portal for community arts festivals, built on React and Node
 
 ```
 volunteer-portal/
-  config/         - Configuration files for various build/test/deploy tools
+  config/         - Configuration files
   public/         - Static files that don't get processed by React
   scripts/        - Support scripts for build/test/deploy tasks
   server/         - Server logic for the JSON REST API
-  src/            - Front end logic for the React application
-    actions/      - Redux actions
-    components/   - React presentational components
-    containers/   - React container components
-    images/       - Images needed by React components
-    reducers/     - Redux reducers
-  test/           - Tests
+  src/            - Uncompiled source code
+    server/       - Source for the server application
+    client/       - Source for the client application
+      actions/    - Redux actions
+      components/ - React presentational components
+      containers/ - React container components
+      images/     - Images needed by React components
+      reducers/   - Redux reducers
   stories/        - Component definitions for Storybook
 ```
 
@@ -53,37 +55,51 @@ volunteer-portal/
 
 In the project directory, you can run:
 
-### `yarn server`
-
-Starts the application server, including the REST API and the React SPA. Port is configured
-in `config/default.json`. The API will be available at the path /api, and the React PSA will 
-route all other URLS on the client-side.
-
-You must run `yarn build` before starting the server.
-
 ### `yarn start`
 
-Runs the React application in the development mode.
+Runs the entire application in development mode. Changes in the source will be visible without rebuilding, and changes
+to the React application will be hot-reloaded. 
+
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.
-You will also see lint errors and Redux actions in the console
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](#running-tests) for more information.
 
 ### `yarn build`
 
-Builds the app for production to the `build` folder.
-This must be done before the app can be served by Express.
+Builds the entire application into a production-ready bundle.
 
+### `yarn server:start`
+
+Starts the application server in development mode, hosting the API only. Changes in the source will be visible without
+rebuilding. You probably don't want to run this by itself, because it will be unable to route to the React front-end.
+
+For development, you should just run [`yarn start`](#yarn-start)
+
+### `yarn server:build`
+
+Builds the server application into a production-ready bundle.
+
+### `yarn server:test`
+
+Doesn't exist! Someone should probably write tests for the server...
+
+### `yarn client:start`
+
+Starts the React application in development mode. Changes to the source will be hot-reloaded without rebuilding.
+You probably don't want to run this by itself, because the API will not be online.
+
+For development, you should just run [`yarn start`](#yarn-start)
+
+### `yarn client:build`
+
+Builds the client application into a production-ready bundle.
+
+### `yarn client:test`
+
+Launches the test runner for the client application in interactive watch mode.
+See the section about [running tests](#running-tests) for more information.
 
 ### `yarn storybook`
 
-Launches the storybook environment, allowing you to view and interact 
-with React components without running the actual app.
+Launches the storybook environment, allowing you to view and interact with React components without running the actual app.
 
 ## Running Tests
 

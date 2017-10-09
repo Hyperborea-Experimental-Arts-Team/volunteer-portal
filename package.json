@@ -58,14 +58,18 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "client:start": "node scripts/start.js",
-    "client:build": "node scripts/build.js",
-    "client:test": "node scripts/test.js --env=jsdom",
-    "server:start": "node server/index.js",
+    "start": "concurrently \"yarn server:start\" \"yarn client:start\"",
+    "build": "node scripts/build-all.js",
+    "clean": "rm -rf ./build",
+    "client:start": "node scripts/start-client.js",
+    "client:build": "node scripts/build-client.js",
+    "client:clean": "rm -rf ./build/client",
+    "client:test": "node scripts/test-client.js --env=jsdom",
+    "server:start": "nodemon src/server/index.js --exec babel-node",
     "server:build": "babel src/server -d build/server",
+    "server:clean": "rm -rf ./build/server",
     "storybook:start": "start-storybook -p 6006",
-    "storybook:build": "build-storybook",
-    "build": ""
+    "storybook:build": "build-storybook"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -112,6 +116,9 @@
     "@storybook/addon-actions": "^3.2.12",
     "@storybook/addon-links": "^3.2.12",
     "@storybook/react": "^3.2.12",
+    "concurrently": "^3.5.0",
+    "nodemon": "^1.12.1",
     "redux-devtools": "^3.4.0"
-  }
+  },
+  "proxy": "http://localhost:3001"
 }
