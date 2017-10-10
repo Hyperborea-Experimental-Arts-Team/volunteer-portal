@@ -12,13 +12,14 @@ import { load } from '../actions/serviceCache';
 
 const mapStateToProps = state => {
   return {
-    serviceCache: state.serviceCache
+    serviceCache: state.serviceCache,
+    token: state.auth.token
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadData: call => dispatch(load(call))
+    loadData: (call, token) => dispatch(load(call, token))
   };
 };
 
@@ -28,6 +29,7 @@ class DataLoader extends React.Component {
       serviceCall,
       serviceCache,
       component: Component,
+      token,
       ...rest
     } = this.props;
     const data = serviceCache[serviceCall];
@@ -44,12 +46,12 @@ class DataLoader extends React.Component {
   }
 
   componentDidMount() {
-    const { serviceCall, serviceCache, loadData } = this.props;
+    const { serviceCall, serviceCache, loadData, token } = this.props;
     const data = serviceCache[serviceCall];
 
     // Data isn't already in the cache, so request it
     if (!data) {
-      loadData(serviceCall);
+      loadData(serviceCall, token);
     }
   }
 }

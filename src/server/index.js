@@ -12,10 +12,11 @@ import express from 'express';
 import config from 'config';
 import path from 'path';
 import passport from 'passport';
-import session from 'express-session';
+//import session from 'express-session';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 
+import { configurePassport } from './auth';
 import api from './api';
 
 const app = express();
@@ -24,9 +25,10 @@ app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.json()); // get information from html forms
 
 // Configure passport for authentication
-app.use(session({ secret: 'thisistotallysecure' }));
+//app.use(session({ secret: config.get('jwtSecret') }));
 app.use(passport.initialize());
-app.use(passport.session());
+//app.use(passport.session());
+configurePassport(passport);
 
 // Serve static assets
 app.use(express.static(path.resolve(__dirname, '..', 'client')));

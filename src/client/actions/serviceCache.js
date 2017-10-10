@@ -13,7 +13,7 @@ function loaded(call, data) {
   return { type: DATA_LOADED, call, data };
 }
 
-export function load(call) {
-  return dispatch => api.get(call)
+export function load(call, token) {
+  return dispatch => api.get(call, token)
     .then(response => dispatch(loaded(call, response.data)));
 }

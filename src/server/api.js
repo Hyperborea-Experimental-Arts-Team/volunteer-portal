@@ -8,9 +8,7 @@
 import express from 'express';
 import passport from 'passport';
 
-import { isLoggedIn, configPassport } from './auth';
-
-configPassport(passport);
+import { isLoggedIn } from './auth';
 
 const router = express.Router();
 
@@ -19,11 +17,18 @@ router.get('/test', isLoggedIn, (request, response) => {
 });
 
 router.post('/auth', (request, response) => {
-  passport.authenticate('local-login', function (err, user) {
-    if (err) {
-      return response.status(401).send(`{"error":"${err}"}`);
+  passport.authenticate('local-login', function (err, token, user) {
+    if (err || !token) {
+      return response.status(400).json({
+        success: false,
+        message: err && err.message
+      });
     }
-    response.send(JSON.stringify(user));
+    return response.json({
+      success: true,
+      token,
+      user
+    });
   })(request, response);
 });
 
