@@ -6,22 +6,25 @@
  * @since Oct 2017
  **/
 import express from 'express';
+import passport from 'passport';
+
+import { isLoggedIn, configPassport } from './auth';
+
+configPassport(passport);
 
 const router = express.Router();
 
-router.get('/test', (request, response) => {
+router.get('/test', isLoggedIn, (request, response) => {
   response.json({'data' : 'Butts'});
 });
 
-router.post('/test', (request, response) => {
-  response.json({'data' : 'Nyan'});
-});
-
 router.post('/auth', (request, response) => {
-  // TODO: Actually authenticate
-  response.json({
-    email: 'butts@butts.com'
-  });
+  passport.authenticate('local-login', function (err, user) {
+    if (err) {
+      return response.status(401).send(`{"error":"${err}"}`);
+    }
+    response.send(JSON.stringify(user));
+  })(request, response);
 });
 
 router.use((request, response) => {

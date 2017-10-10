@@ -17,10 +17,13 @@ function loggedIn(user) {
 export function login(email, password) {
 
   return dispatch =>
-    // TODO: Hash the password
     api.post('auth', { email, password }).then(response => {
-      // TODO: Handle invalid login
-      dispatch(loggedIn({ email: response.email }));
+      if (response.status !== 200) {
+        // TODO: Dispatch a login failed action for visual feedback
+        console.error(response.data.error);
+        return;
+      }
+      dispatch(loggedIn({ email: response.data.email }));
       dispatch(push('/'));
     });
 }

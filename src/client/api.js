@@ -10,6 +10,10 @@ import fetch from 'isomorphic-fetch';
 
 const API_PATH = 'api/';
 
+function handleResponse(response) {
+  return response.json().then(data => ({ status: response.status, data }));
+}
+
 /**
  * Posts data to an API endpoint
  * @param {string} endpoint - The path to which to POST
@@ -24,8 +28,8 @@ export function post(endpoint, data) {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: data
-  }).then(response => response.json());
+    body: JSON.stringify(data)
+  }).then(handleResponse);
 }
 
 /**
@@ -40,5 +44,5 @@ export function get(endpoint) {
     headers: {
       'Accept': 'application/json'
     }
-  }).then(response => response.json());
+  }).then(handleResponse);
 }

@@ -15,5 +15,5 @@ function loaded(call, data) {
 
 export function load(call) {
   return dispatch => api.get(call)
-    .then(data => dispatch(loaded(call, data)));
+    .then(response => dispatch(loaded(call, response.data)));
 }

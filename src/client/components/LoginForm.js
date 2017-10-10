@@ -50,7 +50,7 @@ class LoginForm extends React.Component {
 
     return (
       <form className={styles.LoginForm} onSubmit={this.handleSubmit}>
-        THIS IS THE LOGIN PAGE
+        The login is butts@butts.com:buttsRgr8
         <TextInput name="email" value={email} placeholder="Email Address" onChange={this.handleChange} />
         <TextInput name="password" value={password} placeholder="Password" onChange={this.handleChange} />
         <Button text="Submit" type="submit" />
