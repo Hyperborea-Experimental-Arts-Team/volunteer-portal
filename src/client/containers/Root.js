@@ -18,6 +18,7 @@ import ReversibleSplash from './ReversibleSplash';
 import PrivateRoute from './PrivateRoute';
 
 import { autologin } from '../actions/auth';
+import { invalidate } from '../actions/serviceCache';
 
 // Create browser history object
 const history = createHistory();
@@ -61,6 +62,12 @@ const store = createStore(
 if (token) {
   // Now actually check the token
   store.dispatch(autologin(token));
+}
+
+// Debugging tool for invalidating response caches
+// TODO: Remove this in production
+if (typeof window !== 'undefined' && window) {
+  window.invalidate = () => store.dispatch(invalidate());
 }
 
 export default () => (

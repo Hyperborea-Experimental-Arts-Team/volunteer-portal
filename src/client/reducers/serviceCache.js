@@ -5,13 +5,11 @@
  * @since Oct 2017
  */
 
-import { DATA_LOADED } from '../actions/serviceCache';
-import { LOGGED_IN } from '../actions/auth';
+import { DATA_LOADED, INVALIDATE } from '../actions/serviceCache';
 
 export default (state = {}, action) => {
   switch(action.type) {
-    case LOGGED_IN:
-      // Fresh login means all the responses could be invalid
+    case INVALIDATE:
       return {};
     case DATA_LOADED:
       return Object.assign({}, state, { [action.call]: action.data });
