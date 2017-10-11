@@ -11,7 +11,6 @@ import React from 'react';
 import DataLoader from '../containers/DataLoader';
 import JsonView from './JsonView'
 
-import { concat } from '../util';
 import logo from '../images/logo-blk.svg';
 import style from './Splash.css';
 import theme from '../theme.css';

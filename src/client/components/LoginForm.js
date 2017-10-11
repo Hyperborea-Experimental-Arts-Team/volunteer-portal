@@ -8,7 +8,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Button from './Button';
-import AuthButton from '../containers/AuthButton';
 import TextInput from './TextInput';
 import { login, logout } from '../actions/auth';
 import { concat } from '../util';
@@ -49,8 +48,7 @@ class LoginForm extends React.Component {
   }
 
   render() {
-    const { loggingIn } = this.props;
-    const { email, password, submitted } = this.state;
+    const { email, password } = this.state;
 
     return (
       <form className={concat(grid.col_3, theme.bg_content, style.LoginForm)} onSubmit={this.handleSubmit}>

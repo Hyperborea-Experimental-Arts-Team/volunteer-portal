@@ -4,7 +4,7 @@ import { concat } from '../util';
 import theme from '../theme.css';
 import style from './Header.css';
 
-export default ({}) => (
+export default () => (
   <header className={concat(
       theme.bg_2,
       theme.txt_1,

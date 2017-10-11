@@ -38,6 +38,8 @@ export function isLoggedIn(request, response, next) {
         return nope(response);
       }
 
+      request.user = user;
+
       return next();
     });
   });

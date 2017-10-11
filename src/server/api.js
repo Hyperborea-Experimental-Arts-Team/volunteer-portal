@@ -32,6 +32,13 @@ router.post('/auth', (request, response) => {
   })(request, response);
 });
 
+router.get('/auth', isLoggedIn, (request, response) => {
+  response.json({
+    success: true,
+    user: request.user
+  });
+});
+
 router.use((request, response) => {
   response.status(404).send("{}");
 });
