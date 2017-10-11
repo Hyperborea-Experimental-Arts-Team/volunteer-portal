@@ -11,7 +11,11 @@ import Button from './Button';
 import AuthButton from '../containers/AuthButton';
 import TextInput from './TextInput';
 import { login, logout } from '../actions/auth';
-import styles from './LoginForm.css';
+import { concat } from '../util';
+
+import grid from '../grid.css';
+import theme from '../theme.css';
+import style from './LoginForm.css';
 
 class LoginForm extends React.Component {
 
@@ -49,7 +53,7 @@ class LoginForm extends React.Component {
     const { email, password, submitted } = this.state;
 
     return (
-      <form className={styles.LoginForm} onSubmit={this.handleSubmit}>
+      <form className={concat(grid.col_3, theme.bg_content, style.LoginForm)} onSubmit={this.handleSubmit}>
         The login is butts@butts.com:buttsRgr8
         <TextInput name="email" value={email} placeholder="Email Address" onChange={this.handleChange} />
         <TextInput name="password" value={password} placeholder="Password" onChange={this.handleChange} />

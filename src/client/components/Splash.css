@@ -1,5 +1,6 @@
 .Splash {
   text-align: center;
+  padding: 20px;
 }
 
 .logo {
@@ -7,15 +8,12 @@
   height: 80px;
 }
 
-.reversed .logo {
-  animation-direction: reverse;
+.logo > g {
+  fill: black;
 }
 
-.header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.reversed .logo {
+  animation-direction: reverse;
 }
 
 .title {

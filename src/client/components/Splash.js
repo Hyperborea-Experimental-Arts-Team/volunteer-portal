@@ -7,27 +7,29 @@
  **/
 
 import React from 'react';
-import logo from '../images/logo.svg';
-import styles from './Splash.css';
 
 import DataLoader from '../containers/DataLoader';
 import JsonView from './JsonView'
 
+import { concat } from '../util';
+import logo from '../images/logo-blk.svg';
+import style from './Splash.css';
+import theme from '../theme.css';
+import grid from '../grid.css';
+
 const Splash = ({ reverse, onLogoClick }) => {
-  const className = [ styles.Splash ];
+  const className = [ grid.col_full, theme.bg_content, style.Splash ];
   if (reverse) {
-    className.push(styles.reversed);
+    className.push(style.reversed);
   }
   return (
     <div className={className.join(' ')}>
-      <header className={styles.header}>
-        <img src={logo} className={styles.logo} alt="logo" onClick={ () => onLogoClick() } />
-        <h1 className={styles.title}>ENLIST NOW</h1>
-      </header>
-      <p className={styles.intro}>
+      <img src={logo} className={style.logo} alt="logo" onClick={ () => onLogoClick() } />
+      <h1 className={style.title}>ENLIST NOW</h1>
+      <p className={style.intro}>
         Service guarantees citizenship
       </p>
-      <div className={styles.dataView}>
+      <div className={style.dataView}>
         <DataLoader serviceCall="test" component={JsonView} />
       </div>
     </div>

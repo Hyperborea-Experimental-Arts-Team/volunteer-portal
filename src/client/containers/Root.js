@@ -12,8 +12,9 @@ import splashReducer from '../reducers/splash';
 import authReducer from '../reducers/auth';
 import cacheReducer from '../reducers/serviceCache';
 
-import ReversibleSplash from '../containers/ReversibleSplash';
+import Page from '../components/Page';
 import LoginForm from '../components/LoginForm';
+import ReversibleSplash from './ReversibleSplash';
 import PrivateRoute from './PrivateRoute';
 
 // Create browser history object
@@ -39,10 +40,10 @@ const store = createStore(
 export default () => (
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <div>
+      <Page>
         <PrivateRoute path="/" component={ReversibleSplash} />
         <Route path="/login" component={LoginForm} />
-      </div>
+      </Page>
     </ConnectedRouter>
   </Provider>
 );

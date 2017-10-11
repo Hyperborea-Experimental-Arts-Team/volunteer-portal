@@ -1,0 +1,87 @@
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -10px;
+}
+
+.grid > [class*='col_'] {
+  min-height: 1px;
+  margin: 10px;
+}
+
+.grid > .col_full {
+  width: 100%;
+}
+
+/* :: MOBILE :: 3 columns wide */
+.grid > .col_1 {
+  width: 33.33%
+}
+.grid > .col_2 {
+  width: 66.66%
+}
+.grid > .col_3 {
+  width: 100%
+}
+
+/* :: TABLET :: 6 columns wide */
+@media (min-width: 720px) {
+  .grid > .col_1 {
+    width: 16.66%;
+  }
+  .grid > .col_2 {
+    width: 33.33%;
+  }
+  .grid > .col_3 {
+    width: 49.99%;
+  }
+  .grid > .col_4 {
+    width: 66.66%;
+  }
+  .grid > .col_5 {
+    width: 83.33%;
+  }
+  .grid > .col_6 {
+    width: 100%;
+  }
+}
+
+/* :: DESKTOP :: 12 columns wide */
+@media (min-width: 1024px) {
+  .grid > .col_1 {
+    width: 8.33%;
+  }
+  .grid > .col_2 {
+    width: 16.66%;
+  }
+  .grid > .col_3 {
+    width: 24.99%;
+  }
+  .grid > .col_4 {
+    width: 33.33%;
+  }
+  .grid > .col_5 {
+    width: 41.66%;
+  }
+  .grid > .col_6 {
+    width: 49.99%;
+  }
+  .grid > .col_7 {
+    width: 58.33%;
+  }
+  .grid > .col_8 {
+    width: 66.66%;
+  }
+  .grid > .col_9 {
+    width: 74.99%;
+  }
+  .grid > .col_10 {
+    width: 83.33%;
+  }
+  .grid > .col_11 {
+    width: 91.66%;
+  }
+  .grid > .col_12 {
+    width: 100%;
+  }
+}

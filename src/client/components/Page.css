@@ -1,0 +1,19 @@
+.Page {
+  min-height: 100%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.Page > * {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.content {
+  flex-grow: 2;
+}
+
+.layout.layout {
+  margin-top: -40px;
+}
