@@ -1,5 +1,7 @@
 .LoginForm {
   padding: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .LoginForm > * {
