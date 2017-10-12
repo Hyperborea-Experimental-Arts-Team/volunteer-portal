@@ -66,6 +66,7 @@
     "start": "concurrently \"yarn server:start\" \"yarn client:start\"",
     "build": "node scripts/build-all.js",
     "clean": "rm -rf ./build",
+    "test": "node scripts/test-all.js",
     "client:start": "node scripts/start-client.js",
     "client:build": "node scripts/build-client.js",
     "client:clean": "rm -rf ./build/client",
