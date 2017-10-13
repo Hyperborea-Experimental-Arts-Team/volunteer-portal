@@ -20,10 +20,14 @@ import PrivateRoute from './PrivateRoute';
 import { autologin } from '../actions/auth';
 import { invalidate } from '../actions/serviceCache';
 
-// Create browser history object
 const history = createHistory();
 const loggerMiddleware = createLogger();
 const routeMiddleware = routerMiddleware(history);
+
+const middlewares = [ thunkMiddleware, routeMiddleware ];
+if (process.env.NODE_ENV === `development`) {
+  middlewares.push(loggerMiddleware);
+}
 
 // Check for a stored login token
 const token = localStorage.getItem('token');
@@ -52,11 +56,7 @@ const store = createStore(
   initialState,
 
   // Middleware
-  applyMiddleware(
-    thunkMiddleware,
-    loggerMiddleware,
-    routeMiddleware
-  )
+  applyMiddleware(...middlewares)
 );
 
 if (token) {
