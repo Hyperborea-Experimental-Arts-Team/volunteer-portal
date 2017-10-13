@@ -16,22 +16,24 @@ require('whatwg-fetch');
 Object.assign = require('object-assign');
 
 // Polyfill localStorage for testing
-const localStorageMock = (() => {
-  let store = {};
-  return {
-    getItem: function(key) {
-      return store[key];
-    },
-    setItem: function(key, value) {
-      store[key] = value.toString();
-    },
-    clear: function() {
-      store = {};
-    },
-    removeItem: function(key) {
-      delete store[key];
-    }
-  };
-})();
+if (typeof localStorage === 'undefined') {
+  var localStorageMock = (function () {
+    var store = {};
+    return {
+      getItem: function (key) {
+        return store[key];
+      },
+      setItem: function (key, value) {
+        store[key] = value.toString();
+      },
+      clear: function () {
+        store = {};
+      },
+      removeItem: function (key) {
+        delete store[key];
+      }
+    };
+  })();
 
-Object.defineProperty(window, 'localStorage', { value: localStorageMock });
+  Object.defineProperty(window, 'localStorage', {value: localStorageMock});
+}
