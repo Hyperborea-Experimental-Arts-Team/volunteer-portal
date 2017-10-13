@@ -1,5 +1,7 @@
 Volunteer portal for community arts festivals, built on React and Node
 
+[![Build Status](https://travis-ci.org/Hyperborea-Experimental-Arts-Team/volunteer-portal.svg?branch=master)](https://travis-ci.org/Hyperborea-Experimental-Arts-Team/volunteer-portal)
+
 ## Table of Contents
 
 - [Environment Setup](#environment-setup)
