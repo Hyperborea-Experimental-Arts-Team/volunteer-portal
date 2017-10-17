@@ -11,3 +11,4 @@ after_success:
 before_install:
 - openssl aes-256-cbc -K $encrypted_ec4873b9d7cb_key -iv $encrypted_ec4873b9d7cb_iv
   -in deploy-key.enc -out deploy-key -d
+- chmod 600 deploy-key
