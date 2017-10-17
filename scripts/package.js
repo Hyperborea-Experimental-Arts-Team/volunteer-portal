@@ -5,7 +5,7 @@ const fs = require('fs-extra');
 const Zip = require('adm-zip');
 const paths = require('../config/paths');
 
-console.log('Deploying...');
+console.log('Packaging...');
 
 // Holy cleansing flames
 rmrf.sync(paths.appDeploy);
