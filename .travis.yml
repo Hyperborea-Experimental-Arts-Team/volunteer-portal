@@ -1,8 +1,11 @@
 language: node_js
 node_js:
-  - 8
+- 8
 script:
-  - yarn build
-  - yarn test
+- yarn build
+- yarn test
 after_success:
-  - node scripts/deploy.js
+- node scripts/deploy.js
+before_install:
+- openssl aes-256-cbc -K $encrypted_ec4873b9d7cb_key -iv $encrypted_ec4873b9d7cb_iv
+  -in deploy-key.enc -out deploy-key -d
