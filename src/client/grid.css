@@ -2,11 +2,14 @@
   display: flex;
   flex-wrap: wrap;
   margin-right: -10px;
+  margin-left: -10px;
 }
 
 .row > [class*='col_'] {
   min-height: 1px;
-  margin-right: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
+  box-sizing: border-box;
 }
 
 .col_sm_1 {

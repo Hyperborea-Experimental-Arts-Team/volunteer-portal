@@ -15,29 +15,28 @@ import logo from '../images/logo-blk.svg';
 import style from './Splash.css';
 import theme from '../theme.css';
 import grid from '../grid.css';
+import { concat } from '../util';
 
 const Splash = ({ reverse, onLogoClick }) => {
-  const className = [
-    grid.col_sm_12,
-    grid.col_md_8,
-    //grid.off_md_2,
-    grid.col_lg_6,
-    //grid.off_lg_3,
-    theme.bg_content,
-    style.Splash
-  ];
+  const className = [ theme.bg_content, style.Splash ];
   if (reverse) {
     className.push(style.reversed);
   }
   return (
-    <div className={className.join(' ')}>
-      <img src={logo} className={style.logo} alt="logo" onClick={ () => onLogoClick() } />
-      <h1 className={style.title}>ENLIST NOW</h1>
-      <p className={style.intro}>
-        Service guarantees citizenship
-      </p>
-      <div className={style.dataView}>
-        <DataLoader serviceCall="test" component={JsonView} />
+    <div className={concat(
+      grid.col_sm_12,
+      grid.col_md_8,
+      grid.col_lg_6
+    )}>
+      <div className={className.join(' ')}>
+        <img src={logo} className={style.logo} alt="logo" onClick={ () => onLogoClick() } />
+        <h1 className={style.title}>ENLIST NOW</h1>
+        <p className={style.intro}>
+          Service guarantees citizenship
+        </p>
+        <div className={style.dataView}>
+          <DataLoader serviceCall="test" component={JsonView} />
+        </div>
       </div>
     </div>
   );

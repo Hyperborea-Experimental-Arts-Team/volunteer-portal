@@ -51,17 +51,20 @@ class LoginForm extends React.Component {
     const { email, password } = this.state;
 
     return (
-      <form className={concat(
+      <div className={concat(
           grid.col_sm_12,
           grid.col_md_6,
-          grid.col_lg_4,
-          theme.bg_content,
-          style.LoginForm)} onSubmit={this.handleSubmit}>
-        The login is butts@butts.com:buttsRgr8
-        <TextInput name="email" value={email} placeholder="Email Address" onChange={this.handleChange} />
-        <TextInput name="password" value={password} placeholder="Password" onChange={this.handleChange} />
-        <Button text="Submit" type="submit" />
-      </form>
+          grid.col_lg_4
+      )}>
+        <form className={concat(
+            theme.bg_content,
+            style.LoginForm)} onSubmit={this.handleSubmit}>
+          The login is butts@butts.com:buttsRgr8
+          <TextInput name="email" value={email} placeholder="Email Address" onChange={this.handleChange} />
+          <TextInput name="password" value={password} placeholder="Password" onChange={this.handleChange} />
+          <Button text="Submit" type="submit" />
+        </form>
+      </div>
     );
   }
 }

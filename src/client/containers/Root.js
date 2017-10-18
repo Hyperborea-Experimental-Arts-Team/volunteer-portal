@@ -75,8 +75,6 @@ export default () => (
     <ConnectedRouter history={history}>
       <Page>
         <PrivateRoute path="/" component={ReversibleSplash} />
-        <PrivateRoute path="/" component={ReversibleSplash} />
-
         <Route path="/login" component={LoginForm} />
       </Page>
     </ConnectedRouter>
