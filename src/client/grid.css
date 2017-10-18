@@ -5,7 +5,7 @@
   margin-left: -10px;
 }
 
-.row > [class*='col_'] {
+.row > * {
   min-height: 1px;
   padding-right: 10px;
   padding-left: 10px;
