@@ -17,7 +17,15 @@ import theme from '../theme.css';
 import grid from '../grid.css';
 
 const Splash = ({ reverse, onLogoClick }) => {
-  const className = [ grid.col_full, theme.bg_content, style.Splash ];
+  const className = [
+    grid.col_sm_12,
+    grid.col_md_8,
+    //grid.off_md_2,
+    grid.col_lg_6,
+    //grid.off_lg_3,
+    theme.bg_content,
+    style.Splash
+  ];
   if (reverse) {
     className.push(style.reversed);
   }

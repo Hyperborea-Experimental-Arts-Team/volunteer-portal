@@ -11,7 +11,7 @@ export default ({ children }) => (
   <div className={style.Page}>
     <Header />
     <section className={concat(style.content, theme.bg_1)}>
-      <div className={concat(grid.grid, style.layout)}>
+      <div className={concat(grid.row, style.layout)}>
         {children}
       </div>
     </section>
