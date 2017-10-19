@@ -5,7 +5,11 @@
 }
 
 .name {
-  margin-right: 30px;
-  text-align: right;
   font-size: 48px;
+}
+
+.content {
+  text-align: right;
+  margin-right: 30px;
+  height: 55px;
 }

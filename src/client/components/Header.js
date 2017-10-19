@@ -13,6 +13,8 @@ export default () => (
       style.Header
   )}>
     <div className={style.brand}>Nyan</div>
-    <UserInfo userName="Pinchy McPinchface" avatarUrl="" />
+    <UserInfo userName="Pinchy McPinchface"
+              avatarUrl="/pinchy.jpg"
+              menuLabel="Crustacean" />
   </header>
 );
