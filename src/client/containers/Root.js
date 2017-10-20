@@ -45,20 +45,19 @@ if (token) {
 
 // Initialize the Redux store
 const store = createStore(
+  // Root reducer, composed of other reducers
+  combineReducers({
+    splash: splashReducer,
+    auth: authReducer,
+    router: routerReducer,
+    serviceCache: cacheReducer
+  }),
 
-    // Root reducer, composed of other reducers
-    combineReducers({
-      splash: splashReducer,
-      auth: authReducer,
-      router: routerReducer,
-      serviceCache: cacheReducer
-    }),
+  // Initial state
+  initialState,
 
-    // Initial state
-    initialState,
-
-    // Middleware
-    applyMiddleware(...middlewares)
+  // Middleware
+  applyMiddleware(...middlewares)
 );
 
 if (token) {
