@@ -1,6 +1,6 @@
 import React from 'react';
 import { combineReducers } from 'redux'
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
@@ -12,7 +12,7 @@ import splashReducer from '../reducers/splash';
 import authReducer from '../reducers/auth';
 import cacheReducer from '../reducers/serviceCache';
 
-import Page from '../components/Page';
+import AuthenticatedPage from './AuthenticatedPage';
 import LoginForm from '../components/LoginForm';
 import ReversibleSplash from './ReversibleSplash';
 import PrivateRoute from './PrivateRoute';
@@ -73,10 +73,16 @@ if (typeof window !== 'undefined' && window) {
 export default () => (
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <Page>
-        <PrivateRoute path="/" component={ReversibleSplash} />
+      <AuthenticatedPage>
+        <PrivateRoute path="/splash" component={ReversibleSplash} />
         <Route path="/login" component={LoginForm} />
-      </Page>
+        <Route path="/" exact render={props => (
+          <Redirect to={{
+            pathname: '/splash',
+            state: { from: props.location }
+          }}/>
+        )} />
+      </AuthenticatedPage>
     </ConnectedRouter>
   </Provider>
 );

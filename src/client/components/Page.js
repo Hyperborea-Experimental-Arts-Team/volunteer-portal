@@ -7,9 +7,9 @@ import style from './Page.css';
 import theme from '../theme.css';
 import grid from '../grid.css';
 
-export default ({ children }) => (
+export default ({ user, children }) => (
   <div className={style.Page}>
-    <Header />
+    <Header user={user} />
     <section className={concat(style.content, theme.bg_1)}>
       <div className={concat(grid.row, style.layout)}>
         {children}

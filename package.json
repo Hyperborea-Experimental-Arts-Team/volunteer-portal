@@ -70,7 +70,7 @@
     "client:build": "node scripts/build-client.js",
     "client:clean": "rm -rf ./build/client",
     "client:test": "node scripts/test-client.js --env=jsdom",
-    "server:start": "nodemon src/server/index.js --exec babel-node",
+    "server:start": "nodemon src/server/index.js --inspect --exec babel-node",
     "server:build": "babel src/server -d build/server",
     "server:clean": "rm -rf ./build/server",
     "storybook:start": "start-storybook -p 6006",
