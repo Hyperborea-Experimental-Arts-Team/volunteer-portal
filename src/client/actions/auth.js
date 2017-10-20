@@ -52,7 +52,7 @@ export function login(email, password) {
       }
       localStorage.setItem('token', response.data.token);
       dispatch(loggedIn(response.data.token, response.data.user));
-      dispatch(push('/splash'));
+      dispatch(push('/'));
     });
   }
 }
