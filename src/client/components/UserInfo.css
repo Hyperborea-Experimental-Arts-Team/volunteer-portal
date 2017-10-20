@@ -6,6 +6,8 @@
 
 .name {
   font-size: 48px;
+  font-weight: lighter;
+  line-spacing: -2px;
 }
 
 .content {
