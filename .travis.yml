@@ -8,9 +8,7 @@ script:
 - yarn build
 - yarn test
 after_success:
-- node scripts/package.js
-- scp -oStrictHostKeyChecking=no -i deploy-key ./deploy/deploy.zip deploy@tk-staging.us.to:~/
-- ssh -oStrictHostKeyChecking=no -i deploy-key deploy@tk-staging.us.to 'rm -rf ./web && unzip ./deploy.zip -d web && cd web && yarn install --production && (pm2 restart coup || NODE_ENV=production pm2 start --name="coup" ./server/index.js)'
+- node scripts/travis-deploy.js
 before_install:
 - openssl aes-256-cbc -K $encrypted_ec4873b9d7cb_key -iv $encrypted_ec4873b9d7cb_iv
   -in deploy-key.enc -out deploy-key -d
