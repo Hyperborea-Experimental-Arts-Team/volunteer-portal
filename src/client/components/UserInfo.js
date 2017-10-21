@@ -1,7 +1,7 @@
 import React from 'react';
 import Avatar from './Avatar';
 import UserMenu from './UserMenu';
-import style from './UserInfo.css';
+import style from './UserInfo.less';
 
 export default ({ userName, avatarUrl, menuLabel }) => (
   <div className={style.UserInfo}>

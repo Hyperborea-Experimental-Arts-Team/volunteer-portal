@@ -5,7 +5,7 @@ import Header from './Header';
 import Footer from './Footer';
 import style from './Page.css';
 import theme from '../theme.css';
-import grid from '../grid.css';
+import grid from '../grid.less';
 
 export default ({ user, children }) => (
   <div className={style.Page}>
