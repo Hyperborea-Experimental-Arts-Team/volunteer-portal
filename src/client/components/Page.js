@@ -8,12 +8,10 @@ import theme from '../theme.css';
 import grid from '../grid.css';
 
 export default ({ children }) => (
-  <div className={style.Page}>
+  <div className={concat(style.Page, theme.bg_1)}>
     <Header />
-    <section className={concat(style.content, theme.bg_1)}>
-      <div className={concat(grid.row, style.layout)}>
-        {children}
-      </div>
+    <section className={style.content}>
+      {children}
     </section>
     <Footer />
   </div>
