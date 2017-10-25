@@ -12,5 +12,9 @@
 }
 
 .buttons {
-  padding-top: 120px;
+  padding-top: 110px;
+}
+
+.buttons > button {
+  margin: 14px 0;
 }

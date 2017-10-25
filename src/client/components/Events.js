@@ -56,9 +56,13 @@ export default events => {
                                    grid.col_md_4,
                                    grid.col_lg_4)}>
           <Button text={<FormattedMessage id="events.create"
-                                          defaultMessage="Create an event" />} />
+                                          defaultMessage="Create an event"/>}
+                  bgClass={theme.bg_3}
+          />
           <Button text={<FormattedMessage id="events.deactivate"
-                                          defaultMessage="Deactivate an event" />} />
+                                          defaultMessage="Deactivate an event"/>}
+                  bgClass={theme.bg_2}
+          />
         </section>
       </div>
     </div>
