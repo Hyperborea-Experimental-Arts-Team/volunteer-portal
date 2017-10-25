@@ -10,8 +10,7 @@ import style from './Events.css';
 
 function renderEvents(events) {
   return events.map(e => (
-    <div className={concat(style.bottomMargin,
-                           grid.col_sm_12,
+    <div className={concat(grid.col_sm_12,
                            grid.col_md_6,
                            grid.col_ld_6)}>
       <EventSummary event={e} />
@@ -19,37 +18,49 @@ function renderEvents(events) {
   ));
 }
 
-export default ({ active, inactive }) => (
-  <div className={style.Events}>
-    <div className={grid.row}>
-      <section className={concat(style.eventList,
-                                 grid.col_sm_12,
-                                 grid.col_md_8,
-                                 grid.col_lg_8)}>
-        <h2 className={concat(style.header, theme.txt_1)}>
-          <FormattedMessage id="events.active"
-                            defaultMessage="Active Events" />
-        </h2>
-        <div className={concat(grid.row, style.bottomMargin)}>
-          {renderEvents(['foo', 'bar'])}
-        </div>
-        <h2 className={style.header}>
-          <FormattedMessage id="events.inactive"
-                            defaultMessage="Inactive Events" />
-        </h2>
-        <div className={grid.row}>
-          {renderEvents(['baz'])}
-        </div>
-      </section>
-      <section className={concat(style.buttons,
-                                 grid.col_sm_12,
-                                 grid.col_md_4,
-                                 grid.col_lg_4)}>
-        <Button text={<FormattedMessage id="events.create"
-                                        defaultMessage="Create an event" />} />
-        <Button text={<FormattedMessage id="events.deactivate"
-                                        defaultMessage="Deactivate an event" />} />
-      </section>
+function renderSection(title, list, first = false) {
+  if (!list || list.length === 0) {
+    return null;
+  }
+  return (
+    <section>
+      <h2 className={concat(style.header, first ? theme.txt_1 : theme.txt_2)}>
+        {title}
+      </h2>
+      <div className={concat(grid.row, style.bottomMargin)}>
+        {renderEvents(list)}
+      </div>
+    </section>
+  )
+}
+
+export default events => {
+
+  const active = [], inactive = [];
+  for (let event of Object.values(events)) {
+    (event.active ? active : inactive).push(event);
+  }
+
+  return (
+    <div className={style.Events}>
+      <div className={grid.row}>
+        <section className={concat(style.eventList,
+                                   grid.col_sm_12,
+                                   grid.col_md_8,
+                                   grid.col_lg_8)}>
+          {renderSection(<FormattedMessage id="events.active" defaultMessage="Active Events" />, active, true)}
+          {renderSection(<FormattedMessage id="events.inactive" defaultMessage="Inactive Events" />, inactive)}
+        </section>
+        <section className={concat(style.buttons,
+                                   grid.col_sm_12,
+                                   grid.col_md_4,
+                                   grid.col_lg_4)}>
+          <Button text={<FormattedMessage id="events.create"
+                                          defaultMessage="Create an event" />} />
+          <Button text={<FormattedMessage id="events.deactivate"
+                                          defaultMessage="Deactivate an event" />} />
+        </section>
+      </div>
     </div>
-  </div>
-);
+  );
+}

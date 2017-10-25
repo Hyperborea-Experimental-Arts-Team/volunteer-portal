@@ -1,14 +1,12 @@
 .row {
   display: flex;
   flex-wrap: wrap;
-  margin-right: -10px;
-  margin-left: -10px;
+  margin: -10px;
 }
 
 .row > * {
   min-height: 1px;
-  padding-right: 10px;
-  padding-left: 10px;
+  padding: 10px;
   box-sizing: border-box;
 }
 

@@ -8,7 +8,7 @@ import { createLogger } from 'redux-logger';
 import createHistory from 'history/createBrowserHistory';
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux'
 
-import { IntlProvider, FormattedMessage, addLocaleData } from 'react-intl';
+import { IntlProvider, addLocaleData } from 'react-intl';
 import enData from 'react-intl/locale-data/en';
 import enMessages from '../langs/en';
 
@@ -20,7 +20,7 @@ import Page from '../components/Page';
 import LoginForm from '../components/LoginForm';
 import ReversibleSplash from './ReversibleSplash';
 import PrivateRoute from './PrivateRoute';
-import Events from '../components/Events';
+import LoadedEvents from './LoadedEvents';
 
 import { autologin } from '../actions/auth';
 import { invalidate } from '../actions/serviceCache';
@@ -86,7 +86,7 @@ export default () => (
         <Page>
           <Switch>
             <PrivateRoute path="/splash" component={ReversibleSplash} />
-            <PrivateRoute path="/events" component={Events} />
+            <PrivateRoute path="/events" component={LoadedEvents} />
             <Route path="/login" component={LoginForm} />
             <Redirect from="/" to="/events" />
           </Switch>

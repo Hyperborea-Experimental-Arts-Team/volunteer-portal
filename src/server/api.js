@@ -9,6 +9,7 @@ import express from 'express';
 import passport from 'passport';
 
 import { isLoggedIn } from './auth';
+import { get as getEvent } from './stores/event-store';
 
 const router = express.Router();
 
@@ -37,6 +38,10 @@ router.get('/auth', isLoggedIn, (request, response) => {
     success: true,
     user: request.user
   });
+});
+
+router.get('/events', isLoggedIn, (request, response) => {
+  getEvent().then(events => response.json(events));
 });
 
 router.use((request, response) => {
