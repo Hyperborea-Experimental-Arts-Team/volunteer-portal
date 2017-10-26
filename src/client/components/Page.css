@@ -11,10 +11,7 @@
 }
 
 .content {
+  position: relative;
   flex-grow: 2;
   padding-bottom: 40px;
-}
-
-.layout.layout {
-  margin-top: -40px;
 }

@@ -1,11 +1,23 @@
 .Header {
+  position: relative;
   width: 100%;
-  min-height: 340px;
+  height: 210px;
   padding-top: 40px;
   padding-bottom: 40px;
 }
 
+.Header:before {
+  content: '';
+  position: absolute;
+  background-color: inherit;
+  top: 0;
+  left: 0;
+  bottom: -90px;
+  right: 0;
+}
+
 .brand {
+  position: relative;
   line-height: 50px;
   padding-left: 55px;
   font-size: 28px;

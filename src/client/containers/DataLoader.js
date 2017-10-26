@@ -9,6 +9,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { load } from '../actions/serviceCache';
+import Spinner from '../components/Spinner';
 
 const mapStateToProps = state => {
   return {
@@ -38,7 +39,7 @@ class DataLoader extends React.Component {
     // Still loading the required data, so show a spinner
     if (data == null) {
       loadData(serviceCall, token);
-      return (<div>LOADING...</div>);
+      return <Spinner />;
     }
 
     // Render the child Component with the response data

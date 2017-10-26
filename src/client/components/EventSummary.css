@@ -1,0 +1,36 @@
+.EventSummary {
+  background: white;
+}
+
+.image {
+  position: relative;
+  padding-bottom: 100%;
+  background-size: cover;
+}
+
+.header {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  padding: 20px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.85) 60%)
+}
+
+.name {
+  margin: 0;
+  font-weight: lighter;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.dates {
+  padding: 30px 0;
+}
+
+.dates > div {
+  margin-top: 30px;
+}
+
+.dates > div:first-child {
+  margin-top: 0;
+}

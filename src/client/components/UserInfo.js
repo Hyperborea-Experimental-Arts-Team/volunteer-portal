@@ -9,6 +9,6 @@ export default ({ userName, avatarUrl, menuLabel }) => (
       <span className={style.name}>{userName}</span>
       <UserMenu label={menuLabel} />
     </div>
-    <Avatar url={avatarUrl} width="70" />
+    <Avatar url={avatarUrl} name={userName} width="70" />
   </div>
 );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { combineReducers } from 'redux'
-import { Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
@@ -8,16 +8,20 @@ import { createLogger } from 'redux-logger';
 import createHistory from 'history/createBrowserHistory';
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux'
 
+import { IntlProvider, addLocaleData } from 'react-intl';
+import enData from 'react-intl/locale-data/en';
+import enMessages from '../langs/en';
+
 import splashReducer from '../reducers/splash';
 import authReducer from '../reducers/auth';
 import cacheReducer from '../reducers/serviceCache';
 
 import AuthenticatedPage from './AuthenticatedPage';
-import Page from '../components/Page';
 
 import LoginForm from '../components/LoginForm';
 import ReversibleSplash from './ReversibleSplash';
 import PrivateRoute from './PrivateRoute';
+import LoadedEvents from './LoadedEvents';
 
 import { autologin } from '../actions/auth';
 import { invalidate } from '../actions/serviceCache';
@@ -30,6 +34,10 @@ const middlewares = [ thunkMiddleware, routeMiddleware ];
 if (process.env.NODE_ENV === `development`) {
   middlewares.push(loggerMiddleware);
 }
+
+// Support English only for now
+addLocaleData(enData);
+const locale = 'en';
 
 // Check for a stored login token
 const token = localStorage.getItem('token');
@@ -71,13 +79,21 @@ if (typeof window !== 'undefined' && window) {
   window.invalidate = () => store.dispatch(invalidate());
 }
 
+function makePage(Component) {
+  return () => <AuthenticatedPage><Component /></AuthenticatedPage>;
+}
+
 export default () => (
+  <IntlProvider locale={locale} messages={enMessages}>
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <div style={{ height: '100%' }}>
-          <PrivateRoute path="/" component={() => (<AuthenticatedPage><ReversibleSplash /></AuthenticatedPage>)} />
-          <Route path="/login" component={() => (<Page><LoginForm /></Page>)} />
-        </div>
+        <Switch>
+          <PrivateRoute path="/splash" component={makePage(ReversibleSplash)} />
+          <PrivateRoute path="/events" component={makePage(LoadedEvents)} />
+          <Route path="/login" component={makePage(LoginForm)} />
+          <Redirect from="/" to="/events" />
+        </Switch>
       </ConnectedRouter>
     </Provider>
+  </IntlProvider>
 );

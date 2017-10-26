@@ -20,7 +20,7 @@ export default ({ user }) => {
         theme.txt_1,
         style.Header
     )}>
-      <div className={grid.row}>
+      <div className={grid.row} style={{position: 'relative'}}>
         <div className={concat(
           grid.col_sm_12,
           grid.col_md_6,

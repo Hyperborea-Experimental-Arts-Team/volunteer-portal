@@ -1,0 +1,18 @@
+.bottomMargin {
+  margin-bottom: 40px;
+}
+
+.header {
+  margin: 0 0 30px;
+  font-size: 24px
+}
+
+@media (min-width: 720px) {
+  .buttons {
+    padding-top: 110px;
+  }
+}
+
+.buttons > button {
+  margin: 14px 0;
+}
