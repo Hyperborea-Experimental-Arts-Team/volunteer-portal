@@ -10,6 +10,8 @@ import bcrypt from 'bcrypt-nodejs';
 
 const fakeStore = {
   'butts@butts.com': {
+    name: 'Pinchy McPinchface',
+    avatar: 'pinchy.jpg',
     email: 'butts@butts.com',
     password: hash('buttsRgr8')
   }
@@ -24,27 +26,29 @@ function validate(password, user) {
 }
 
 /**
- * Gets a user from the store.
- * @param {string} email - User's email address
- * @param {string} password - User's password
- * @returns {Promise.<object|null>} Promise resolving to the user, or null if one cannot be found
- */
-export function getUser(email, password) {
-  const user = fakeStore[email];
-
-  if (!user || !validate(password, user)) {
-    return Promise.resolve(null);
-  }
-
-  return Promise.resolve({ email: user.email });
-}
-
-/**
  * Looks a user up by email.
  * @param {string} email - User's email address
  * @returns {Promise.<object|null>} Promise resolving to the user, or null if one cannot be found
  */
-export function findUser(email) {
-  const user = fakeStore[email];
-  return Promise.resolve(user ? { email: user.email } : null);
+export function get(email) {
+  if (!fakeStore.hasOwnProperty(email)) {
+    return Promise.resolve(null);
+  }
+  return Promise.resolve(Object.assign({}, fakeStore[email]));
+}
+
+/**
+ * Gets a user from the store, validating their password
+ * @param {string} email - User's email address
+ * @param {string} password - User's password
+ * @returns {Promise.<object|null>} Promise resolving to the user, or null if one cannot be found
+ */
+export function authenticate(email, password) {
+  console.log(authenticate);
+  return get(email).then(user => {
+    if (!user || !validate(password, user)) {
+      return Promise.resolve(null);
+    }
+    return Promise.resolve(user);
+  });
 }

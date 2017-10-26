@@ -4,7 +4,7 @@ import { concat } from '../util.js';
 import EventSummary from './EventSummary';
 import Button from './Button';
 
-import grid from '../grid.css';
+import grid from '../grid.less';
 import theme from '../theme.css';
 import style from './Events.css';
 
@@ -42,29 +42,27 @@ export default events => {
   }
 
   return (
-    <div className={style.Events}>
-      <div className={grid.row}>
-        <section className={concat(style.eventList,
-                                   grid.col_sm_12,
-                                   grid.col_md_8,
-                                   grid.col_lg_8)}>
-          {renderSection(<FormattedMessage id="events.active" defaultMessage="Active Events" />, active, true)}
-          {renderSection(<FormattedMessage id="events.inactive" defaultMessage="Inactive Events" />, inactive)}
-        </section>
-        <section className={concat(style.buttons,
-                                   grid.col_sm_12,
-                                   grid.col_md_4,
-                                   grid.col_lg_4)}>
-          <Button text={<FormattedMessage id="events.create"
-                                          defaultMessage="Create an event"/>}
-                  bgClass={theme.bg_3}
-          />
-          <Button text={<FormattedMessage id="events.deactivate"
-                                          defaultMessage="Deactivate an event"/>}
-                  bgClass={theme.bg_2}
-          />
-        </section>
-      </div>
+    <div className={grid.row}>
+      <section className={concat(style.eventList,
+                                 grid.col_sm_12,
+                                 grid.col_md_8,
+                                 grid.col_lg_8)}>
+        {renderSection(<FormattedMessage id="events.active" defaultMessage="Active Events" />, active, true)}
+        {renderSection(<FormattedMessage id="events.inactive" defaultMessage="Inactive Events" />, inactive)}
+      </section>
+      <section className={concat(style.buttons,
+                                 grid.col_sm_12,
+                                 grid.col_md_4,
+                                 grid.col_lg_4)}>
+        <Button text={<FormattedMessage id="events.create"
+                                        defaultMessage="Create an event"/>}
+                bgClass={theme.bg_3}
+        />
+        <Button text={<FormattedMessage id="events.deactivate"
+                                        defaultMessage="Deactivate an event"/>}
+                bgClass={theme.bg_2}
+        />
+      </section>
     </div>
   );
 }

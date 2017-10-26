@@ -13,6 +13,12 @@ import { get as getEvent } from './stores/event-store';
 
 const router = express.Router();
 
+function scrubUser(user) {
+  const scrubbedUser = Object.assign({}, user);
+  delete scrubbedUser.password;
+  return scrubbedUser;
+}
+
 router.get('/test', isLoggedIn, (request, response) => {
   response.json({'data' : 'Butts'});
 });
@@ -28,7 +34,7 @@ router.post('/auth', (request, response) => {
     return response.json({
       success: true,
       token,
-      user
+      user: scrubUser(user)
     });
   })(request, response);
 });
@@ -36,7 +42,7 @@ router.post('/auth', (request, response) => {
 router.get('/auth', isLoggedIn, (request, response) => {
   response.json({
     success: true,
-    user: request.user
+    user: scrubUser(request.user)
   });
 });
 

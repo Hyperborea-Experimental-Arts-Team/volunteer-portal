@@ -13,7 +13,7 @@ import TextInput from './TextInput';
 import { login, logout } from '../actions/auth';
 import { concat } from '../util';
 
-import grid from '../grid.css';
+import grid from '../grid.less';
 import theme from '../theme.css';
 import style from './LoginForm.css';
 

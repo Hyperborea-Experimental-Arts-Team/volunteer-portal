@@ -4,13 +4,15 @@ import { concat } from '../util';
 import Header from './Header';
 import Footer from './Footer';
 import style from './Page.css';
-import theme from '../theme.css';
+import grid from '../grid.less';
 
-export default ({ children }) => (
-  <div className={concat(style.Page, theme.bg_1)}>
-    <Header />
+export default ({ user, children }) => (
+  <div className={style.Page}>
+    <Header user={user} />
     <section className={style.content}>
-      {children}
+      <div className={concat(grid.row, style.layout)}>
+        {children}
+      </div>
     </section>
     <Footer />
   </div>

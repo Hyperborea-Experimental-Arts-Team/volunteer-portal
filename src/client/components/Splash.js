@@ -14,7 +14,7 @@ import JsonView from './JsonView'
 import logo from '../images/logo-blk.svg';
 import style from './Splash.css';
 import theme from '../theme.css';
-import grid from '../grid.css';
+import grid from '../grid.less';
 import { concat } from '../util';
 
 const Splash = ({ reverse, onLogoClick }) => {

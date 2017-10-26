@@ -1,13 +1,23 @@
+@import './breakpoints.less';
+
 .row {
   display: flex;
   flex-wrap: wrap;
   margin: -10px;
-}
 
-.row > * {
-  min-height: 1px;
-  padding: 10px;
-  box-sizing: border-box;
+  & > * {
+    min-height: 1px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  &.gutterless {
+    margin: 0;
+
+    & > * {
+      padding: 0;
+    }
+  }
 }
 
 .col_sm_1 {
@@ -118,7 +128,7 @@
   margin-left: 100%;
 }
 
-@media (min-width: 720px) {
+@media @medium {
   .col_md_1 {
     flex-basis: 8.33333333%;
     max-width: 8.33333333%;
@@ -228,7 +238,7 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media @large {
   .col_lg_1 {
     flex-basis: 8.33333333%;
     max-width: 8.33333333%;

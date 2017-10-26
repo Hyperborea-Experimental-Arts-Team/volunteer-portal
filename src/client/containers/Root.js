@@ -16,7 +16,8 @@ import splashReducer from '../reducers/splash';
 import authReducer from '../reducers/auth';
 import cacheReducer from '../reducers/serviceCache';
 
-import Page from '../components/Page';
+import AuthenticatedPage from './AuthenticatedPage';
+
 import LoginForm from '../components/LoginForm';
 import ReversibleSplash from './ReversibleSplash';
 import PrivateRoute from './PrivateRoute';
@@ -52,7 +53,6 @@ if (token) {
 
 // Initialize the Redux store
 const store = createStore(
-
   // Root reducer, composed of other reducers
   combineReducers({
     splash: splashReducer,
@@ -79,18 +79,20 @@ if (typeof window !== 'undefined' && window) {
   window.invalidate = () => store.dispatch(invalidate());
 }
 
+function makePage(Component) {
+  return () => <AuthenticatedPage><Component /></AuthenticatedPage>;
+}
+
 export default () => (
   <IntlProvider locale={locale} messages={enMessages}>
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <Page>
-          <Switch>
-            <PrivateRoute path="/splash" component={ReversibleSplash} />
-            <PrivateRoute path="/events" component={LoadedEvents} />
-            <Route path="/login" component={LoginForm} />
-            <Redirect from="/" to="/events" />
-          </Switch>
-        </Page>
+        <Switch>
+          <PrivateRoute path="/splash" component={makePage(ReversibleSplash)} />
+          <PrivateRoute path="/events" component={makePage(LoadedEvents)} />
+          <Route path="/login" component={makePage(LoginForm)} />
+          <Redirect from="/" to="/events" />
+        </Switch>
       </ConnectedRouter>
     </Provider>
   </IntlProvider>

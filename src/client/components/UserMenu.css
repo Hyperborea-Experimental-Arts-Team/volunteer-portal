@@ -1,0 +1,11 @@
+.UserMenu {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.chevron {
+  width: 14px;
+  margin-left: 15px;
+  stroke: #434343;
+  fill: #434343;
+}
