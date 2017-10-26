@@ -8,7 +8,7 @@
 import { Strategy as LocalStrategy } from 'passport-local';
 import jwt from 'jsonwebtoken';
 import config from 'config';
-import { getUser, findUser } from './stores/user-store';
+import { get, authenticate } from './stores/user-store';
 
 function nope(response) {
   return response.status(401).send('{}');
@@ -33,7 +33,7 @@ export function isLoggedIn(request, response, next) {
     const userEmail = decoded.sub;
 
     // check if a user exists
-    return findUser(userEmail).then(user => {
+    return get(userEmail).then(user => {
       if (!user) {
         return nope(response);
       }
@@ -55,14 +55,14 @@ export function configurePassport(passport) {
   });
 
   passport.deserializeUser((email, done) => {
-    findUser(email).then(user => done(user ? null : `Invalid user ${email}`, user));
+    get(email).then(user => done(user ? null : `Invalid user ${email}`, user));
   });
 
   passport.use('local-login', new LocalStrategy({
     usernameField : 'email',
     passwordField : 'password'
   }, (email, password, done) => {
-    getUser(email, password).then(user => {
+    authenticate(email, password).then(user => {
       if (!user) {
         const error = new Error('Incorrect email or password');
         error.name = 'IncorrectCredentialsError';
@@ -76,9 +76,7 @@ export function configurePassport(passport) {
 
       // create a token string
       const token = jwt.sign(payload, config.jwtSecret);
-      const data = {
-        email: user.email
-      };
+      const data = user;
 
       return done(null, token, data);
     });

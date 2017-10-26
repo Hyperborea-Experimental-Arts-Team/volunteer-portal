@@ -1,0 +1,23 @@
+@import '../breakpoints.less';
+
+.UserInfo {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.name {
+  font-size: 24px;
+  font-weight: lighter;
+  line-spacing: -2px;
+
+  @media @medium {
+    font-size: 48px;
+  }
+}
+
+.content {
+  text-align: right;
+  margin-right: 30px;
+  height: 55px;
+}
