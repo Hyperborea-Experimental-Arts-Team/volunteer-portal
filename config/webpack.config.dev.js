@@ -153,7 +153,6 @@ module.exports = {
               cacheDirectory: true,
             },
           },
-
           {
             test: /\.less$/,
             use: [
@@ -166,11 +165,10 @@ module.exports = {
                   localIdentName: "[name]__[local]___[hash:base64:5]"
                 },
               },
-              require.resolve('less-loader'),
               {
                 loader: require.resolve('postcss-loader'),
                 options: {
-                  parser: require('postcss-less'),
+                  //parser: require('postcss-less'),
                   // Necessary for external CSS imports to work
                   // https://github.com/facebookincubator/create-react-app/issues/2677
                   ident: 'postcss',
@@ -188,6 +186,7 @@ module.exports = {
                   ],
                 },
               },
+              require.resolve('less-loader'),
             ]
           },
 
@@ -240,7 +239,7 @@ module.exports = {
             // it's runtime that would otherwise processed through "file" loader.
             // Also exclude `html` and `json` extensions so they get processed
             // by webpacks internal loaders.
-            exclude: [/\.js$/, /\.html$/, /\.json$/],
+            exclude: [/\.js$/, /\.html$/, /\.json$/, /\.less$/],
             loader: require.resolve('file-loader'),
             options: {
               name: 'static/media/[name].[hash:8].[ext]',

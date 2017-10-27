@@ -23,15 +23,13 @@ export default ({ user }) => {
       <div className={grid.row} style={{position: 'relative'}}>
         <div className={concat(
           grid.col_sm_12,
-          grid.col_md_6,
-          grid.col_lg_3
+          grid.col_md_6
         )}>
           <div className={style.brand}>Nyan</div>
         </div>
         <div className={concat(
           grid.col_sm_12,
-          grid.col_md_6,
-          grid.col_lg_3
+          grid.col_md_6
         )}>
           {userInfo}
         </div>
