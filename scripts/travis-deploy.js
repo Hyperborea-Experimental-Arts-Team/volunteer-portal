@@ -65,11 +65,7 @@ async function deploy() {
   }
 }
 
-console.log(":::TEST:::");
-console.log(process.env.TRAVIS_PULL_REQUEST);
-console.log(":::TEST:::");
-
-if (process.env.TRAVIS_PULL_REQUEST) {
+if (process.env.TRAVIS_PULL_REQUEST === 'true') {
   // Don't deploy for pull requests
   console.info('Pull request detected. Skipping deploy step.');
   process.exit();
