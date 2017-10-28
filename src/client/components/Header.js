@@ -7,18 +7,19 @@ import theme from '../theme.css';
 import style from './Header.less';
 import grid from '../grid.less';
 
-export default ({ user }) => {
+export default ({ user, small }) => {
 
   const userInfo = !user ? '' :
       <UserInfo userName={user.name}
                 avatarUrl={`/${user.avatar}`}
-                menuLabel='Crustacean'/>;
+                menuLabel='Crustacean'
+                small={small} />;
 
   return (
     <header className={concat(
         theme.bg_2,
         theme.txt_1,
-        style.Header
+        small ? style.smallHeader : style.bigHeader
     )}>
       <div className={grid.row} style={{position: 'relative'}}>
         <div className={concat(

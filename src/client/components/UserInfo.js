@@ -1,14 +1,15 @@
 import React from 'react';
+import { concat } from '../util';
 import Avatar from './Avatar';
 import UserMenu from './UserMenu';
 import style from './UserInfo.less';
 
-export default ({ userName, avatarUrl, menuLabel }) => (
-  <div className={style.UserInfo}>
-    <div className={style.content}>
-      <span className={style.name}>{userName}</span>
-      <UserMenu label={menuLabel} />
+export default ({ userName, avatarUrl, menuLabel, small }) => (
+  <div className={concat(style.UserInfo, small ? style.small : style.big)}>
+    <div className={small ? style.smallContent : style.bigContent}>
+      <span className={small ? style.smallName : style.bigName}>{userName}</span>
+      <UserMenu label={small ? null : menuLabel} />
     </div>
-    <Avatar url={avatarUrl} name={userName} width="70" />
+    <Avatar url={avatarUrl} name={userName} width={small ? '40' : '70'} />
   </div>
 );

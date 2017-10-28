@@ -4,9 +4,17 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+
+  &.small {
+    height: 100%;
+  }
 }
 
-.name {
+.smallName {
+  font-size: 18px;
+}
+
+.bigName {
   font-size: 24px;
   font-weight: lighter;
   line-spacing: -2px;
@@ -16,8 +24,13 @@
   }
 }
 
-.content {
+.bigContent {
   text-align: right;
   margin-right: 30px;
   height: 55px;
+}
+
+.smallContent {
+  display: flex;
+  margin-right: 15px;
 }

@@ -19,10 +19,14 @@ const pageFactory = (HeaderComponent, PageComponent) => ({user, match}) => (
   </div>
 );
 
+function withProps(Component, props) {
+  return p => <Component {...Object.assign({}, p, props)} />;
+}
+
 export default () => (
   <Switch>
     <PrivateRoute path="/events" component={pageFactory(Header, LoadedEvents)} />
-    <PrivateRoute path="/event/:id" component={pageFactory(Header, Event)} />
+    <PrivateRoute path="/event/:id" component={pageFactory(withProps(Header, { small: true }), Event)} />
     <Route path="/login" component={pageFactory(Header, LoginForm)} />
     <Redirect from="/" to="/events" />
   </Switch>

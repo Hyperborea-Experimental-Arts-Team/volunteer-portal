@@ -1,19 +1,23 @@
-.Header {
+.bigHeader {
   position: relative;
   width: 100%;
   height: 210px;
   padding-top: 40px;
   padding-bottom: 40px;
+
+  &:before {
+    content: '';
+    position: absolute;
+    background-color: inherit;
+    top: 0;
+    left: 0;
+    bottom: -90px;
+    right: 0;
+  }
 }
 
-.Header:before {
-  content: '';
-  position: absolute;
-  background-color: inherit;
-  top: 0;
-  left: 0;
-  bottom: -90px;
-  right: 0;
+.smallHeader {
+  position: relative;
 }
 
 .brand {
