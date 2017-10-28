@@ -17,7 +17,7 @@ const pageFactory = (HeaderComponent, PageComponent) => ({user, match}) => (
     </section>
     <Footer />
   </div>
-);git
+);
 
 export default () => (
   <Switch>
