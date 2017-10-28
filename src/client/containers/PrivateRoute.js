@@ -16,11 +16,9 @@ const mapStateToProps = state => {
   };
 };
 
-let PrivateRoute = ({ component: Component, loggedIn, ...rest }) => (
+let PrivateRoute = ({ children, loggedIn, ...rest }) => (
   <Route {...rest} render={props => (
-    loggedIn ? (
-      <Component {...props}/>
-    ) : (
+    loggedIn ? children : (
       <Redirect to={{
         pathname: '/login',
         state: { from: props.location }

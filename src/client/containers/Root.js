@@ -79,21 +79,26 @@ if (typeof window !== 'undefined' && window) {
   window.invalidate = () => store.dispatch(invalidate());
 }
 
-function makePage(Component) {
-  return () => <AuthenticatedPage><Component /></AuthenticatedPage>;
-}
-
 export default () => (
-  <IntlProvider locale={locale} messages={enMessages}>
-    <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <Switch>
-          <PrivateRoute path="/splash" component={makePage(ReversibleSplash)} />
-          <PrivateRoute path="/events" component={makePage(LoadedEvents)} />
-          <Route path="/login" component={makePage(LoginForm)} />
-          <Redirect from="/" to="/events" />
-        </Switch>
-      </ConnectedRouter>
-    </Provider>
-  </IntlProvider>
+    <IntlProvider locale={locale} messages={enMessages}>
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <Switch>
+            <PrivateRoute path="/:path(splash|events)">
+              <AuthenticatedPage><Switch>
+                <Route path="/splash" component={ReversibleSplash} />
+                <Route path="/events" component={LoadedEvents} />
+              </Switch></AuthenticatedPage>
+            </PrivateRoute>
+            <Route path="/login">
+              <AuthenticatedPage>
+                <LoginForm />
+              </AuthenticatedPage>
+            </Route>
+            <Redirect from="/" to="/events" />
+          </Switch>
+        </ConnectedRouter>
+      </Provider>
+    </IntlProvider>
 );
+

@@ -10,7 +10,8 @@ import style from './Events.css';
 
 function renderEvents(events) {
   return events.map(e => (
-    <div className={concat(grid.col_sm_12,
+    <div key={e.id}
+         className={concat(grid.col_sm_12,
                            grid.col_md_6,
                            grid.col_ld_6)}>
       <EventSummary event={e} />
