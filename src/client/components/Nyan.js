@@ -12,12 +12,12 @@ import style from './Nyan.less';
 const pageFactory = (HeaderComponent, PageComponent) => ({user, match}) => (
   <div className={style.nyan}>
     <HeaderComponent user={user} />
-    <div className={style.content}>
+    <section className={style.content}>
       <PageComponent match={match} />
-    </div>
+    </section>
     <Footer />
   </div>
-);
+);git
 
 export default () => (
   <Switch>
