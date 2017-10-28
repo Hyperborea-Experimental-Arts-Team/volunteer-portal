@@ -1,6 +1,5 @@
 import React from 'react';
 import { combineReducers } from 'redux'
-import { Switch, Route, Redirect } from 'react-router-dom'
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
@@ -16,15 +15,10 @@ import splashReducer from '../reducers/splash';
 import authReducer from '../reducers/auth';
 import cacheReducer from '../reducers/serviceCache';
 
-import AuthenticatedPage from './AuthenticatedPage';
-
-import LoginForm from '../components/LoginForm';
-import ReversibleSplash from './ReversibleSplash';
-import PrivateRoute from './PrivateRoute';
-import LoadedEvents from './LoadedEvents';
-
 import { autologin } from '../actions/auth';
 import { invalidate } from '../actions/serviceCache';
+
+import Nyan from '../components/Nyan';
 
 const history = createHistory();
 const loggerMiddleware = createLogger();
@@ -83,20 +77,7 @@ export default () => (
     <IntlProvider locale={locale} messages={enMessages}>
       <Provider store={store}>
         <ConnectedRouter history={history}>
-          <Switch>
-            <PrivateRoute path="/:path(splash|events)">
-              <AuthenticatedPage><Switch>
-                <Route path="/splash" component={ReversibleSplash} />
-                <Route path="/events" component={LoadedEvents} />
-              </Switch></AuthenticatedPage>
-            </PrivateRoute>
-            <Route path="/login">
-              <AuthenticatedPage>
-                <LoginForm />
-              </AuthenticatedPage>
-            </Route>
-            <Redirect from="/" to="/events" />
-          </Switch>
+          <Nyan />
         </ConnectedRouter>
       </Provider>
     </IntlProvider>

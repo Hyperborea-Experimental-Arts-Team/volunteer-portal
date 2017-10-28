@@ -57,10 +57,10 @@ export function login(email, password) {
   }
 }
 
-export function logout() {
+export function logout(redirect) {
   return dispatch => {
     localStorage.removeItem('token');
     dispatch(loggedOut());
-    dispatch(push('/login'));
+    redirect && dispatch(push('/login'));
   };
 }

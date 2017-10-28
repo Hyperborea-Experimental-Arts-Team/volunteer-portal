@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { Link } from 'react-router-dom';
 import { concat } from '../util.js';
 import EventSummary from './EventSummary';
 import Button from './Button';
@@ -10,12 +11,12 @@ import style from './Events.css';
 
 function renderEvents(events) {
   return events.map(e => (
-    <div key={e.id}
+    <Link key={e.id} to={`/event/${e.id}/overview`}
          className={concat(grid.col_sm_12,
                            grid.col_md_6,
                            grid.col_ld_6)}>
       <EventSummary event={e} />
-    </div>
+    </Link>
   ));
 }
 

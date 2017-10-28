@@ -8,7 +8,7 @@
  */
 import fetch from 'isomorphic-fetch';
 
-const API_PATH = 'api/';
+const API_PATH = '/api';
 
 function handleResponse(response) {
   return response.json().then(data => ({ status: response.status, data }));
@@ -21,7 +21,7 @@ function handleResponse(response) {
  * @returns {Promise.<object>} A promise resolving to JSON response data
  */
 export function post(endpoint, token, data) {
-  return fetch(`${API_PATH}${endpoint}`, {
+  return fetch(`${API_PATH}/${endpoint}`, {
     method: 'POST',
     headers: {
       'Authorization': `bearer ${token}`,
@@ -38,7 +38,7 @@ export function post(endpoint, token, data) {
  * @returns {Promise.<object>} A promise resolving to JSON response data
  */
 export function get(endpoint, token) {
-  return fetch(`${API_PATH}${endpoint}`, {
+  return fetch(`${API_PATH}/${endpoint}`, {
     method: 'GET',
     headers: {
       'Authorization': `bearer ${token}`,

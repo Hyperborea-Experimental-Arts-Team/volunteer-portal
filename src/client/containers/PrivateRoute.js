@@ -12,13 +12,16 @@ import { Route, Redirect } from 'react-router-dom';
 
 const mapStateToProps = state => {
   return {
-    loggedIn: state.auth.loggedIn
+    loggedIn: state.auth.loggedIn,
+    user: state.auth.user
   };
 };
 
-let PrivateRoute = ({ children, loggedIn, ...rest }) => (
+let PrivateRoute = ({ component: Component, loggedIn, user, ...rest }) => (
   <Route {...rest} render={props => (
-    loggedIn ? children : (
+    loggedIn ? (
+      <Component user={user} match={props.match} />
+    ) : (
       <Redirect to={{
         pathname: '/login',
         state: { from: props.location }

@@ -22,9 +22,6 @@ class LoginForm extends React.Component {
   constructor(props) {
     super(props);
 
-    // reset login status
-    this.props.onLogout();
-
     this.state = {
       email: '',
       password: '',
@@ -33,6 +30,11 @@ class LoginForm extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentWillMount() {
+    // reset login status
+    this.props.onLogout();
   }
 
   handleChange(e) {
@@ -52,22 +54,24 @@ class LoginForm extends React.Component {
     const { email, password } = this.state;
 
     return (
-      <div className={concat(
-          grid.col_sm_12,
-          grid.col_md_6,
-          grid.col_lg_4
-      )}>
-        <h2 className={concat(style.header, theme.txt_1)}>
-          <FormattedMessage id="login.title" defaultMessage="Login" />
-        </h2>
-        <form className={concat(
-            theme.bg_content,
-            style.LoginForm)} onSubmit={this.handleSubmit}>
-          The login is butts@butts.com:buttsRgr8
-          <TextInput name="email" value={email} placeholder="Email Address" onChange={this.handleChange} />
-          <TextInput name="password" value={password} placeholder="Password" onChange={this.handleChange} />
-          <Button text="Submit" type="submit" bgClass={theme.bg_3} />
-        </form>
+      <div className={grid.row}>
+        <div className={concat(
+            grid.col_sm_12,
+            grid.col_md_6,
+            grid.col_lg_4
+        )}>
+          <h2 className={concat(style.header, theme.txt_1)}>
+            <FormattedMessage id="login.title" defaultMessage="Login" />
+          </h2>
+          <form className={concat(
+              theme.bg_content,
+              style.LoginForm)} onSubmit={this.handleSubmit}>
+            The login is butts@butts.com:buttsRgr8
+            <TextInput name="email" value={email} placeholder="Email Address" onChange={this.handleChange} />
+            <TextInput name="password" value={password} placeholder="Password" onChange={this.handleChange} />
+            <Button text="Submit" type="submit" bgClass={theme.bg_3} />
+          </form>
+        </div>
       </div>
     );
   }
@@ -83,7 +87,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     onLogin: (email, password) => dispatch(login(email, password)),
-    onLogout: () => dispatch(logout())
+    onLogout: () => dispatch(logout(false))
   };
 }
 
