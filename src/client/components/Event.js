@@ -1,22 +1,34 @@
 import React from 'react';
-
+import { Redirect } from 'react-router-dom';
 import EventMenu from './EventMenu';
-import Content from './Content';
+import EventOverview from './Todo';
+import EventTeams from './Todo';
+import EventVolunteers from './Todo';
+import EventSchedule from './Todo';
 
 import { concat } from '../util';
 import style from './Event.less';
 import theme from '../theme.css';
 import grid from '../grid.less';
 
+function eventTab(selectedTab, defaultUrl) {
+  switch (selectedTab) {
+    case 'overview':
+      return <EventOverview />;
+    case 'teams':
+      return <EventTeams />;
+    case 'volunteers':
+      return <EventVolunteers />;
+    case 'schedule':
+      return <EventSchedule />;
+    default:
+      return <Redirect to={defaultUrl} />
+  }
+}
+
 export default ({ match }) => (
   <div className={style.Event}>
     <EventMenu eventId={match.params.id} selectedTab={match.params.selectedTab} />
-    <div className={concat(grid.row, theme.page_padding)}>
-      <div className={concat(grid.col_sm_12,
-                             theme.txt_2,
-                             style.temp)}>
-        <Content>{match.params.id} {match.url} </Content>
-      </div>
-    </div>
+    {eventTab(match.params.selectedTab, `/event/${match.params.id}/overview`)}
   </div>
 );
