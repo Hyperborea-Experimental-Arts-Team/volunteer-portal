@@ -14,16 +14,19 @@
     bottom: -90px;
     right: 0;
   }
+
+  > * {
+    position: relative;
+  }
 }
 
 .smallHeader {
   position: relative;
+  padding-top: 17px;
+  padding-bottom: 17px;
 }
 
-.brand {
-  position: relative;
-  line-height: 50px;
-  padding-left: 55px;
-  font-size: 28px;
-  background: url(../images/logo.svg) 0 0 no-repeat;
+.column {
+  display: flex;
+  align-items: center;
 }
