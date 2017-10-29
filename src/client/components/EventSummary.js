@@ -5,6 +5,7 @@ import { concat } from '../util';
 import BigDate from './BigDate';
 import DateRange from './DateRange';
 import Content from './Content';
+import Image from './Image';
 
 import theme from '../theme.css';
 import style from './EventSummary.css';
@@ -29,7 +30,7 @@ function renderDates(start, end, big, altBg) {
 
 export default ({ event }) => (
   <div className={style.EventSummary}>
-    <div className={style.image} style={{backgroundImage: `url(${event.photo})` }}>
+    <Image url={event.photo} ratio={1}>
       <div className={concat(style.header, theme.txt_1)}>
         <h3 className={style.name}>{event.name}</h3>
         {event.numDepartments}&nbsp;
@@ -49,7 +50,7 @@ export default ({ event }) => (
           />
         </span>
       </div>
-    </div>
+    </Image>
     {renderDates(event.startDate, event.endDate, event.active, !(event.id % 2))}
     {event.active ? <Content>{event.address}</Content> : null}
   </div>
