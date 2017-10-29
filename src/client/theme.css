@@ -1,3 +1,8 @@
+.page_padding {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
 .bg_1 {
   background: #EDEDED;
 }

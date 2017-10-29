@@ -18,6 +18,7 @@ export default ({ user, small }) => {
 
   return (
     <header className={concat(
+        theme.page_padding,
         theme.bg_2,
         theme.txt_1,
         grid.row,

@@ -54,7 +54,7 @@ class LoginForm extends React.Component {
     const { email, password } = this.state;
 
     return (
-      <div className={grid.row}>
+      <div className={concat(theme.page_padding, grid.row)}>
         <div className={concat(
             grid.col_sm_12,
             grid.col_md_6,

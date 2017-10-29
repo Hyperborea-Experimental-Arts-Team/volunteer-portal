@@ -6,6 +6,7 @@ import style from './Footer.css';
 
 export default () => (
   <footer className={concat(
+      theme.page_padding,
       theme.bg_content,
       theme.txt_min,
       style.Footer

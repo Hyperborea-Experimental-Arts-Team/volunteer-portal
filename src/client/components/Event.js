@@ -1,16 +1,22 @@
 import React from 'react';
 
+import EventMenu from './EventMenu';
+import Content from './Content';
+
 import { concat } from '../util';
-import style from './Event.css';
+import style from './Event.less';
 import theme from '../theme.css';
 import grid from '../grid.less';
 
 export default ({ match }) => (
-  <div className={grid.row}>
-    <div className={concat(grid.col_sm_12,
-                           theme.txt_2,
-                           style.temp)}>
-      {match.params.id} {match.url}
+  <div className={style.Event}>
+    <EventMenu eventId={match.params.id} />
+    <div className={concat(grid.row, theme.page_padding)}>
+      <div className={concat(grid.col_sm_12,
+                             theme.txt_2,
+                             style.temp)}>
+        <Content>{match.params.id} {match.url}</Content>
+      </div>
     </div>
   </div>
 );

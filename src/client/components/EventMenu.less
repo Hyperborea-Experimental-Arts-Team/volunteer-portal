@@ -1,0 +1,24 @@
+.EventMenu {
+  padding-top: 50px;
+  position: relative;
+
+  > * {
+    position: relative;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: -30px;
+    background-color: inherit;
+  }
+}
+
+.menu {
+  list-style: none;
+  margin: 0;
+  display: flex;
+}

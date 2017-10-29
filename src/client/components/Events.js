@@ -44,7 +44,7 @@ export default events => {
   }
 
   return (
-    <div className={grid.row}>
+    <div className={concat(theme.page_padding, grid.row)}>
       <section className={concat(style.eventList,
                                  grid.col_sm_12,
                                  grid.col_md_8,
