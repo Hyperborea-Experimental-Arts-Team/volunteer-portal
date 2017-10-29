@@ -22,7 +22,7 @@ export default ({ eventId, eventName, selectedTab }) => (
                          theme.page_padding,
                          theme.txt_1,
                          theme.bg_3)}>
-    <div className={concat(grid.row)}>
+    <div className={concat(grid.row, style.content)}>
       <div className={concat(grid.col_sm_4, style.eventName)}>
         Page title
       </div>
