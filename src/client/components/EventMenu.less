@@ -1,5 +1,8 @@
+@import '../breakpoints.less';
+
 .EventMenu {
   padding-top: 50px;
+  padding-bottom: 45px;
   position: relative;
 
   > * {
@@ -18,7 +21,45 @@
 }
 
 .menu {
+  width: 100%;
   list-style: none;
   margin: 0;
   display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  font-size: 16px;
+  padding: 0 40px;
+
+  @media @medium {
+    flex-direction: row;
+  }
+}
+
+.menuItem {
+  position: relative;
+  padding-bottom:15px;
+  min-width: 65px;
+}
+
+.selected:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 65px;
+  border-bottom: 4px solid white;
+}
+
+.eventName {
+  font-weight: lighter;
+  font-size: 36px;
+
+  @media @medium {
+    font-size: 43px;
+  }
+}
+
+.nav {
+  display: flex;
+  align-items: flex-end;
 }

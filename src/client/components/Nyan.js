@@ -27,7 +27,7 @@ function withProps(Component, props) {
 export default () => (
   <Switch>
     <PrivateRoute path="/events" component={pageFactory(Header, LoadedEvents)} />
-    <PrivateRoute path="/event/:id" component={pageFactory(withProps(Header, { small: true }), Event)} />
+    <PrivateRoute path="/event/:id/:selectedTab" component={pageFactory(withProps(Header, { small: true }), Event)} />
     <Route path="/login" component={pageFactory(Header, LoginForm)} />
     <Redirect from="/" to="/events" />
   </Switch>
