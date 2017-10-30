@@ -8,7 +8,7 @@ import theme from '../theme.css';
 export default ({ userName, avatarUrl, menuLabel, small }) => (
   <div className={concat(style.UserInfo, small ? style.small : style.big)}>
     <div className={small ? style.smallContent : style.bigContent}>
-      <span className={small ? concat(theme.txt_3, style.smallName) :
+      <span className={small ? concat(theme.txt_light, style.smallName) :
                                style.bigName}>{userName}</span>
       <UserMenu label={small ? null : menuLabel} />
     </div>

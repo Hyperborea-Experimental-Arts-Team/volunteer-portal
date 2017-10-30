@@ -28,10 +28,12 @@ export default ({ photo, address, startDate, endDate, description }) => (
             <BigDate
               date={startDate}
               label={<FormattedMessage id="date.start" defaultMessage="Start" />}
+              className={theme.txt_accent}
             />
             <BigDate
               date={endDate}
               label={<FormattedMessage id="date.end" defaultMessage="End" />}
+              className={concat(theme.txt_accent, style.topMargin)}
             />
           </div>
           <div>
@@ -42,14 +44,16 @@ export default ({ photo, address, startDate, endDate, description }) => (
                 'Fire Art Safety Team'
               ]}
               number={20}
+              className={theme.txt_accent}
             />
             <BigNumber
-                label={<FormattedMessage id="role.hours" defaultMessage="Hours Per Role" />}
+                label={<FormattedMessage id="shifts.remaining" defaultMessage="Shifts Remaining" />}
                 infoLines={[
-                'Officer Of The Day -',
-                'Fire Art Safety Team'
+                '57 minimum open',
+                '132 maximum open'
               ]}
-                number={20}
+              number={20}
+              className={concat(theme.txt_accent, style.topMargin)}
             />
           </div>
         </div>

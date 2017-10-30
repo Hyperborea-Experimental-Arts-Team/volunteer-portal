@@ -20,7 +20,7 @@ const MenuItem = ({ label, link, selected }) => (
 export default ({ eventId, eventName, selectedTab }) => (
   <div className={concat(style.EventMenu,
                          theme.page_padding,
-                         theme.txt_1,
+                         theme.txt_lightest,
                          theme.bg_3)}>
     <div className={concat(grid.row, style.content)}>
       <div className={concat(grid.col_sm_4, style.eventName)}>

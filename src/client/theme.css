@@ -23,20 +23,28 @@
   background: #FFF;
 }
 
-.txt_1 {
-  color: #FFF;
-}
-
-.txt_2 {
+.txt_darkest {
   color: #000;
 }
 
-.txt_3 {
+.txt_dark {
+  color: #555;
+}
+
+.txt_light {
   color: #838383;
 }
 
-.txt_min {
+.txt_lighter {
   color: #9B9B9B;
+}
+
+.txt_lightest {
+  color: #FFF;
+}
+
+.txt_accent {
+  color: #8F2CFA;
 }
 
 .divider {

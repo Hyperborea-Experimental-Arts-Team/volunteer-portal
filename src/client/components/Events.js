@@ -26,7 +26,7 @@ function renderSection(title, list, first = false) {
   }
   return (
     <section>
-      <h2 className={concat(style.header, first ? theme.txt_1 : theme.txt_2)}>
+      <h2 className={concat(style.header, first ? theme.txt_lightest : theme.txt_darkest)}>
         {title}
       </h2>
       <div className={concat(grid.row, style.bottomMargin)}>

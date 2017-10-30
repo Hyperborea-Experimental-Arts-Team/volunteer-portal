@@ -60,7 +60,7 @@ class LoginForm extends React.Component {
             grid.col_md_6,
             grid.col_lg_4
         )}>
-          <h2 className={concat(style.header, theme.txt_1)}>
+          <h2 className={concat(style.header, theme.txt_lightest)}>
             <FormattedMessage id="login.title" defaultMessage="Login" />
           </h2>
           <form className={concat(

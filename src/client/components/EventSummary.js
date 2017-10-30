@@ -17,9 +17,9 @@ function bg(alt) {
 function renderDates(start, end, big, altBg) {
   if (big) {
     return (
-      <div className={concat(style.dates, bg(altBg), theme.txt_1)}>
-        <BigDate date={start} label={<FormattedMessage id="date.start" defaultMessage="Start" />}/>
-        <BigDate date={end} label={<FormattedMessage id="date.end" defaultMessage="End" />}/>
+      <div className={concat(style.dates, bg(altBg), theme.txt_lightest)}>
+        <BigDate light={true} date={start} label={<FormattedMessage id="date.start" defaultMessage="Start" />}/>
+        <BigDate light={true} date={end} label={<FormattedMessage id="date.end" defaultMessage="End" />}/>
       </div>
     );
   }
@@ -31,10 +31,10 @@ function renderDates(start, end, big, altBg) {
 export default ({ event }) => (
   <div className={style.EventSummary}>
     <Image url={event.photo} ratio={1}>
-      <div className={concat(style.header, theme.txt_1)}>
+      <div className={concat(style.header, theme.txt_lightest)}>
         <h3 className={style.name}>{event.name}</h3>
         {event.numDepartments}&nbsp;
-        <span className={theme.txt_3}>
+        <span className={theme.txt_light}>
           <FormattedMessage
               id="event.departments"
               defaultMessage="{n, plural, one {Department} other {Departments}}"
@@ -42,7 +42,7 @@ export default ({ event }) => (
           />
         ,&#32;</span>
         {event.numVolunteers}&nbsp;
-        <span className={theme.txt_3}>
+        <span className={theme.txt_light}>
           <FormattedMessage
               id="event.volunteers"
               defaultMessage="{n, plural, one {Volunteer} other {Volunteers}}"
