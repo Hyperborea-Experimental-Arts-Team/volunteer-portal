@@ -11,6 +11,28 @@ import grid from '../grid.less';
 import theme from '../theme.css';
 import style from './EventOverview.less';
 
+const DESCRIPTION_LENGTH = 250;
+
+const Description = ({ text }) => {
+  const display = text.length <= DESCRIPTION_LENGTH ?
+      text :
+      text.substring(0, DESCRIPTION_LENGTH)
+          .split(' ')
+          .slice(0, -1)
+          .join(' ');
+  return (
+    <span className={style.description}>
+      {display}
+      {display.length < text.length ? (
+          <span className={style.more}>
+            <FormattedMessage id="event.seeMore" defaultMessage="See More..." />
+          </span>)
+          : null
+      }
+    </span>
+  );
+};
+
 export default ({ photo, address, startDate, endDate, description }) => (
   <div className={concat(grid.row, theme.page_padding)}>
     <section className={grid.col_sm_4}>
@@ -61,7 +83,7 @@ export default ({ photo, address, startDate, endDate, description }) => (
           <h3 className={style.title}>
             <FormattedMessage id="event.description" defaultMessage="Description" />
           </h3>
-          {description}
+          <Description text={description} />
         </div>
       </div>
     </section>
