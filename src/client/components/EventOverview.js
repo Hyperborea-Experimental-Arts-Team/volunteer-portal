@@ -6,6 +6,7 @@ import Content from './Content';
 import Button from './Button';
 import BigDate from './BigDate';
 import BigNumber from './BigNumber';
+import DepartmentSummary from './DepartmentSummary';
 
 import grid from '../grid.less';
 import theme from '../theme.css';
@@ -33,59 +34,64 @@ const Description = ({ text }) => {
   );
 };
 
-export default ({ photo, address, startDate, endDate, description }) => (
+const Info = ({ startDate, endDate, description }) => (
+  <div className={concat(style.info, theme.bg_content)}>
+    <div className={concat(style.numberSection, theme.divider)}>
+      <div>
+        <BigDate
+            date={startDate}
+            label={<FormattedMessage id="date.start" defaultMessage="Start" />}
+            className={theme.txt_accent}
+        />
+        <BigDate
+            date={endDate}
+            label={<FormattedMessage id="date.end" defaultMessage="End" />}
+            className={concat(theme.txt_accent, style.topMargin)}
+        />
+      </div>
+      <div>
+        <BigNumber
+            label={<FormattedMessage id="role.hours" defaultMessage="Hours Per Role" />}
+            infoLines={[
+              'Officer Of The Day -',
+              'Fire Art Safety Team'
+            ]}
+            number={20}
+            className={theme.txt_accent}
+        />
+        <BigNumber
+            label={<FormattedMessage id="shifts.remaining" defaultMessage="Shifts Remaining" />}
+            infoLines={[
+              '57 minimum open',
+              '132 maximum open'
+            ]}
+            number={20}
+            className={concat(theme.txt_accent, style.topMargin)}
+        />
+      </div>
+    </div>
+    <div className={style.descriptionSection}>
+      <h3 className={style.title}>
+        <FormattedMessage id="event.description" defaultMessage="Description" />
+      </h3>
+      <Description text={description} />
+    </div>
+  </div>
+);
+
+export default event => (
   <div className={concat(grid.row, theme.page_padding)}>
     <section className={grid.col_sm_4}>
-      <Image url={photo} ratio={1} />
-      <Content>{address}</Content>
+      <Image url={event.photo} ratio={1} />
+      <Content>{event.address}</Content>
       <Button text={<FormattedMessage id="event.edit" defaultMessage="Edit Event" />}
               className={concat(style.button, theme.bg_3)} />
       <Button text={<FormattedMessage id="event.deactivate" defaultMessage="Deactivate Event" />}
               className={concat(style.button, theme.bg_2)} />
     </section>
     <section className={grid.col_sm_8}>
-      <div className={concat(style.info, theme.bg_content)}>
-        <div className={concat(style.numberSection, theme.divider)}>
-          <div>
-            <BigDate
-              date={startDate}
-              label={<FormattedMessage id="date.start" defaultMessage="Start" />}
-              className={theme.txt_accent}
-            />
-            <BigDate
-              date={endDate}
-              label={<FormattedMessage id="date.end" defaultMessage="End" />}
-              className={concat(theme.txt_accent, style.topMargin)}
-            />
-          </div>
-          <div>
-            <BigNumber
-              label={<FormattedMessage id="role.hours" defaultMessage="Hours Per Role" />}
-              infoLines={[
-                'Officer Of The Day -',
-                'Fire Art Safety Team'
-              ]}
-              number={20}
-              className={theme.txt_accent}
-            />
-            <BigNumber
-                label={<FormattedMessage id="shifts.remaining" defaultMessage="Shifts Remaining" />}
-                infoLines={[
-                '57 minimum open',
-                '132 maximum open'
-              ]}
-              number={20}
-              className={concat(theme.txt_accent, style.topMargin)}
-            />
-          </div>
-        </div>
-        <div className={style.descriptionSection}>
-          <h3 className={style.title}>
-            <FormattedMessage id="event.description" defaultMessage="Description" />
-          </h3>
-          <Description text={description} />
-        </div>
-      </div>
+      <Info startDate={event.startDate} endDate={event.endDate} description={event.description} />
     </section>
+    {event.departments.map((d, i) => <div key={i} className={grid.col_sm_12}><DepartmentSummary {...d} /></div>)}
   </div>
 )

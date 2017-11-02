@@ -4,7 +4,6 @@ import LoginForm from './LoginForm';
 import PrivateRoute from '../containers/PrivateRoute';
 import LoadedEvents from '../containers/LoadedEvents';
 import Header from './Header';
-import EventMenu from './EventMenu';
 import Footer from './Footer';
 import Event from './Event';
 

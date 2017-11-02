@@ -10,8 +10,8 @@ export default ({ number, label, infoLines, className = '', light}) => {
         <div className={style.number}>{number}</div>
         <div className={style.rest}>
           <div className={concat(light ? theme.txt_lightest : theme.txt_darkest, style.label)}>{label}</div>
-          {infoLines.map(line =>
-              <div className={concat(light ? theme.txt_lightest : theme.txt_dark, style.line)}>{line}</div>
+          {infoLines.map((line, i) =>
+              <div key={i} className={concat(light ? theme.txt_lightest : theme.txt_dark, style.line)}>{line}</div>
           )}
         </div>
       </div>

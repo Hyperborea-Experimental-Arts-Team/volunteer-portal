@@ -12,7 +12,7 @@ export default ({ user, small }) => {
 
   const userInfo = !user ? '' :
       <UserInfo userName={user.name}
-                avatarUrl={`/${user.avatar}`}
+                avatarUrl={user.avatar}
                 menuLabel='Crustacean'
                 small={small} />;
 

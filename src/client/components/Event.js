@@ -7,10 +7,7 @@ import EventVolunteers from './Todo';
 import EventSchedule from './Todo';
 import DataLoader from '../containers/DataLoader';
 
-import { concat } from '../util';
 import style from './Event.less';
-import theme from '../theme.css';
-import grid from '../grid.less';
 
 function eventTab(selectedTab, eventId) {
   switch (selectedTab) {
