@@ -6,7 +6,7 @@ import './index.css';
 import Root from './containers/Root';
 //import * as ServiceWorker from './registerServiceWorker';
 
-render(<Root />, document.body);
+render(<Root />, document.getElementById('nyan'));
 
 // TODO: Uncomment this to re-enable service worker caching
 //ServiceWorker.register();
