@@ -7,7 +7,49 @@ import Table from './Table';
 import style from './DepartmentSummary.less';
 import theme from '../theme.css';
 
-export default ({ name, lead }) => (
+function getStatusMessage({ minShifts, maxShifts, filledShifts }) {
+  const needed = minShifts - filledShifts;
+  const extra = maxShifts - filledShifts;
+  if (needed > 0) {
+    return <FormattedMessage
+        id="status.needed"
+        defaultMessage="{num} {num, plural, one {volunteer} other {volunteers}} needed"
+        values={{ num: needed }} />;
+  }
+  if (extra > 0) {
+    return <FormattedMessage
+        id="status.extra"
+        defaultMessage="{num} extra {num, plural, one {shift} other {shifts}} open"
+        values={{ num: extra }} />;
+  }
+  return <FormattedMessage
+      id="status.filled"
+      defaultMessage="All shifts filled" />;
+}
+
+function getRowModel(team) {
+  const totals = team.roles.reduce((role, totals) => ({
+    minShifts: role.minShifts + totals.minShifts,
+    maxShifts: role.maxShifts + totals.maxShifts,
+    filledShifts: role.filledShifts + totals.filledShifts
+  }), { minShifts: 0, maxShifts: 0, filledShifts: 0 });
+
+  return [
+    team.name,
+    totals.minShifts,
+    totals.maxShifts,
+    <FormattedMessage
+        id="shift.filledDisplay"
+        defaultMessage="{filled} / {min} min."
+        values={{
+          filled: totals.filledShifts,
+          min: totals.minShifts
+        }} />,
+    getStatusMessage(totals)
+  ];
+}
+
+export default ({ name, lead, teams }) => (
   <section className={concat(theme.bg_content, style.wrapper)}>
     <div className={style.header}>
       <div className={style.title}>
@@ -31,12 +73,8 @@ export default ({ name, lead }) => (
           <FormattedMessage id="team.filledShifts" defaultMessage="Filled Shifts" />,
           <FormattedMessage id="team.status" defaultMessage="Status" />
         ]}
-        rows={[
-          ['foo', 'foo', 'foo', 'foo', 'foo'],
-          ['bar', 'bar', 'bar', 'bar', 'bar'],
-          ['baz', 'baz', 'baz', 'baz', 'baz'],
-          ['boz', 'boz', 'boz', 'boz', 'boz']
-        ]}
+        widths={[35, 15, 15, 15, 20]}
+        rows={teams.map(getRowModel)}
     />
   </section>
 );
