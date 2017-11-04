@@ -1,4 +1,5 @@
 import React from 'react';
+import { concat } from '../util';
 
 import style from './Table.less';
 
@@ -21,7 +22,7 @@ export const Row = ({ data, widths }) => (
 );
 
 export const ExpandableRow = ({ data, widths, subRows, expanded, toggle }) => (
-  <div className={style.expandableRow} onClick={toggle}>
+  <div className={concat(style.expandableRow, expanded ? style.expanded : '')} onClick={toggle}>
     <Row data={data} widths={widths} />
     {expanded ? subRows.map((d, i) => <SubRow key={i} data={d} widths={widths} />) : null}
   </div>

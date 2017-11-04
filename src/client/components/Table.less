@@ -25,7 +25,17 @@
   & > .row {
     cursor: pointer;
     border-bottom: none;
+
+    > :first-child {
+      padding-left: 20px;
+      background: url(/add.svg) left center no-repeat;
+      background-size: contain;
+    }
   }
+}
+
+.expanded > .row > :first-child {
+  background-image: url(/minus.svg);
 }
 
 .subRow {
