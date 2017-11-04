@@ -29,12 +29,22 @@ function getStatusMessage({ minShifts, maxShifts, filledShifts }) {
       defaultMessage="All shifts filled" />;
 }
 
+function getStatus({ minShifts, maxShifts, filledShifts }) {
+  return (
+    <span className={filledShifts < minShifts ? style.urgent : null}>
+      {getStatusMessage({minShifts, maxShifts, filledShifts})}
+    </span>
+  );
+}
+
 function getFilledMessage(min, filled) {
-  return <FormattedMessage
-      id="shift.filledDisplay"
-      defaultMessage="{filled} / {min} min."
-      values={{ filled, min }}
-  />;
+  return <span className={filled < min ? style.urgent : null}>
+      <FormattedMessage
+        id="shift.filledDisplay"
+        defaultMessage="{filled} / {min} min."
+        values={{ filled, min }}
+      />
+    </span>;
 }
 
 function getRow(team, expanded, toggleTeam) {
@@ -54,14 +64,14 @@ function getRow(team, expanded, toggleTeam) {
         totals.minShifts,
         totals.maxShifts,
         getFilledMessage(totals.minShifts, totals.filledShifts),
-        getStatusMessage(totals)
+        getStatus(totals)
       ]}
       subRows={team.roles.map(r => [
         r.name,
         r.minShifts,
         r.maxShifts,
         getFilledMessage(r.minShifts, r.filledShifts),
-        getStatusMessage(r)
+        getStatus(r)
       ])}
   />
 }
