@@ -7,6 +7,7 @@ import Button from './Button';
 import BigDate from './BigDate';
 import BigNumber from './BigNumber';
 import DepartmentSummary from './DepartmentSummary';
+import expandable from '../containers/expandable';
 
 import grid from '../grid.less';
 import theme from '../theme.css';
@@ -92,6 +93,13 @@ export default event => (
     <section className={grid.col_sm_8}>
       <Info startDate={event.startDate} endDate={event.endDate} description={event.description} />
     </section>
-    {event.departments.map((d, i) => <div key={i} className={grid.col_sm_12}><DepartmentSummary {...d} /></div>)}
+    {event.departments.map((d, i) => {
+      const ExpandableSummary = expandable(`eo:${d.name}`, DepartmentSummary);
+      return (
+        <div key={i} className={grid.col_sm_12}>
+          <ExpandableSummary {...d} />
+        </div>
+      );
+    })}
   </div>
 )

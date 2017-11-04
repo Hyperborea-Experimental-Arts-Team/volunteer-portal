@@ -2,17 +2,34 @@ import React from 'react';
 
 import style from './Table.less';
 
-const Row = ({ data, widths }) => (
-  <div className={style.row}>
-    {data.map((d, i) => <div key={i} className={style.column} style={{ minWidth: `${widths[i]}%` }}>{d}</div>)}
+const RowTemplate = ({ data, widths, className }) => (
+  <div className={className}>
+    {data.map((h, i) => <div key={i} style={{ minWidth: `${widths[i]}%` }}>{h}</div>)}
   </div>
 );
 
-export default ({ headings, rows, widths }) => (
+const SubRow = ({ data, widths }) => (
+    <RowTemplate data={data} widths={widths} className={style.subRow} />
+);
+
+export const Header = ({ data, widths }) => (
+  <RowTemplate data={data} widths={widths} className={style.headingRow} />
+);
+
+export const Row = ({ data, widths }) => (
+  <RowTemplate data={data} widths={widths} className={style.row} />
+);
+
+export const ExpandableRow = ({ data, widths, subRows, expanded, toggle }) => (
+  <div className={style.expandableRow} onClick={toggle}>
+    <Row data={data} widths={widths} />
+    {expanded ? subRows.map((d, i) => <SubRow key={i} data={d} widths={widths} />) : null}
+  </div>
+);
+
+export const Table = ({ header, rows }) => (
   <div>
-    <div className={style.headingRow}>
-      {headings.map((h, i) => <div key={i} className={style.heading} style={{ minWidth: `${widths[i]}%` }}>{h}</div>)}
-    </div>
-    {rows.map((r, i) => <Row key={i} data={r} widths={widths} />)}
+    {header}
+    {rows}
   </div>
 );
