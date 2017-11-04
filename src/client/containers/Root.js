@@ -11,7 +11,6 @@ import { IntlProvider, addLocaleData } from 'react-intl';
 import enData from 'react-intl/locale-data/en';
 import enMessages from '../langs/en';
 
-import splashReducer from '../reducers/splash';
 import authReducer from '../reducers/auth';
 import cacheReducer from '../reducers/serviceCache';
 
@@ -49,7 +48,6 @@ if (token) {
 const store = createStore(
   // Root reducer, composed of other reducers
   combineReducers({
-    splash: splashReducer,
     auth: authReducer,
     router: routerReducer,
     serviceCache: cacheReducer
