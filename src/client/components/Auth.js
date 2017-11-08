@@ -33,6 +33,12 @@ export default ({ match }) => (
               </Link>
           );})}
         </nav>
+        <section className={style.intro}>
+          <FormattedMessage
+              id="login.intro"
+              defaultMessage="Welcome to Nyan, an event management tool. This platform has been built by and made for the regional Burning Man community and their events."
+          />
+        </section>
       </div>
     </div>
     <div className={concat(style.photo, grid.col_sm_0, grid.col_md_7)}
