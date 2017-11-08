@@ -1,0 +1,52 @@
+.headingRow, .row, .subRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 20px;
+}
+
+.headingRow {
+  background: #f7f7f7;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.row, .expandableRow {
+  border-bottom: 1px solid #d8d8d8;
+  font-size: 12px;
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.expandableRow {
+  overflow: hidden;
+  & > .row {
+    cursor: pointer;
+    border-bottom: none;
+
+    > :first-child {
+      padding-left: 20px;
+      background: url(/add.svg) left center no-repeat;
+      background-size: contain;
+    }
+  }
+}
+
+.expanded > .row > :first-child {
+  background-image: url(/minus.svg);
+}
+
+.subRow {
+  font-size: 12px;
+  min-height: 20px;
+
+  &:nth-child(2n) > div {
+    background: #f7f7f7;
+  }
+
+  &:last-child {
+    margin-bottom: 20px;
+  }
+}

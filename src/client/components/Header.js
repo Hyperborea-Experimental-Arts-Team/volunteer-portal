@@ -12,7 +12,7 @@ export default ({ user, small }) => {
 
   const userInfo = !user ? '' :
       <UserInfo userName={user.name}
-                avatarUrl={`/${user.avatar}`}
+                avatarUrl={user.avatar}
                 menuLabel='Crustacean'
                 small={small} />;
 
@@ -20,7 +20,7 @@ export default ({ user, small }) => {
     <header className={concat(
         theme.page_padding,
         theme.bg_2,
-        theme.txt_1,
+        theme.txt_lightest,
         grid.row,
         grid.gutterless,
         small ? style.smallHeader : style.bigHeader

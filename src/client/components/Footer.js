@@ -8,7 +8,7 @@ export default () => (
   <footer className={concat(
       theme.page_padding,
       theme.bg_content,
-      theme.txt_min,
+      theme.txt_lighter,
       style.Footer
   )}>
     &copy; Nyan

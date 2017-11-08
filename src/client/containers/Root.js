@@ -13,6 +13,7 @@ import enMessages from '../langs/en';
 
 import authReducer from '../reducers/auth';
 import cacheReducer from '../reducers/serviceCache';
+import tableReducer from '../reducers/table';
 
 import { autologin } from '../actions/auth';
 import { invalidate } from '../actions/serviceCache';
@@ -50,7 +51,8 @@ const store = createStore(
   combineReducers({
     auth: authReducer,
     router: routerReducer,
-    serviceCache: cacheReducer
+    serviceCache: cacheReducer,
+    table: tableReducer
   }),
 
   // Initial state

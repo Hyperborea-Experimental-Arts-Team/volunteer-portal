@@ -46,8 +46,8 @@ router.get('/auth', isLoggedIn, (request, response) => {
   });
 });
 
-router.get('/events', isLoggedIn, (request, response) => {
-  getEvent().then(events => response.json(events));
+router.get('/events/:id?', isLoggedIn, (request, response) => {
+  getEvent(request.params.id).then(events => response.json(events));
 });
 
 router.use((request, response) => {

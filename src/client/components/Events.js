@@ -26,7 +26,7 @@ function renderSection(title, list, first = false) {
   }
   return (
     <section>
-      <h2 className={concat(style.header, first ? theme.txt_1 : theme.txt_2)}>
+      <h2 className={concat(style.header, first ? theme.txt_lightest : theme.txt_darkest)}>
         {title}
       </h2>
       <div className={concat(grid.row, style.bottomMargin)}>
@@ -58,11 +58,11 @@ export default events => {
                                  grid.col_lg_4)}>
         <Button text={<FormattedMessage id="events.create"
                                         defaultMessage="Create an event"/>}
-                bgClass={theme.bg_3}
+                className={theme.bg_3}
         />
         <Button text={<FormattedMessage id="events.deactivate"
                                         defaultMessage="Deactivate an event"/>}
-                bgClass={theme.bg_2}
+                className={theme.bg_2}
         />
       </section>
     </div>

@@ -4,7 +4,7 @@ import style from './UserMenu.css'
 import theme from '../theme.css';
 
 export default ({ label }) => (
-  <div className={concat(style.UserMenu, theme.txt_3)}>
+  <div className={concat(style.UserMenu, theme.txt_light)}>
     {label}
     <svg className={style.chevron}
          viewBox="4 6 12 8"
