@@ -25,6 +25,28 @@
 }
 
 .nav {
-  padding-bottom: 10px;
   border-bottom: 1px solid #d8d8d8;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.link {
+  position: relative;
+  font-weight: bold;
+  font-size: 12px;
+  min-width: 50%;
+  opacity: 0.35;
+  cursor: pointer;
+  padding-bottom: 10px;
+
+  &.selected {
+    opacity: 1;
+  }
+}
+
+.selector {
+  width: 30px;
+  height: 3px;
+  position: absolute;
+  bottom: -1px;
 }

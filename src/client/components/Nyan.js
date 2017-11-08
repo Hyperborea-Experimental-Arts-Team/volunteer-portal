@@ -28,7 +28,7 @@ export default () => (
   <Switch>
     <PrivateRoute path="/events" component={pageFactory(Header, LoadedEvents)} />
     <PrivateRoute path="/event/:id/:selectedTab" component={pageFactory(withProps(Header, { small: true }), Event)} />
-    <Route path="/login" component={Auth} />
+    <Route path="/auth/:selectedTab" component={Auth} />
     <Redirect from="/" to="/events" />
   </Switch>
 );
