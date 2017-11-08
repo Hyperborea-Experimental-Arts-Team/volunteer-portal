@@ -1,0 +1,36 @@
+.wrap {
+  position: relative;
+}
+
+.placeholder {
+  position: absolute;
+  pointer-events: none;
+  bottom: 10px;
+  font-size: 8px;
+  transition: all 200ms;
+  line-height: 2;
+  font-weight: 500;
+  background-position: left center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.input {
+  margin-top: 25.5px;
+  border: none;
+  outline: none;
+  width: 100%;
+  border-bottom: 1px solid #555;
+  padding: 5px 0;
+
+  &:focus, &.filled {
+    + .placeholder {
+      font-size: 7px;
+      transform: translate3d(0, -15px, 0);
+    }
+  }
+}
+
+.withIcon {
+  padding-left: 20px;
+}

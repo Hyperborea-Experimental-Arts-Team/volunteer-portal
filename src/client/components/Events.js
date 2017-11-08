@@ -58,11 +58,11 @@ export default events => {
                                  grid.col_lg_4)}>
         <Button text={<FormattedMessage id="events.create"
                                         defaultMessage="Create an event"/>}
-                className={theme.bg_3}
+                className={concat(theme.txt_lightest, theme.bg_3)}
         />
         <Button text={<FormattedMessage id="events.deactivate"
                                         defaultMessage="Deactivate an event"/>}
-                className={theme.bg_2}
+                className={concat(theme.txt_lightest, theme.bg_2)}
         />
       </section>
     </div>
