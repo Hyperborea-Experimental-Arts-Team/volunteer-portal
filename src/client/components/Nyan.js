@@ -27,7 +27,7 @@ export default () => (
   <Switch>
     <PrivateRoute path="/events" component={pageFactory(Header, LoadedEvents)} />
     <PrivateRoute path="/event/:id/:selectedTab" component={pageFactory(withProps(Header, { small: true }), Event)} />
-    <Route path="/auth/:selectedTab" component={SubmittableAuth} />
+    <Route path="/auth/:selectedTab" component={withProps(SubmittableAuth, { photo: { url: '/hrpdrp.png', title: 'Hyperborea 2017', by: 'Fee Gunn' } })}  />
     <Redirect from="/" to="/events" />
   </Switch>
 );

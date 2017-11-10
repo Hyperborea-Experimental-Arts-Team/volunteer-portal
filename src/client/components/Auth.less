@@ -5,6 +5,7 @@
 .photo {
   background-size: cover;
   background-position: center;
+  position: relative;
 }
 
 .content {
@@ -79,4 +80,29 @@
   color: red;
   font-size: 12px;
   margin: 10px 0;
+}
+
+.photoInfo {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.85) 40%);
+  text-align: right;
+  padding: 48px;
+}
+
+.photoBy {
+  font-size: 8px;
+  font-weight: bold;
+}
+
+.photoTitle {
+  font-size: 24px;
+  font-weight: 300;
+  letter-spacing: -0.9px;
+}
+
+.photoByName {
+  margin-left: 5px;
 }

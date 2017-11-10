@@ -135,7 +135,7 @@ class Auth extends React.Component {
   }
 
   render() {
-    const { match, status, onLogin, onSignup } = this.props;
+    const { match, status, onLogin, onSignup, photo } = this.props;
 
     return (
         <div className={concat(grid.row, grid.gutterless, style.wrap)}>
@@ -173,8 +173,18 @@ class Auth extends React.Component {
             </div>
           </div>
           <div className={concat(style.photo, grid.col_sm_0, grid.col_md_7)}
-               style={{ backgroundImage: 'url(/hrpdrp.png' }}
-          ></div>
+               style={{ backgroundImage: `url(${photo.url})` }}
+          >
+            <div className={concat(style.photoInfo, theme.txt_lightest)}>
+              <div className={style.photoBy}>
+                <span className={theme.txt_light}><FormattedMessage id="photo.by" defaultMessage="Photo by" /></span>
+                <span className={style.photoByName}>{photo.by}</span>
+              </div>
+              <div className={style.photoTitle}>
+                {photo.title}
+              </div>
+            </div>
+          </div>
         </div>
     );
   }
