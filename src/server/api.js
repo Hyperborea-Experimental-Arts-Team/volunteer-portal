@@ -26,7 +26,7 @@ router.get('/test', isLoggedIn, (request, response) => {
 router.post('/auth', (request, response) => {
   passport.authenticate('local-login', function (err, token, user) {
     if (err || !token) {
-      return response.status(400).json({
+      return response.status(401).json({
         success: false,
         message: err && err.message
       });

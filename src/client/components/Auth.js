@@ -18,8 +18,12 @@ function submitLogin(e, state, onLogin) {
   email && password && onLogin(email, password);
 }
 
-const LoginForm = ({ state, onLogin, onChange }) => (
+const LoginForm = ({ state, failed, onLogin, onChange }) => (
   <form onSubmit={e => submitLogin(e, state, onLogin)}>
+    <section className={style.temp}>
+      The login is butts@butts.com : buttsRgr8
+    </section>
+    {failed ? <div className={style.error}><FormattedMessage id="login.failed" defaultMessage="Incorrect email or password." /></div> : null}
     <FormField icon={emailSvg}
                name="email"
                value={state.email}
@@ -101,7 +105,7 @@ class Auth extends React.Component {
   }
 
   render() {
-    const { match, onLogin } = this.props;
+    const { match, failed, onLogin } = this.props;
 
     return (
         <div className={concat(grid.row, grid.gutterless, style.wrap)}>
@@ -127,13 +131,10 @@ class Auth extends React.Component {
                     defaultMessage="Welcome to Nyan, an event management tool. This platform has been built by and made for the regional Burning Man community and their events."
                 />
               </section>
-              <section className={style.temp}>
-                The login is butts@butts.com : buttsRgr8
-              </section>
               {(() => {
                 const formId = match.params.selectedTab;
                 const Form = tabs[formId].form;
-                return <Form onLogin={onLogin} state={this.state[formId]} onChange={this.updateForm.bind(this, formId)} />;
+                return <Form failed={failed} onLogin={onLogin} state={this.state[formId]} onChange={this.updateForm.bind(this, formId)} />;
               })()}
             </div>
           </div>

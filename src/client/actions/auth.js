@@ -12,6 +12,7 @@ import { invalidate } from './serviceCache';
 export const LOGGING_IN = 'LOGGING_IN';
 export const LOGGED_IN = 'LOGGED_IN';
 export const LOGGED_OUT = 'LOGGED_OUT';
+export const LOGIN_FAILED = 'LOGIN_FAILED';
 
 function loggingIn() {
   return { type: LOGGING_IN };
@@ -23,6 +24,10 @@ function loggedIn(token, user) {
 
 function loggedOut() {
   return { type: LOGGED_OUT };
+}
+
+function loginFailed() {
+  return { type: LOGIN_FAILED };
 }
 
 export function autologin(token) {
@@ -46,8 +51,7 @@ export function login(email, password) {
     dispatch(loggingIn());
     api.post('auth', null, { email, password }).then(response => {
       if (response.status !== 200) {
-        // TODO: Dispatch a login failed action for visual feedback
-        console.error(response.data.error);
+        dispatch(loginFailed());
         return;
       }
       localStorage.setItem('token', response.data.token);
