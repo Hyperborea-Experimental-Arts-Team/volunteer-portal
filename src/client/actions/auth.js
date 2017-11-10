@@ -13,6 +13,9 @@ export const LOGGING_IN = 'LOGGING_IN';
 export const LOGGED_IN = 'LOGGED_IN';
 export const LOGGED_OUT = 'LOGGED_OUT';
 export const LOGIN_FAILED = 'LOGIN_FAILED';
+export const SIGNING_UP = 'SIGNING_UP';
+export const SIGNUP_FAILED = 'SIGNUP_FAILED';
+export const SIGNED_UP = 'SIGNED_UP';
 
 function loggingIn() {
   return { type: LOGGING_IN };
@@ -30,10 +33,22 @@ function loginFailed() {
   return { type: LOGIN_FAILED };
 }
 
+function signingUp() {
+  return { type: SIGNING_UP };
+}
+
+function signedUp() {
+  return { type: SIGNED_UP };
+}
+
+function signupFailed() {
+  return { type: SIGNUP_FAILED };
+}
+
 export function autologin(token) {
   return dispatch => {
     dispatch(loggingIn());
-    api.get('auth', token).then(response => {
+    api.get('login', token).then(response => {
       dispatch(invalidate());
       if (response.status === 200) {
         dispatch(loggedIn(token, response.data.user));
@@ -46,10 +61,9 @@ export function autologin(token) {
 }
 
 export function login(email, password) {
-
   return dispatch => {
     dispatch(loggingIn());
-    api.post('auth', null, { email, password }).then(response => {
+    api.post('login', null, { email, password }).then(response => {
       if (response.status !== 200) {
         dispatch(loginFailed());
         return;
@@ -66,5 +80,18 @@ export function logout(redirect) {
     localStorage.removeItem('token');
     dispatch(loggedOut());
     redirect && dispatch(push('/login'));
+  };
+}
+
+export function signup(firstname, lastname, email, password) {
+  return dispatch => {
+    dispatch(signingUp());
+    api.post('signup', null, { firstname, lastname, email, password }).then(response => {
+      if (response.status !== 200) {
+        dispatch(signupFailed());
+        return;
+      }
+      dispatch(signedUp());
+    })
   };
 }

@@ -23,7 +23,7 @@ router.get('/test', isLoggedIn, (request, response) => {
   response.json({'data' : 'Butts'});
 });
 
-router.post('/auth', (request, response) => {
+router.post('/login', (request, response) => {
   passport.authenticate('local-login', function (err, token, user) {
     if (err || !token) {
       return response.status(401).json({
@@ -39,10 +39,17 @@ router.post('/auth', (request, response) => {
   })(request, response);
 });
 
-router.get('/auth', isLoggedIn, (request, response) => {
+router.get('/login', isLoggedIn, (request, response) => {
   response.json({
     success: true,
     user: scrubUser(request.user)
+  });
+});
+
+router.post('/signup', (request, response) => {
+  response.status(418).json({
+    success: false,
+    message: 'Not yet implemented'
   });
 });
 

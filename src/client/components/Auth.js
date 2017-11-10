@@ -18,12 +18,19 @@ function submitLogin(e, state, onLogin) {
   email && password && onLogin(email, password);
 }
 
-const LoginForm = ({ state, failed, onLogin, onChange }) => (
+function submitSignup(e, state, onSignup) {
+  e.preventDefault();
+  const { firstname, lastname, email, password } = state;
+  firstname && lastname && email && password &&
+      onSignup(firstname, lastname, email, password);
+}
+
+const LoginForm = ({ state, status, onLogin, onChange }) => (
   <form onSubmit={e => submitLogin(e, state, onLogin)}>
     <section className={style.temp}>
       The login is butts@butts.com : buttsRgr8
     </section>
-    {failed ? <div className={style.error}><FormattedMessage id="login.failed" defaultMessage="Incorrect email or password." /></div> : null}
+    {status === 'LOGIN_FAILED' ? <div className={style.error}><FormattedMessage id="login.failed" defaultMessage="Incorrect email or password." /></div> : null}
     <FormField icon={emailSvg}
                name="email"
                value={state.email}
@@ -49,23 +56,48 @@ const LoginForm = ({ state, failed, onLogin, onChange }) => (
   </form>
 );
 
-const SignupForm = () => (
-  <form>
-    <FormField name="firstname" title={<FormattedMessage
-        id="user.firstname"
-        defaultMessage="First Name" />} />
-    <FormField name="lastname" title={<FormattedMessage
-        id="user.lastname"
-        defaultMessage="Last Name" />} />
-    <FormField icon={emailSvg} name="email" title={<FormattedMessage
-        id="user.email"
-        defaultMessage="Email Address" />} />
-    <FormField password={true} icon={lockSvg} name="password" title={<FormattedMessage
-        id="user.password"
-        defaultMessage="Password" />} />
-    <FormField password={true} icon={lockSvg} name="repeatpassword" title={<FormattedMessage
-        id="user.repeatpassword"
-        defaultMessage="Repeat Password" />} />
+const SignupForm = ({ state, status, onSignup, onChange }) => (
+  <form onSubmit={e => submitSignup(e, state, onSignup)}>
+    {status === 'SIGNUP_FAILED' ? <div className={style.error}><FormattedMessage id="login.failed" defaultMessage="Signup failed for unspecified reasons!" /></div> : null}
+    <FormField name="firstname"
+               value={state.firstname}
+               onChange={v => onChange('firstname', v)}
+               title={<FormattedMessage
+                   id="user.firstname"
+                   defaultMessage="First Name" />} />
+    <FormField name="lastname"
+               value={state.lastname}
+               onChange={v => onChange('lastname', v)}
+               title={<FormattedMessage
+                   id="user.lastname"
+                   defaultMessage="Last Name" />} />
+    <FormField icon={emailSvg}
+               name="email"
+               value={state.email}
+               onChange={v => onChange('email', v)}
+               title={<FormattedMessage
+                   id="user.email"
+                   defaultMessage="Email Address" />} />
+    <FormField isObfuscated={true}
+               icon={lockSvg}
+               name="password"
+               value={state.password}
+               onChange={v => onChange('password', v)}
+               title={<FormattedMessage
+                   id="user.password"
+                   defaultMessage="Password" />} />
+    <FormField isObfuscated={true}
+               icon={lockSvg}
+               name="repeatpassword"
+               value={state.repeatpassword}
+               onChange={v => onChange('repeatpassword', v)}
+               title={<FormattedMessage
+                   id="user.repeatpassword"
+                   defaultMessage="Repeat Password" />} />
+    <Button type="submit"
+            border={true}
+            className={concat(style.button, theme.txt_darkest)}
+            text={<FormattedMessage id="login.signup" defaultMessage="Sign Up" />} />
   </form>
 );
 
@@ -97,15 +129,13 @@ class Auth extends React.Component {
     }));
   }
 
-  submit
-
   componentWillMount() {
     // reset login status
     this.props.onLogout();
   }
 
   render() {
-    const { match, failed, onLogin } = this.props;
+    const { match, status, onLogin, onSignup } = this.props;
 
     return (
         <div className={concat(grid.row, grid.gutterless, style.wrap)}>
@@ -134,7 +164,11 @@ class Auth extends React.Component {
               {(() => {
                 const formId = match.params.selectedTab;
                 const Form = tabs[formId].form;
-                return <Form failed={failed} onLogin={onLogin} state={this.state[formId]} onChange={this.updateForm.bind(this, formId)} />;
+                return <Form status={status}
+                             onSignup={onSignup}
+                             onLogin={onLogin}
+                             state={this.state[formId]}
+                             onChange={this.updateForm.bind(this, formId)} />;
               })()}
             </div>
           </div>
