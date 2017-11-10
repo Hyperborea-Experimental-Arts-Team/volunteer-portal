@@ -12,20 +12,29 @@ import style from './Auth.less';
 import grid from '../grid.less';
 import theme from '../theme.css';
 
-function submitLogin(e, onLogin) {
+function submitLogin(e, state, onLogin) {
   e.preventDefault();
-  const { email, password } = e.target;
-  email.value && password.value && onLogin(email.value, password.value);
+  const { email, password } = state;
+  email && password && onLogin(email, password);
 }
 
-const LoginForm = ({ onLogin }) => (
-  <form onSubmit={e => submitLogin(e, onLogin)}>
-    <FormField icon={emailSvg} name="email" title={<FormattedMessage
-        id="user.email"
-        defaultMessage="Email Address" />} />
-    <FormField password={true} icon={lockSvg} name="password" title={<FormattedMessage
-        id="user.password"
-        defaultMessage="Password" />} />
+const LoginForm = ({ state, onLogin, onChange }) => (
+  <form onSubmit={e => submitLogin(e, state, onLogin)}>
+    <FormField icon={emailSvg}
+               name="email"
+               value={state.email}
+               onChange={v => onChange('email', v)}
+               title={<FormattedMessage
+                   id="user.email"
+                   defaultMessage="Email Address" />} />
+    <FormField isObfuscated={true}
+               icon={lockSvg}
+               name="password"
+               value={state.password}
+               onChange={v => onChange('password', v)}
+               title={<FormattedMessage
+                   id="user.password"
+                   defaultMessage="Password" />} />
     <div className={concat(theme.txt_2, style.forgot)}>
       <FormattedMessage id="login.forgot" defaultMessage="Forgot your password?" />
     </div>
@@ -71,6 +80,21 @@ const tabs = {
 
 class Auth extends React.Component {
 
+  constructor() {
+    super();
+    this.state = { login: {}, signup: {} };
+  }
+
+  updateForm(form, field, value) {
+    this.setState(Object.assign({}, this.state, {
+      [form]:Object.assign({}, this.state[form], {
+        [field]: value
+      })
+    }));
+  }
+
+  submit
+
   componentWillMount() {
     // reset login status
     this.props.onLogout();
@@ -107,8 +131,9 @@ class Auth extends React.Component {
                 The login is butts@butts.com : buttsRgr8
               </section>
               {(() => {
-                const Form = tabs[match.params.selectedTab].form;
-                return <Form onLogin={onLogin} />;
+                const formId = match.params.selectedTab;
+                const Form = tabs[formId].form;
+                return <Form onLogin={onLogin} state={this.state[formId]} onChange={this.updateForm.bind(this, formId)} />;
               })()}
             </div>
           </div>
