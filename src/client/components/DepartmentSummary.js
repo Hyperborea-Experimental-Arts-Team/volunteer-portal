@@ -86,11 +86,11 @@ export default ({ name, lead, teams, expandedRows = new Set(), toggleRow = () =>
                 defaultMessage="{title} Department Volunteer Needs"
                 values={{ title: name }}/>
           </div>
-          <UserBadge {...lead} title={
-        <FormattedMessage
-            id="lead.title"
-            defaultMessage="{department} Lead"
-            values={{ department: name }} />}
+          <UserBadge {...lead} justify="right" title={
+            <FormattedMessage
+                id="lead.title"
+                defaultMessage="{department} Lead"
+                values={{ department: name }} />}
           />
         </div>
         <Table

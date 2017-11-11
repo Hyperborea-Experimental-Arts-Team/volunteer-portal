@@ -7,6 +7,7 @@ import Button from './Button';
 import BigDate from './BigDate';
 import BigNumber from './BigNumber';
 import DepartmentSummary from './DepartmentSummary';
+import UserBadge from './UserBadge';
 import expandable from '../containers/expandable';
 
 import grid from '../grid.less';
@@ -83,7 +84,14 @@ const Info = ({ startDate, endDate, description }) => (
 export default event => (
   <div className={concat(grid.row, theme.page_padding)}>
     <section className={grid.col_sm_4}>
-      <Image url={event.photo} ratio={1} />
+      <Image className={style.eventPhoto} url={event.photo} ratio={1}>
+        <UserBadge title={<FormattedMessage id="event.lead" defaultMessage="Event Lead" />}
+                   name={event.lead.name}
+                   avatar={event.lead.avatar}
+                   theme="light"
+                   justify="left"
+                   className={style.eventLead} />
+      </Image>
       <Content>{event.address}</Content>
       <Button text={<FormattedMessage id="event.edit" defaultMessage="Edit Event" />}
               className={concat(style.button, theme.bg_3)} />
