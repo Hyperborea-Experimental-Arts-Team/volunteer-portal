@@ -23,10 +23,7 @@ export default ({ eventId, eventName, selectedTab }) => (
                          theme.txt_lightest,
                          theme.bg_3)}>
     <div className={concat(grid.row, style.content)}>
-      <div className={concat(grid.col_sm_4, style.eventName)}>
-        Page title
-      </div>
-      <nav className={concat(grid.col_sm_8, style.nav)}>
+      <nav className={concat(grid.col_sm_8, grid.off_sm_4, style.nav)}>
         <ul className={style.menu}>
           <MenuItem link={eventLink(eventId, 'overview')}
                     label={<FormattedMessage id="event.overview" defaultMessage="Event Overview" />}

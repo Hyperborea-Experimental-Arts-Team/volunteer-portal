@@ -82,8 +82,9 @@ const Info = ({ startDate, endDate, description }) => (
 );
 
 export default event => (
-  <div className={concat(grid.row, theme.page_padding)}>
-    <section className={grid.col_sm_4}>
+  <div className={concat(style.wrap, grid.row, theme.page_padding)}>
+    <section className={grid.col_sm_4} style={{position: 'relative'}}>
+      <div className={concat(theme.txt_lightest, style.pageTitle)}>{event.name}</div>
       <Image className={style.eventPhoto} url={event.photo} ratio={1}>
         <UserBadge title={<FormattedMessage id="event.lead" defaultMessage="Event Lead" />}
                    name={event.lead.name}
