@@ -8,12 +8,15 @@
 import React from 'react';
 
 import { concat } from '../util';
-import styles from './Button.css';
+import style from './Button.css';
 import theme from '../theme.css';
 
-export default ({ text, type, onClick, className }) => {
-
-  return (
-    <button className={`${className} ${concat(theme.txt_lightest, styles.Button)}`} type={type} onClick={onClick}>{text}</button>
-  );
-};
+export default ({ icon, text, type, onClick, className }) => (
+  <button className={`${className} ${concat(theme.txt_lightest, style.Button)}`} type={type} onClick={onClick}>
+    {icon ?
+      <div className={style.icon} style={{ backgroundImage: `url(${icon})` }}>
+        {text}
+      </div> : text
+    }
+  </button>
+);

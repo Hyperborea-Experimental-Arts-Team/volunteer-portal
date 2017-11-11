@@ -5,6 +5,7 @@ import { concat } from '../util';
 import BigDate from './BigDate';
 import DateRange from './DateRange';
 import Content from './Content';
+import Address from './Address';
 import Image from './Image';
 
 import theme from '../theme.css';
@@ -24,7 +25,7 @@ function renderDates(start, end, big, altBg) {
     );
   }
   else {
-    return <DateRange start={start} end={end} />
+    return <Content><DateRange start={start} end={end} /></Content>
   }
 }
 
@@ -52,6 +53,6 @@ export default ({ event }) => (
       </div>
     </Image>
     {renderDates(event.startDate, event.endDate, event.active, !(event.id % 2))}
-    {event.active ? <Content>{event.address}</Content> : null}
+    {event.active ? <Content><Address address={event.address} /></Content> : null}
   </div>
 );
