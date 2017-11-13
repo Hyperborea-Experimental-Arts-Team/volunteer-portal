@@ -20,6 +20,10 @@
   }
 }
 
+.col_sm_0 {
+  display: none;
+}
+
 .col_sm_1 {
   flex-basis: 8.33333333%;
   max-width: 8.33333333%;
@@ -129,6 +133,15 @@
 }
 
 @media @medium {
+
+  .col_sm_0 {
+    display: initial;
+  }
+
+  .col_md_0 {
+    display: none;
+  }
+
   .col_md_1 {
     flex-basis: 8.33333333%;
     max-width: 8.33333333%;
@@ -239,6 +252,14 @@
 }
 
 @media @large {
+  .col_md_0 {
+    display: initial;
+  }
+
+  .col_lg_0 {
+    display: none;
+  }
+
   .col_lg_1 {
     flex-basis: 8.33333333%;
     max-width: 8.33333333%;

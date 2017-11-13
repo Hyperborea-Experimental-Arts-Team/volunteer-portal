@@ -1,16 +1,19 @@
 .Button {
+  background-color: transparent;
   width: 100%;
   text-align: center;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 9px;
+  font-weight: bold;
   border: none;
-  padding: 30px;
+  padding: 12px;
 }
 
 .icon {
+  display: inline-block;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center left;
-  padding: 2px 0 2px 10px;
-  margin-left: -10px;
+  padding: 2px 0 2px 20px;
+  margin-left: -20px;
 }

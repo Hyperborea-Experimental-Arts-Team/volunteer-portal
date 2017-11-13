@@ -61,12 +61,13 @@ export default events => {
         <Button text={<FormattedMessage id="events.create"
                                         defaultMessage="Create an event"/>}
                 icon={addSvg}
-                className={theme.bg_3}
+                border={true}
+                className={theme.txt_darkest}
         />
         <Button text={<FormattedMessage id="events.deactivate"
                                         defaultMessage="Deactivate event"/>}
                 icon={xSvg}
-                className={theme.bg_2}
+                className={concat(theme.txt_lightest, theme.bg_2)}
         />
       </section>
     </div>

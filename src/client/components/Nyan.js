@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom'
-import LoginForm from './LoginForm';
+import SubmittableAuth from '../containers/SubmittableAuth';
 import PrivateRoute from '../containers/PrivateRoute';
 import LoadedEvents from '../containers/LoadedEvents';
 import Header from './Header';
@@ -27,7 +27,7 @@ export default () => (
   <Switch>
     <PrivateRoute path="/events" component={pageFactory(Header, LoadedEvents)} />
     <PrivateRoute path="/event/:id/:selectedTab" component={pageFactory(withProps(Header, { small: true }), Event)} />
-    <Route path="/login" component={pageFactory(Header, LoginForm)} />
+    <Route path="/auth/:selectedTab" component={withProps(SubmittableAuth, { photo: { url: '/hrpdrp.png', title: 'Hyperborea 2017', by: 'Fee Gunn' } })}  />
     <Redirect from="/" to="/events" />
   </Switch>
 );

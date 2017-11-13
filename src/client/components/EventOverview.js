@@ -97,9 +97,9 @@ export default event => (
       </Image>
       <Content><Address address={event.address} /></Content>
       <Button text={<FormattedMessage id="event.edit" defaultMessage="Edit Event" />}
-              className={concat(style.button, theme.bg_3)} />
+              className={concat(style.button, theme.txt_lightest, theme.bg_3)} />
       <Button text={<FormattedMessage id="event.deactivate" defaultMessage="Deactivate Event" />}
-              className={concat(style.button, theme.bg_2)} />
+              className={concat(style.button, theme.txt_lightest, theme.bg_2)} />
     </section>
     <section className={grid.col_sm_8}>
       <Info startDate={event.startDate} endDate={event.endDate} description={event.description} />
