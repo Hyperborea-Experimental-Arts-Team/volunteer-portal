@@ -5,6 +5,8 @@ import { concat } from '../util.js';
 import EventSummary from './EventSummary';
 import Button from './Button';
 
+import addSvg from '../images/add.svg';
+import xSvg from '../images/x.svg';
 import grid from '../grid.less';
 import theme from '../theme.css';
 import style from './Events.css';
@@ -58,10 +60,12 @@ export default events => {
                                  grid.col_lg_4)}>
         <Button text={<FormattedMessage id="events.create"
                                         defaultMessage="Create an event"/>}
+                icon={addSvg}
                 className={theme.bg_3}
         />
         <Button text={<FormattedMessage id="events.deactivate"
-                                        defaultMessage="Deactivate an event"/>}
+                                        defaultMessage="Deactivate event"/>}
+                icon={xSvg}
                 className={theme.bg_2}
         />
       </section>
