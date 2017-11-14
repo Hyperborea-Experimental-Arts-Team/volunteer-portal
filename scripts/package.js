@@ -5,6 +5,8 @@ const fs = require('fs-extra');
 const tar = require('tar');
 const paths = require('../config/paths');
 
+const PACKAGE_NAME = 'deploy.zip';
+
 console.log('Packaging...');
 
 // Holy cleansing flames
@@ -28,7 +30,7 @@ rmrf.sync(paths.appDeploy);
   await tar.c({
     C: deployDir,
     gzip: true,
-    file: 'my-tarball.tgz'
+    file: `${paths.appDeploy}/${PACKAGE_NAME}`
   }, files
   );
 })();
