@@ -24,11 +24,10 @@ rmrf.sync(paths.appDeploy);
     fs.copy(paths.config, `${paths.appDeploy}/web/config`, { filter: src => src.endsWith('.json') || src.endsWith('/config') })
   ]);
 
-
-  const deployDir = `${paths.appDeploy}/web`;
-  const files = await fs.readdir(deployDir);
+  
+  const files = await fs.readdir(paths.appDeploy);
   await tar.c({
-    C: deployDir,
+    C: paths.appDeploy,
     gzip: true,
     file: `${paths.appDeploy}/${PACKAGE_NAME}`
   }, files
