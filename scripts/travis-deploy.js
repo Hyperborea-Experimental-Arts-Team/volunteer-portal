@@ -57,7 +57,7 @@ async function deploy() {
     '-i',
     'deploy-key',
     'deploy@staging.empire.tk',
-    '\'rm -rf ./web && unzip ./deploy.zip -d web && cd web && yarn install --production && (pm2 restart coup || NODE_ENV=production pm2 start --name="coup" ./server/index.js)\''
+    '\'rm -rf ./web && tar xzfv ./deploy.zip -d web && cd web && yarn install --production && (pm2 restart coup || NODE_ENV=production pm2 start --name="coup" ./server/index.js)\''
   ], { shell: true });
   if (code !== 0) {
     console.error("Could not install package", code);
