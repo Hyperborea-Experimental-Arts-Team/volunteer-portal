@@ -2,7 +2,7 @@
 
 const rmrf = require('rimraf');
 const fs = require('fs-extra');
-const Zip = require('adm-zip');
+const tar = require('tar');
 const paths = require('../config/paths');
 
 console.log('Packaging...');
@@ -22,9 +22,15 @@ rmrf.sync(paths.appDeploy);
     fs.copy(paths.config, `${paths.appDeploy}/web/config`, { filter: src => src.endsWith('.json') || src.endsWith('/config') })
   ]);
 
-  const archive = new Zip();
-  archive.addLocalFolder(`${paths.appDeploy}/web`);
-  archive.writeZip(`${paths.appDeploy}/deploy.zip`);
+
+  const deployDir = `${paths.appDeploy}/web`;
+  const files = await fs.readdir(deployDir);
+  await tar.c({
+    C: deployDir,
+    gzip: true,
+    file: 'my-tarball.tgz'
+  }, files
+  );
 })();
 
 

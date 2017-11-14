@@ -11,7 +11,6 @@ import UserBadge from './UserBadge';
 import Address from './Address';
 import expandable from '../containers/expandable';
 
-import pin from '../images/pin.svg';
 import grid from '../grid.less';
 import theme from '../theme.css';
 import style from './EventOverview.less';

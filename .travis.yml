@@ -5,9 +5,11 @@ branches:
 node_js:
 - 8
 script:
+- set -e
 - yarn build
 - yarn test
 after_success:
+- set -e
 - node scripts/travis-deploy.js
 before_install:
 - openssl aes-256-cbc -K $encrypted_ec4873b9d7cb_key -iv $encrypted_ec4873b9d7cb_iv

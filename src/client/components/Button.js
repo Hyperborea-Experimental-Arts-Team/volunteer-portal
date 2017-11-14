@@ -9,7 +9,6 @@ import React from 'react';
 
 import { concat } from '../util';
 import style from './Button.css';
-import theme from '../theme.css';
 
 export default ({ icon, text, type, onClick, border, className = '' }) => (
   <button className={concat(className, style.Button)}
