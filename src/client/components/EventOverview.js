@@ -9,6 +9,7 @@ import BigNumber from './BigNumber';
 import DepartmentSummary from './DepartmentSummary';
 import UserBadge from './UserBadge';
 import Address from './Address';
+import PageTitle from './PageTitle';
 import expandable from '../containers/expandable';
 
 import grid from '../grid.less';
@@ -85,7 +86,7 @@ const Info = ({ startDate, endDate, description }) => (
 export default event => (
   <div className={concat(style.wrap, grid.row, theme.page_padding)}>
     <section className={grid.col_sm_4} style={{position: 'relative'}}>
-      <div className={concat(theme.txt_lightest, style.pageTitle)}>{event.name}</div>
+      <PageTitle className={theme.txt_lightest} title={event.name} />
       <Image className={style.eventPhoto} url={event.photo} ratio={1}>
         <UserBadge title={<FormattedMessage id="event.lead" defaultMessage="Event Lead" />}
                    name={event.lead.name}

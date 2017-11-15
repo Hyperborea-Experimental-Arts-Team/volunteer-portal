@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import EventMenu from './EventMenu';
 import EventOverview from './EventOverview';
-import EventTeams from './Todo';
+import EventDepartments from './EventDepartments';
 import EventVolunteers from './Todo';
 import EventSchedule from './Todo';
 import DataLoader from '../containers/DataLoader';
@@ -14,7 +14,7 @@ function eventTab(selectedTab, eventId) {
     case 'overview':
       return <DataLoader serviceCall={`events/${eventId}`} component={EventOverview} />;
     case 'teams':
-      return <EventTeams />;
+      return <DataLoader serviceCall={`events/${eventId}`} component={EventDepartments} />;
     case 'volunteers':
       return <EventVolunteers />;
     case 'schedule':
