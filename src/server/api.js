@@ -10,6 +10,7 @@ import passport from 'passport';
 
 import { isLoggedIn } from './auth';
 import { get as getEvent } from './stores/event-store';
+import { getAll as getDepartments } from './stores/department-store';
 
 const router = express.Router();
 
@@ -55,6 +56,10 @@ router.post('/signup', (request, response) => {
 
 router.get('/events/:id?', isLoggedIn, (request, response) => {
   getEvent(request.params.id).then(events => response.json(events));
+});
+
+router.get('/events/:id/departments', isLoggedIn, (request, response) => {
+  getDepartments(request.params.id).then(departments => response.json({ departments }));
 });
 
 router.use((request, response) => {
