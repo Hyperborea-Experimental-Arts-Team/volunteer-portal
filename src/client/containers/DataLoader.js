@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 
 import { load } from '../actions/serviceCache';
 import Spinner from '../components/Spinner';
+import Error from '../components/Error';
 
 const mapStateToProps = state => {
   return {
@@ -40,6 +41,11 @@ class DataLoader extends React.Component {
     if (data == null) {
       loadData(serviceCall, token);
       return <Spinner />;
+    }
+
+    // The data load failed
+    if (data.error) {
+      return <Error message={data.message} />;
     }
 
     // Render the child Component with the response data

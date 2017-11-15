@@ -20,46 +20,64 @@ function scrubUser(user) {
   return scrubbedUser;
 }
 
-router.get('/test', isLoggedIn, (request, response) => {
-  response.json({'data' : 'Butts'});
-});
-
-router.post('/login', (request, response) => {
-  passport.authenticate('local-login', function (err, token, user) {
-    if (err || !token) {
-      return response.status(401).json({
-        success: false,
-        message: err && err.message
+const POSTS = [
+  ['/login', (request, response) => {
+    passport.authenticate('local-login', function (err, token, user) {
+      if (err || !token) {
+        return response.status(401).json({
+          success: false,
+          message: err && err.message
+        });
+      }
+      return response.json({
+        success: true,
+        token,
+        user: scrubUser(user)
       });
-    }
-    return response.json({
-      success: true,
-      token,
-      user: scrubUser(user)
+    })(request, response);
+  }],
+
+  ['/signup', (request, response) => {
+    response.status(418).json({
+      success: false,
+      message: 'Not yet implemented'
     });
-  })(request, response);
-});
+  }]
+];
 
-router.get('/login', isLoggedIn, (request, response) => {
-  response.json({
-    success: true,
-    user: scrubUser(request.user)
-  });
-});
+const GETS = [
+  ['/test', isLoggedIn, (request, response) => {
+    response.json({'data' : 'Butts'});
+  }],
 
-router.post('/signup', (request, response) => {
-  response.status(418).json({
-    success: false,
-    message: 'Not yet implemented'
-  });
-});
+  ['/login', isLoggedIn, (request, response) => {
+    response.json({
+      success: true,
+      user: scrubUser(request.user)
+    });
+  }],
 
-router.get('/events/:id?', isLoggedIn, (request, response) => {
-  getEvent(request.params.id).then(events => response.json(events));
-});
+  ['/events/:id?', isLoggedIn, (request, response) => {
+    getEvent(request.params.id).then(events => response.json(events));
+  }],
 
-router.get('/events/:id/departments', isLoggedIn, (request, response) => {
-  getDepartments(request.params.id).then(departments => response.json({ departments }));
+  ['/events/:id/departments', isLoggedIn, (request, response) => {
+    getDepartments(request.params.id).then(departments => response.json({ departments }));
+  }]
+];
+
+POSTS.forEach(config => router.post(...config));
+GETS.forEach(config => router.get(...config));
+
+router.post('/batch', isLoggedIn, (request, response) => {
+  const responseMap = request.body.requests.reduce((ret, subrequest) => {
+    ret[subrequest.endpoint] = {
+      status: 501,
+      data: 'Not implemented'
+    };
+    return ret;
+  }, {});
+  response.json(responseMap);
 });
 
 router.use((request, response) => {

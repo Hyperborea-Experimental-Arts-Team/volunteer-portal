@@ -5,7 +5,7 @@
  * @since Oct 2017
  */
 
-import { DATA_LOADED, INVALIDATE } from '../actions/serviceCache';
+import { DATA_LOADED, DATA_ERROR, INVALIDATE } from '../actions/serviceCache';
 
 export default (state = {}, action) => {
   switch(action.type) {
@@ -13,6 +13,8 @@ export default (state = {}, action) => {
       return {};
     case DATA_LOADED:
       return Object.assign({}, state, { [action.call]: action.data });
+    case DATA_ERROR:
+      return Object.assign({}, state, { [action.call]: { error: true, message: action.data }});
     default:
       return state;
   }

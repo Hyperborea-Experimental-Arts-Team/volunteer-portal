@@ -7,11 +7,16 @@
 
 import * as api from '../api';
 
+export const DATA_ERROR = 'DATA_ERROR';
 export const DATA_LOADED = 'DATA_LOADED';
 export const INVALIDATE = 'INVALIDATE';
 
 function loaded(call, data) {
   return { type: DATA_LOADED, call, data };
+}
+
+function errored(call, data) {
+  return { type: DATA_ERROR, call, data };
 }
 
 /**
@@ -22,7 +27,14 @@ function loaded(call, data) {
  */
 export function load(call, token) {
   return dispatch => api.get(call, token)
-    .then(response => dispatch(loaded(call, response.data)));
+    .then(response => {
+      if (response.status === 200) {
+        return dispatch(loaded(call, response.data));
+      }
+      else {
+        return dispatch(errored(call, response.data));
+      }
+    });
 }
 
 /**
