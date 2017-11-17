@@ -7,9 +7,14 @@
 
 import * as api from '../api';
 
+export const DATA_LOADING = 'DATA_LOADING';
 export const DATA_ERROR = 'DATA_ERROR';
 export const DATA_LOADED = 'DATA_LOADED';
 export const INVALIDATE = 'INVALIDATE';
+
+function loading(call) {
+  return { type: DATA_LOADING, call };
+}
 
 function loaded(call, data) {
   return { type: DATA_LOADED, call, data };
@@ -26,15 +31,18 @@ function errored(call, data) {
  * @returns {Function} Action thunk
  */
 export function load(call, token) {
-  return dispatch => api.get(call, token)
-    .then(response => {
-      if (response.status === 200) {
-        return dispatch(loaded(call, response.data));
-      }
-      else {
-        return dispatch(errored(call, response.data));
-      }
-    });
+  return dispatch => {
+    dispatch(loading(call));
+    api.get(call, token)
+        .then(response => {
+          if (response.status === 200) {
+            return dispatch(loaded(call, response.data));
+          }
+          else {
+            return dispatch(errored(call, response.data));
+          }
+        });
+  }
 }
 
 /**

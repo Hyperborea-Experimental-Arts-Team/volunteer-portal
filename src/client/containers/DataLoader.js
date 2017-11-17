@@ -8,6 +8,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { LOADING } from '../reducers/serviceCache';
 import { load } from '../actions/serviceCache';
 import Spinner from '../components/Spinner';
 import Error from '../components/Error';
@@ -31,15 +32,14 @@ class DataLoader extends React.Component {
       serviceCall,
       serviceCache,
       component: Component,
-      token,
       loadData,
+      token,
       ...rest
     } = this.props;
     const data = serviceCache[serviceCall];
 
-    // Still loading the required data, so show a spinner
-    if (data == null) {
-      loadData(serviceCall, token);
+    // Loading data. Spin spin spin.
+    if (data == null || data === LOADING) {
       return <Spinner />;
     }
 
@@ -52,6 +52,19 @@ class DataLoader extends React.Component {
     return (
         <Component {...data} {...rest} />
     );
+  }
+
+  componentWillMount() {
+    const {
+      serviceCall,
+      token,
+      serviceCache,
+      loadData
+    } = this.props;
+    // Nothing in the cache. Load it.
+    if (serviceCache[serviceCall] == null) {
+      loadData(serviceCall, token);
+    }
   }
 }
 

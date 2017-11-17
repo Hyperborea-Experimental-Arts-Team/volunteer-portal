@@ -16,15 +16,16 @@ function handleResponse(response) {
   });
 }
 
-//////
-const WINDOW = 100;
+////// TODO: Split this into its own batched-fetch module
+const WINDOW = 200;
 let _requests = [];
 let _timeout = null;
 
 function handleBatchResponse(response, requests) {
   return response.json().then(data => {
     requests.forEach(req => {
-      req.resolve(data[req.endpoint]);
+      const subresponse = JSON.parse(data[req.endpoint]);
+      req.resolve(subresponse);
     });
   });
 }
@@ -33,7 +34,6 @@ function batchedRequest(method, endpoint, token, data) {
   const request = {
     method,
     endpoint,
-    token,
     data
   };
 
