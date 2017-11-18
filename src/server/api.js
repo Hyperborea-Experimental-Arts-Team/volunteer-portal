@@ -73,16 +73,16 @@ const GETS = [
 POSTS.forEach(config => router.post(...config));
 GETS.forEach(config => router.get(...config));
 
-// TODO: Reuse code from client
+// TODO: Reuse the fetch code from the client when code sharing happens
 function handleResponse(response) {
   return response.json().then(data => {
     return ({ status: response.status, data });
   });
 }
 
-router.post('/batch', isLoggedIn, (request, response) => {
+router.post('/batch', (request, response) => {
 
-  // TODO: Reuse the fetch code from the client
+  // TODO: Reuse the fetch code from the client when code sharing happens
   const subrequests = request.body.requests.map(subrequest => fetch(
     `http://${HOST}:${config.get('server.port')}/api/${subrequest.endpoint}`,
     {
