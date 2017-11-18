@@ -131,7 +131,7 @@ class Auth extends React.Component {
 
   componentWillMount() {
     // reset login status
-    this.props.onLogout();
+    this.props.loggedIn && this.props.onLogout();
   }
 
   render() {
