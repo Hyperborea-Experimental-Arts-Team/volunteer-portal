@@ -1,20 +1,12 @@
 /**
  * Accessor functions for the back-end API.
  *
- * // TODO: Error handling
- *
  * @author mtownsend
  * @since Oct 2017
  */
 import batchRequest from './batch-request';
 
 const API_PATH = '/api';
-
-function handleResponse(response) {
-  return response.json().then(data => {
-    return ({ status: response.status, data });
-  });
-}
 
 /**
  * Posts data to an API endpoint
