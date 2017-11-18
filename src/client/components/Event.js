@@ -12,7 +12,7 @@ import style from './Event.less';
 function eventTab(selectedTab, eventId) {
   switch (selectedTab) {
     case 'overview':
-      return <DataLoader serviceCall={`events/${eventId}`} component={EventOverview} />;
+      return <EventOverview eventId={eventId} />;
     case 'teams':
       return <DataLoader serviceCall={`events/${eventId}`} component={EventDepartments} />;
     case 'volunteers':

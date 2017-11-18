@@ -10,6 +10,7 @@ import DepartmentSummary from './DepartmentSummary';
 import UserBadge from './UserBadge';
 import Address from './Address';
 import PageTitle from './PageTitle';
+import DataLoader from '../containers/DataLoader';
 import expandable from '../containers/expandable';
 
 import grid from '../grid.less';
@@ -37,6 +38,30 @@ const Description = ({ text }) => {
     </span>
   );
 };
+
+const EventRow = event => (
+  <div className={grid.row}>
+    <section className={grid.col_sm_4} style={{position: 'relative'}}>
+      <PageTitle className={theme.txt_lightest} title={event.name} />
+      <Image className={style.eventPhoto} url={event.photo} ratio={1}>
+        <UserBadge title={<FormattedMessage id="event.lead" defaultMessage="Event Lead" />}
+                   name={event.lead.name}
+                   avatar={event.lead.avatar}
+                   theme="light"
+                   justify="left"
+                   className={style.eventLead} />
+      </Image>
+      <Content><Address address={event.address} /></Content>
+      <Button text={<FormattedMessage id="event.edit" defaultMessage="Edit Event" />}
+              className={concat(style.button, theme.txt_lightest, theme.bg_3)} />
+      <Button text={<FormattedMessage id="event.deactivate" defaultMessage="Deactivate Event" />}
+              className={concat(style.button, theme.txt_lightest, theme.bg_2)} />
+    </section>
+    <section className={grid.col_sm_8}>
+      <Info startDate={event.startDate} endDate={event.endDate} description={event.description} />
+    </section>
+  </div>
+);
 
 const Info = ({ startDate, endDate, description }) => (
   <div className={concat(style.info, theme.bg_content)}>
@@ -83,34 +108,26 @@ const Info = ({ startDate, endDate, description }) => (
   </div>
 );
 
-export default event => (
-  <div className={concat(style.wrap, grid.row, theme.page_padding)}>
-    <section className={grid.col_sm_4} style={{position: 'relative'}}>
-      <PageTitle className={theme.txt_lightest} title={event.name} />
-      <Image className={style.eventPhoto} url={event.photo} ratio={1}>
-        <UserBadge title={<FormattedMessage id="event.lead" defaultMessage="Event Lead" />}
-                   name={event.lead.name}
-                   avatar={event.lead.avatar}
-                   theme="light"
-                   justify="left"
-                   className={style.eventLead} />
-      </Image>
-      <Content><Address address={event.address} /></Content>
-      <Button text={<FormattedMessage id="event.edit" defaultMessage="Edit Event" />}
-              className={concat(style.button, theme.txt_lightest, theme.bg_3)} />
-      <Button text={<FormattedMessage id="event.deactivate" defaultMessage="Deactivate Event" />}
-              className={concat(style.button, theme.txt_lightest, theme.bg_2)} />
-    </section>
-    <section className={grid.col_sm_8}>
-      <Info startDate={event.startDate} endDate={event.endDate} description={event.description} />
-    </section>
-    {event.departments.map((d, i) => {
+const DepartmentList = ({ departments }) => (
+  <ul className={style.departmentList}>
+    {departments.map((d, i) => {
       const ExpandableSummary = expandable(`eo:${d.name}`, DepartmentSummary);
       return (
-        <div key={i} className={grid.col_sm_12}>
+        <li key={i} className={concat(style.department, grid.col_sm_12)}>
           <ExpandableSummary {...d} />
-        </div>
+        </li>
       );
     })}
+  </ul>
+);
+
+export default ({ eventId }) => (
+  <div className={concat(style.wrap, theme.page_padding)}>
+    <section className={style.event}>
+      <DataLoader serviceCall={`events/${eventId}`} component={EventRow} />
+    </section>
+    <section className={style.departments}>
+      <DataLoader serviceCall={`events/${eventId}/departments`} component={DepartmentList} />
+    </section>
   </div>
 )
