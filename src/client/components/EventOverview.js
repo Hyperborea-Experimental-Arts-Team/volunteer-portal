@@ -39,14 +39,15 @@ const Description = ({ text }) => {
   );
 };
 
-const EventRow = event => (
+const EventRow = ({ event, lead }) => {
+  return (
   <div className={grid.row}>
     <section className={grid.col_sm_4} style={{position: 'relative'}}>
       <PageTitle className={theme.txt_lightest} title={event.name} />
       <Image className={style.eventPhoto} url={event.photo} ratio={1}>
         <UserBadge title={<FormattedMessage id="event.lead" defaultMessage="Event Lead" />}
-                   name={event.lead.name}
-                   avatar={event.lead.avatar}
+                   name={lead.name}
+                   avatar={lead.avatar}
                    theme="light"
                    justify="left"
                    className={style.eventLead} />
@@ -61,7 +62,7 @@ const EventRow = event => (
       <Info startDate={event.startDate} endDate={event.endDate} description={event.description} />
     </section>
   </div>
-);
+)};
 
 const Info = ({ startDate, endDate, description }) => (
   <div className={concat(style.info, theme.bg_content)}>
@@ -124,7 +125,10 @@ const DepartmentList = ({ departments }) => (
 export default ({ eventId }) => (
   <div className={concat(style.wrap, theme.page_padding)}>
     <section className={style.event}>
-      <DataLoader serviceCall={`events/${eventId}`} component={EventRow} />
+      <DataLoader serviceCall={{
+                    [`events/${eventId}`]: 'event',
+                    [`events/${eventId}/lead`]: 'lead'}}
+                  component={EventRow} />
     </section>
     <section className={style.departments}>
       <DataLoader serviceCall={`events/${eventId}/departments`} component={DepartmentList} />

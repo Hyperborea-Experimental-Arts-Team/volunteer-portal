@@ -5,7 +5,6 @@ import EventOverview from './EventOverview';
 import EventDepartments from './EventDepartments';
 import EventVolunteers from './Todo';
 import EventSchedule from './Todo';
-import DataLoader from '../containers/DataLoader';
 
 import style from './Event.less';
 
@@ -14,7 +13,7 @@ function eventTab(selectedTab, eventId) {
     case 'overview':
       return <EventOverview eventId={eventId} />;
     case 'teams':
-      return <DataLoader serviceCall={`events/${eventId}`} component={EventDepartments} />;
+      return <EventDepartments eventId={eventId}/>;
     case 'volunteers':
       return <EventVolunteers />;
     case 'schedule':

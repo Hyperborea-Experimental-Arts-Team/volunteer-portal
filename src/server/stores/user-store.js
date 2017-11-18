@@ -8,8 +8,13 @@
  */
 import bcrypt from 'bcrypt-nodejs';
 
+const byEmail = {
+  'butts@butts.com': 0
+};
+
 const fakeStore = {
-  'butts@butts.com': {
+  0: {
+    id: 0,
     name: 'Pinchy McPinchface',
     avatar: 'pinchy.jpg',
     email: 'butts@butts.com',
@@ -26,15 +31,24 @@ function validate(password, user) {
 }
 
 /**
+ * Gets a user by id
+ * @param {number} id - The id of the user
+ * @returns {Promise.<object|null>} Promise resolving to the user, or null if one cannot be found
+ */
+export function get(id) {
+  return Promise.resolve(fakeStore[id] || null);
+}
+
+/**
  * Looks a user up by email.
  * @param {string} email - User's email address
  * @returns {Promise.<object|null>} Promise resolving to the user, or null if one cannot be found
  */
-export function get(email) {
-  if (!fakeStore.hasOwnProperty(email)) {
+export function getByEmail(email) {
+  if (!byEmail.hasOwnProperty(email)) {
     return Promise.resolve(null);
   }
-  return Promise.resolve(Object.assign({}, fakeStore[email]));
+  return Promise.resolve(Object.assign({}, fakeStore[byEmail[email]]));
 }
 
 /**

@@ -8,7 +8,7 @@
 import { Strategy as LocalStrategy } from 'passport-local';
 import jwt from 'jsonwebtoken';
 import config from 'config';
-import { get, authenticate } from './stores/user-store';
+import { getByEmail, authenticate } from './stores/user-store';
 
 function nope(response) {
   return response.status(401).send('{}');
@@ -33,7 +33,7 @@ export function isLoggedIn(request, response, next) {
     const userEmail = decoded.sub;
 
     // check if a user exists
-    return get(userEmail).then(user => {
+    return getByEmail(userEmail).then(user => {
       if (!user) {
         return nope(response);
       }
@@ -55,7 +55,7 @@ export function configurePassport(passport) {
   });
 
   passport.deserializeUser((email, done) => {
-    get(email).then(user => done(user ? null : `Invalid user ${email}`, user));
+    getByEmail(email).then(user => done(user ? null : `Invalid user ${email}`, user));
   });
 
   passport.use('local-login', new LocalStrategy({
