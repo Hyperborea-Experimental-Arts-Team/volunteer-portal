@@ -26,6 +26,19 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+function maybeLoadData(props) {
+  const {
+      serviceCall,
+      token,
+      serviceCache,
+      loadData
+      } = props;
+  // Nothing in the cache. Load it.
+  if (serviceCache[serviceCall] == null) {
+    loadData(serviceCall, token);
+  }
+}
+
 class DataLoader extends React.Component {
   render() {
     const {
@@ -55,16 +68,11 @@ class DataLoader extends React.Component {
   }
 
   componentWillMount() {
-    const {
-      serviceCall,
-      token,
-      serviceCache,
-      loadData
-    } = this.props;
-    // Nothing in the cache. Load it.
-    if (serviceCache[serviceCall] == null) {
-      loadData(serviceCall, token);
-    }
+    maybeLoadData(this.props);
+  }
+
+  componentWillReceiveProps(newProps) {
+    maybeLoadData(newProps);
   }
 }
 
