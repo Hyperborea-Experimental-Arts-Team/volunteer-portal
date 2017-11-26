@@ -12,6 +12,9 @@
 # deploy package
 /deploy
 
+# script for JJ
+/src/database/runsql.sh
+
 # misc
 .DS_Store
 .env.local
