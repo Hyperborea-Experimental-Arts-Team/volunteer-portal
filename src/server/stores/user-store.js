@@ -7,6 +7,8 @@
  * @since Oct 2017
  */
 import bcrypt from 'bcrypt-nodejs';
+import { dbQuery } from '../db';
+var mysql     =    require('mysql');
 
 const fakeStore = {
   'butts@butts.com': {
@@ -22,7 +24,7 @@ function hash(password) {
 }
 
 function validate(password, user) {
-  return bcrypt.compareSync(password, user.password);
+  return bcrypt.compareSync(password, String.fromCharCode(...user.password));
 }
 
 /**
@@ -31,10 +33,22 @@ function validate(password, user) {
  * @returns {Promise.<object|null>} Promise resolving to the user, or null if one cannot be found
  */
 export function get(email) {
-  if (!fakeStore.hasOwnProperty(email)) {
-    return Promise.resolve(null);
-  }
-  return Promise.resolve(Object.assign({}, fakeStore[email]));
+    // THE OLD CODE - still handy if you don't have a MySQL instance running...
+    //
+    //if (!fakeStore.hasOwnProperty(email)) {
+    //    return Promise.resolve(null);
+    //}
+    //return Promise.resolve(Object.assign({}, fakeStore[email]));
+    
+    return dbQuery("SELECT CONCAT(firstName,' ',lastName) AS name, photo AS avatar, email, password " +
+    "FROM users WHERE email=" + mysql.escape(email))
+    .then(rows => {
+        if (rows.length == 0) {
+            return Promise.resolve(null);
+        }
+        // Copy from SQL RowDataPacket to generic object
+        return Promise.resolve(Object.assign({},rows[0]));
+    });
 }
 
 /**
