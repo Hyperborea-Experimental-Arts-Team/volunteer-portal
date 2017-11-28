@@ -7,8 +7,9 @@
  * @since Oct 2017
  */
 import bcrypt from 'bcrypt-nodejs';
-import { dbQuery } from '../db';
-var mysql     =    require('mysql');
+import { runQuery } from '../db';
+import mysql from 'mysql';
+import config from 'config';
 
 const fakeStore = {
   'butts@butts.com': {
@@ -33,15 +34,20 @@ function validate(password, user) {
  * @returns {Promise.<object|null>} Promise resolving to the user, or null if one cannot be found
  */
 export function get(email) {
-    // THE OLD CODE - still handy if you don't have a MySQL instance running...
-    //
-    //if (!fakeStore.hasOwnProperty(email)) {
-    //    return Promise.resolve(null);
-    //}
-    //return Promise.resolve(Object.assign({}, fakeStore[email]));
     
-    return dbQuery("SELECT CONCAT(firstName,' ',lastName) AS name, photo AS avatar, email, password " +
-    "FROM users WHERE email=" + mysql.escape(email))
+    if(config.db.isMocked){
+        if (!fakeStore.hasOwnProperty(email)) {
+            return Promise.resolve(null);
+        }
+        return Promise.resolve(Object.assign({}, fakeStore[email]));
+    }
+    
+    var query = "SELECT CONCAT(firstName,' ',lastName) AS name, photo AS avatar, email, password " +
+                "FROM users WHERE email=?";
+    const params = [email];
+    query = mysql.format(query, params);
+    
+    return runQuery(query)
     .then(rows => {
         if (rows.length == 0) {
             return Promise.resolve(null);
