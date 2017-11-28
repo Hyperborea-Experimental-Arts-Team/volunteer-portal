@@ -42,7 +42,7 @@ export function get(email) {
         return Promise.resolve(Object.assign({}, fakeStore[email]));
     }
     
-    var query = "SELECT CONCAT(firstName,' ',lastName) AS name, photo AS avatar, email, password " +
+    let query = "SELECT CONCAT(firstName,' ',lastName) AS name, photo AS avatar, email, password " +
                 "FROM users WHERE email=?";
     const params = [email];
     query = mysql.format(query, params);

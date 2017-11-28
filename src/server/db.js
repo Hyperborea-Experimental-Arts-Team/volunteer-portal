@@ -1,11 +1,6 @@
 import mysql from 'mysql';
 import config from 'config';
 
-// URL of the MySQL server. We expect that the DB is listening on the
-// default port (3306).
-//
-
-
 const pool      =    mysql.createPool({
     connectionLimit : config.db.maxConnections, 
     host     : config.db.host,
