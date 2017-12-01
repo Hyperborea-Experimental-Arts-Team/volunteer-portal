@@ -25,7 +25,7 @@ function hash(password) {
 }
 
 function validate(password, user) {
-  return bcrypt.compareSync(password, String.fromCharCode(...user.password));
+  return bcrypt.compareSync(password, user.password);
 }
 
 /**
@@ -52,8 +52,12 @@ export function get(email) {
         if (rows.length == 0) {
             return Promise.resolve(null);
         }
+
         // Copy from SQL RowDataPacket to generic object
-        return Promise.resolve(Object.assign({},rows[0]));
+        const user = Object.assign({}, rows[0]);
+        user.password = String.fromCharCode(...user.password);
+
+        return Promise.resolve(user);
     });
 }
 
@@ -64,7 +68,6 @@ export function get(email) {
  * @returns {Promise.<object|null>} Promise resolving to the user, or null if one cannot be found
  */
 export function authenticate(email, password) {
-  console.log(authenticate);
   return get(email).then(user => {
     if (!user || !validate(password, user)) {
       return Promise.resolve(null);
