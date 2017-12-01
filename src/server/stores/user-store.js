@@ -58,8 +58,7 @@ export function getByEmail(email) {
  * @returns {Promise.<object|null>} Promise resolving to the user, or null if one cannot be found
  */
 export function authenticate(email, password) {
-  console.log(authenticate);
-  return get(email).then(user => {
+  return getByEmail(email).then(user => {
     if (!user || !validate(password, user)) {
       return Promise.resolve(null);
     }
