@@ -24,11 +24,11 @@
 
 /* The work of creating history starts with a blank page. */
 DROP DATABASE IF EXISTS nyanPortal;
+DROP USER nyanCat;
 
 /* In the beginning there was Nyan Cat. */
 /* This is the user Node.js will connect as. */
-CREATE USER IF NOT EXISTS 'nyanCat'@'%'
-	IDENTIFIED BY 'P!b2BtW8AarP';
+CREATE USER  'nyanCat'@'%' IDENTIFIED BY 'P!b2BtW8AarP';
 
 /* Make the DB. */
 CREATE DATABASE nyanPortal 

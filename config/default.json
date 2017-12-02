@@ -3,8 +3,8 @@
     "port": 3001
   },
   "db" : {
-    "isMocked": true,
-    "host": "heavenly",
+    "isMocked": false,
+    "host": "localhost",
     "user": "nyanCat",
     "__passwd_comment":  "Line below must match value in createSchema.sql",
     "passwd": "P!b2BtW8AarP", 
