@@ -1,3 +1,9 @@
+body {
+  background: black;
+  min-height: 100%;
+  height: auto;
+}
+
 .wrap {
   height: 100%;
 }
@@ -6,6 +12,7 @@
   background-size: cover;
   background-position: center;
   position: relative;
+  height: 1024px;
 }
 
 .content {
@@ -14,7 +21,8 @@
 }
 
 .head {
-  height: 94px;
+  height: 187px;
+  min-height: 187px;
   padding: 0 16%;
   display: flex;
   align-items: center;
@@ -22,24 +30,24 @@
 
 .form {
   flex-grow: 1;
-  padding: 32px 16%;
+  padding: 66px 16%;
 }
 
 .nav {
   border-bottom: 1px solid #d8d8d8;
   display: flex;
   justify-content: flex-start;
-  margin-bottom: 20px
+  margin-bottom: 40px
 }
 
 .link {
   position: relative;
   font-weight: bold;
-  font-size: 12px;
+  font-size: 24px;
   min-width: 50%;
   opacity: 0.35;
   cursor: pointer;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
 
   &.selected {
     opacity: 1;
@@ -47,16 +55,16 @@
 }
 
 .selector {
-  width: 30px;
+  width: 60px;
   height: 3px;
   position: absolute;
   bottom: -1px;
 }
 
 .intro {
-  font-size: 8px;
+  font-size: 16px;
   line-height: 1.56;
-  letter-spacing: -0.1px;
+  letter-spacing: -0.2px;
 }
 
 /* TODO: Remove this */
@@ -67,7 +75,7 @@
 }
 
 .forgot {
-  font-size: 7px;
+  font-size: 14px;
   text-align: right;
   margin-top: 11px;
 }
@@ -93,12 +101,12 @@
 }
 
 .photoBy {
-  font-size: 8px;
+  font-size: 16px;
   font-weight: bold;
 }
 
 .photoTitle {
-  font-size: 24px;
+  font-size: 48px;
   font-weight: 300;
   letter-spacing: -0.9px;
 }

@@ -12,7 +12,7 @@ import style from './Button.css';
 
 export default ({ icon, text, type, onClick, border, className = '' }) => (
   <button className={concat(className, style.Button)}
-          style={ border ? { border: '1px solid' } : null}
+          style={ border ? { border: '2px solid' } : null}
           type={type}
           onClick={onClick}>
     {icon ?

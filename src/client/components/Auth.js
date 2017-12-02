@@ -141,7 +141,7 @@ class Auth extends React.Component {
         <div className={concat(grid.row, grid.gutterless, style.wrap)}>
           <div className={concat(style.content, grid.col_sm_12, grid.col_md_5)}>
             <div className={concat(style.head, theme.txt_lightest, theme.bg_2)}>
-              <Brand size={14} />
+              <Brand size={28} />
             </div>
             <div className={concat(style.form, theme.bg_content)}>
               <nav className={style.nav}>

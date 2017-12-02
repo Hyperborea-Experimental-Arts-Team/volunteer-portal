@@ -3,10 +3,11 @@
   width: 100%;
   text-align: center;
   cursor: pointer;
-  font-size: 9px;
+  font-size: 18px;
   font-weight: bold;
   border: none;
-  padding: 12px;
+  padding: 24px;
+  border-radius: 0;
 }
 
 .icon {
