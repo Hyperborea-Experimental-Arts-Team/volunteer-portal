@@ -101,7 +101,7 @@ const Info = ({ startDate, endDate, description }) => (
       </div>
     </div>
     <div className={style.descriptionSection}>
-      <h3 className={style.title}>
+      <h3 className={theme.title}>
         <FormattedMessage id="event.description" defaultMessage="Description" />
       </h3>
       <Description text={description} />
