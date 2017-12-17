@@ -6,12 +6,11 @@ import Content from './Content';
 import Button from './Button';
 import BigDate from './BigDate';
 import BigNumber from './BigNumber';
-import DepartmentSummary from './DepartmentSummary';
 import UserBadge from './UserBadge';
 import Address from './Address';
 import PageTitle from './PageTitle';
+import EventDepartmentsList from './EventDepartmentsList';
 import DataLoader from '../containers/DataLoader';
-import expandable from '../containers/expandable';
 
 import grid from '../grid.less';
 import theme from '../theme.css';
@@ -109,19 +108,6 @@ const Info = ({ startDate, endDate, description }) => (
   </div>
 );
 
-const DepartmentList = ({ departments }) => (
-  <ul className={style.departmentList}>
-    {departments.map((d, i) => {
-      const ExpandableSummary = expandable(`eo:${d.name}`, DepartmentSummary);
-      return (
-        <li key={i} className={concat(style.department, grid.col_sm_12)}>
-          <ExpandableSummary {...d} />
-        </li>
-      );
-    })}
-  </ul>
-);
-
 export default ({ eventId }) => (
   <div className={concat(style.wrap, theme.page_padding)}>
     <section className={style.event}>
@@ -131,7 +117,9 @@ export default ({ eventId }) => (
                   component={EventRow} />
     </section>
     <section className={style.departments}>
-      <DataLoader serviceCall={`events/${eventId}/departments`} component={DepartmentList} />
+      <DataLoader serviceCall={`events/${eventId}/departments`}
+                  component={EventDepartmentsList}
+                  longTitle={true} />
     </section>
   </div>
 )

@@ -8,6 +8,7 @@ import UserBadge from './UserBadge';
 import SubMenu from './SubMenu';
 import FormField from './FormField';
 import Button from './Button';
+import EventDepartmentsList from './EventDepartmentsList';
 
 import grid from '../grid.less';
 import theme from '../theme.css';
@@ -95,10 +96,10 @@ const SummaryRow = ({ eventId }) => (
   </div>
 );
 
-const Departments = ({ }) => (
+const Departments = ({ eventId }) => (
   <div className={theme.page_padding}>
-    <div className={theme.bg_content} style={{ height: '100px' }}>
-    </div>
+    <DataLoader serviceCall={`events/${eventId}/departments`}
+                component={EventDepartmentsList} />
   </div>
 );
 
@@ -135,6 +136,6 @@ export default ({ eventId }) => (
     <SubMenu>
       <SearchForm />
     </SubMenu>
-    <Departments />
+    <Departments eventId={eventId} />
   </div>
 );

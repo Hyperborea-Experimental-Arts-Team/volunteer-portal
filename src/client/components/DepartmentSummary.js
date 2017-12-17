@@ -76,15 +76,28 @@ function getRow(team, expanded, toggleTeam) {
   />
 }
 
-export default ({ name, lead, teams, expandedRows = new Set(), toggleRow = () => {} }) => {
+export default ({
+    name,
+    lead,
+    teams,
+    expandedRows = new Set(),
+    toggleRow = () => {},
+    longTitle = false
+}) => {
+  const title = longTitle ?
+      <FormattedMessage
+          id="department.needs"
+          defaultMessage="{title} Department Volunteer Needs"
+          values={{ title: name }}/> :
+      <FormattedMessage
+          id="department.name"
+          defaultMessage="{title} Department"
+          values={{ title: name }}/>;
   return (
       <section className={concat(theme.bg_content, style.wrapper)}>
         <div className={style.header}>
           <div className={style.title}>
-            <FormattedMessage
-                id="department.needs"
-                defaultMessage="{title} Department Volunteer Needs"
-                values={{ title: name }}/>
+            {title}
           </div>
           <UserBadge {...lead} justify="right" title={
             <FormattedMessage

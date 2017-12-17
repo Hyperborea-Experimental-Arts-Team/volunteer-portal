@@ -91,6 +91,7 @@ router.post('/batch', (request, response) => {
 
   // TODO: Reuse the fetch code from the client when code sharing happens
   // TODO: Also, it would be more efficient if it didn't actually fire new http requests
+  // TODO: Also, it should consolidate duplicate calls
   const subrequests = request.body.requests.map(subrequest => fetch(
     `http://${HOST}:${config.get('server.port')}/api/${subrequest.endpoint}`,
     {
