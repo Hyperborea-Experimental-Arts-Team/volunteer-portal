@@ -45,12 +45,13 @@ const DepartmentList = ({ departments }) => (
     <h3 className={theme.title}>
       <FormattedMessage id="departments.title" defaultMessage="Departments" />
       <div className={style.departmentList}>
-        { departments.map(department => {
+        { departments.map((department, i) => {
           const numVolunteers = department.teams.reduce(
               (volunteers, team) => volunteers + team.roles.reduce(
                   (v, role) => v + role.filledShifts, 0), 0);
           return (
-            <UserBadge name={department.name}
+            <UserBadge key={i}
+                       name={department.name}
                        title={<FormattedMessage id="department.stats"
                                                 defaultMessage="{teams} {teams, plural, one {team} other {teams}} • {volunteers} {volunteers, plural, one {volunteer} other {volunteers}}"
                                                 values={{
