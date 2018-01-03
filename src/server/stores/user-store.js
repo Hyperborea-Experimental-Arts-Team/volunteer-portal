@@ -7,6 +7,9 @@
  * @since Oct 2017
  */
 import bcrypt from 'bcrypt-nodejs';
+import { runQuery } from '../db';
+import mysql from 'mysql';
+import config from 'config';
 
 const byEmail = {
   'butts@butts.com': 0
@@ -45,10 +48,31 @@ export function get(id) {
  * @returns {Promise.<object|null>} Promise resolving to the user, or null if one cannot be found
  */
 export function getByEmail(email) {
-  if (!byEmail.hasOwnProperty(email)) {
-    return Promise.resolve(null);
-  }
-  return Promise.resolve(Object.assign({}, fakeStore[byEmail[email]]));
+    
+    if(config.db.isMocked){
+        if (!byEmail.hasOwnProperty(email)) {
+            return Promise.resolve(null);
+        }
+        return Promise.resolve(Object.assign({}, fakeStore[byEmail[email]]));
+    }
+    
+    let query = "SELECT CONCAT(firstName,' ',lastName) AS name, photo AS avatar, email, password " +
+                "FROM users WHERE email=?";
+    const params = [email];
+    query = mysql.format(query, params);
+    
+    return runQuery(query)
+    .then(rows => {
+        if (rows.length == 0) {
+            return Promise.resolve(null);
+        }
+
+        // Copy from SQL RowDataPacket to generic object
+        const user = Object.assign({}, rows[0]);
+        user.password = String.fromCharCode(...user.password);
+
+        return Promise.resolve(user);
+    });
 }
 
 /**

@@ -2,5 +2,14 @@
   "server": {
     "port": 3001
   },
+  "db" : {
+    "isMocked": true,
+    "host": "heavenly",
+    "user": "nyanCat",
+    "__passwd_comment":  "Line below must match value in createSchema.sql",
+    "passwd": "P!b2BtW8AarP", 
+    "schema": "nyanPortal",
+    "maxConnections": 100
+  },
   "jwtSecret": "CHANGEME"
 }
