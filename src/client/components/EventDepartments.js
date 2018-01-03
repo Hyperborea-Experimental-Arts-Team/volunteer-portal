@@ -9,6 +9,7 @@ import SubMenu from './SubMenu';
 import FormField from './FormField';
 import Button from './Button';
 import EventDepartmentsList from './EventDepartmentsList';
+import BigNumber from './BigNumber';
 
 import grid from '../grid.less';
 import theme from '../theme.css';
@@ -34,11 +35,87 @@ const LeadInfo = lead => (
   </div>
 );
 
-const DepartmentNumbers = () => (
-  <div className={concat(style.numberSection, theme.divider)} style={{ minHeight: '200px' }}>
-    TODO
-  </div>
-);
+const DepartmentNumbers = ({ departments }) => {
+
+  // This is fucking awful, Michael. Definitely do it better when there's a real data model.
+  const numLeads = departments.reduce((num, department) => num + department.leads.length, 0);
+  const numTeams = departments.reduce((num, department) => num + department.teams.length, 0);
+  const numTeamLeads = departments.reduce(
+      (num, department) => num + department.teams.reduce(
+          (num, team) => num + team.leads.length, 0), 0);
+  const numVolunteers = departments.reduce(
+      (num, department) => num + department.teams.reduce(
+          (num, team) => team.roles.reduce(
+              (num, role) => num + role.filledShifts
+          , 0)
+      , 0)
+  , 0);
+
+  return (
+      <div className={concat(style.numberSection, theme.divider)}>
+        <div className={style.numberColumn}>
+          <BigNumber
+              label={<FormattedMessage id="departments.title" defaultMessage="Departments" />}
+              infoLines={[
+                (<FormattedMessage id="department.leads"
+                                   defaultMessage="{leads} Department {leads, plural, one {Lead} other {Leads}}"
+                                   values={{ leads: numLeads }}
+                />),
+                (<FormattedMessage id="department.teams"
+                                   defaultMessage="{teams} {teams, plural, one {Team} other {Teams}}"
+                                   values={{ teams: numTeams }}
+                />)
+              ]}
+              number={departments.length}
+              className={theme.txt_accent}
+          />
+          <BigNumber
+              label={<FormattedMessage id="teams.title" defaultMessage="Teams" />}
+              infoLines={[
+                (<FormattedMessage id="team.leads"
+                                   defaultMessage="{leads} Team {leads, plural, one {Lead} other {Leads}}"
+                                   values={{ leads: numTeamLeads }}
+                />),
+                (<FormattedMessage id="department.volunteers"
+                                   defaultMessage="{volunteers} {volunteers, plural, one {Volunteer} other {Volunteers}}"
+                                   values={{ volunteers: numVolunteers }}
+                />)
+              ]}
+              number={numTeams}
+              className={theme.txt_accent}
+          />
+        </div>
+        <div className={style.numberColumn}>
+          <BigNumber
+              label={<FormattedMessage id="departments.title" defaultMessage="Departments" />}
+              infoLines={[
+                (<FormattedMessage id="department.leads"
+                                   defaultMessage="{leads} Department {leads, plural, one {Lead} other {Leads}}"
+                                   values={{ leads: numLeads }}
+                />),
+                (<FormattedMessage id="department.teams"
+                                   defaultMessage="{teams} {teams, plural, one {Team} other {Teams}}"
+                                   values={{ teams: numTeams }}
+                />)
+              ]}
+              number={departments.length}
+              className={theme.txt_accent}
+          />
+          <BigNumber
+              label={<FormattedMessage id="volunteers.title" defaultMessage="Volunteers" />}
+              infoLines={[
+                (<FormattedMessage id="department.volunteers"
+                                   defaultMessage="{volunteers} {volunteers, plural, one {Volunteer} other {Volunteers}}"
+                                   values={{ volunteers: numVolunteers }}
+                />)
+              ]}
+              number={numVolunteers}
+              className={theme.txt_accent}
+          />
+        </div>
+      </div>
+  );
+};
 
 const DepartmentList = ({ departments }) => (
   <div>
@@ -58,7 +135,7 @@ const DepartmentList = ({ departments }) => (
                                                   teams: department.teams.length,
                                                   volunteers: numVolunteers
                                                 }} />}
-                       avatar={department.lead.avatar} />
+                       avatar={department.leads[0].avatar} />
           );
         })}
       </div>
@@ -89,7 +166,7 @@ const SummaryRow = ({ eventId }) => (
       </section>
       <section className={grid.col_sm_8}>
         <div className={concat(style.info, theme.bg_content)}>
-          <DepartmentNumbers />
+          <DataLoader serviceCall={`events/${eventId}/departments`} component={DepartmentNumbers} />
           <DataLoader serviceCall={`events/${eventId}/departments`} component={DepartmentList} />
         </div>
       </section>

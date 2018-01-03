@@ -12,12 +12,16 @@ const fakeStore = {
   0: {
     id: 0,
     name: 'Safety',
-    lead: {
+    leads: [{
       name: 'Pinchy McPinchface',
       avatar: 'pinchy.jpg'
-    },
+    }],
     teams: [{
       name: 'Fire Art Safety Team',
+      leads: [{
+        name: 'Pinchy McPinchface',
+        avatar: 'pinchy.jpg'
+      }],
       roles: [{
         name: 'Dirt',
         minShifts: 20,
@@ -36,6 +40,10 @@ const fakeStore = {
       }]
     }, {
       name: 'First Aid Team',
+      leads: [{
+        name: 'Pinchy McPinchface',
+        avatar: 'pinchy.jpg'
+      }],
       roles: [{
         name: 'Dirt',
         minShifts: 20,
@@ -57,12 +65,16 @@ const fakeStore = {
   1: {
     id: 1,
     name: 'City',
-    lead: {
+    leads:[{
       name: 'Pinchy McPinchface',
       avatar: 'pinchy.jpg'
-    },
+    }],
     teams: [{
       name: 'Department of Public Works',
+      leads: [{
+        name: 'Pinchy McPinchface',
+        avatar: 'pinchy.jpg'
+      }],
       roles: [{
         name: 'Dirt',
         minShifts: 20,
@@ -81,6 +93,10 @@ const fakeStore = {
       }]
     }, {
       name: 'Placement',
+      leads: [{
+        name: 'Pinchy McPinchface',
+        avatar: 'pinchy.jpg'
+      }],
       roles: [{
         name: 'Dirt',
         minShifts: 20,
@@ -99,6 +115,10 @@ const fakeStore = {
       }]
     }, {
       name: 'Leave No Trace',
+      leads: [{
+        name: 'Pinchy McPinchface',
+        avatar: 'pinchy.jpg'
+      }],
       roles: [{
         name: 'Dirt',
         minShifts: 20,
@@ -120,12 +140,16 @@ const fakeStore = {
   2: {
     id: 2,
     name: 'Art',
-    lead: {
+    leads: [{
       name: 'Pinchy McPinchface',
       avatar: 'pinchy.jpg'
-    },
+    }],
     teams: [{
       name: 'Department of Public Works',
+      leads: [{
+        name: 'Pinchy McPinchface',
+        avatar: 'pinchy.jpg'
+      }],
       roles: [{
         name: 'Dirt',
         minShifts: 20,
@@ -144,6 +168,10 @@ const fakeStore = {
       }]
     }, {
       name: 'Placement',
+      leads: [{
+        name: 'Pinchy McPinchface',
+        avatar: 'pinchy.jpg'
+      }],
       roles: [{
         name: 'Dirt',
         minShifts: 20,
@@ -162,6 +190,10 @@ const fakeStore = {
       }]
     }, {
       name: 'Leave No Trace',
+      leads: [{
+        name: 'Pinchy McPinchface',
+        avatar: 'pinchy.jpg'
+      }],
       roles: [{
         name: 'Dirt',
         minShifts: 20,

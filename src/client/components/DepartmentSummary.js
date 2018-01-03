@@ -78,7 +78,7 @@ function getRow(team, expanded, toggleTeam) {
 
 export default ({
     name,
-    lead,
+    leads,
     teams,
     expandedRows = new Set(),
     toggleRow = () => {},
@@ -99,7 +99,7 @@ export default ({
           <div className={style.title}>
             {title}
           </div>
-          <UserBadge {...lead} justify="right" title={
+          <UserBadge {...leads[0]} justify="right" title={
             <FormattedMessage
                 id="lead.title"
                 defaultMessage="{department} Lead"
