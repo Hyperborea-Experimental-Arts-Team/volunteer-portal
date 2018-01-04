@@ -12,7 +12,7 @@ import config from 'config';
 import { isLoggedIn } from './auth';
 import { get as getEvent } from './stores/event-store';
 import { getAll as getDepartments } from './stores/department-store';
-import { get as getUser } from './stores/user-store';
+import { getById as getUser } from './stores/user-store';
 import fetch from 'isomorphic-fetch';
 
 const HOST = 'localhost';
