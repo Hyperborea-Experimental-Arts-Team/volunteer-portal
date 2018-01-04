@@ -50,3 +50,10 @@
 .divider {
   border-color: #d8d8d8;
 }
+
+.title {
+  font-weight: bold;
+  font-size: 18px;
+  letter-spacing: -0.1px;
+  margin-bottom: 14px;
+}

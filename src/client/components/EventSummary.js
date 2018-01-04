@@ -19,8 +19,8 @@ function renderDates(start, end, big, altBg) {
   if (big) {
     return (
       <div className={concat(style.dates, bg(altBg), theme.txt_lightest)}>
-        <BigDate light={true} date={start} label={<FormattedMessage id="date.start" defaultMessage="Start" />}/>
-        <BigDate light={true} date={end} label={<FormattedMessage id="date.end" defaultMessage="End" />}/>
+        <BigDate bigHeader={true} light={true} date={start} label={<FormattedMessage id="date.start" defaultMessage="Start" />}/>
+        <BigDate bigHeader={true} light={true} date={end} label={<FormattedMessage id="date.end" defaultMessage="End" />}/>
       </div>
     );
   }
