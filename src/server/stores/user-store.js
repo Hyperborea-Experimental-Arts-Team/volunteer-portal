@@ -11,7 +11,7 @@ import { runQuery } from '../db';
 import mysql from 'mysql';
 import config from 'config';
 
-const byEmail = {
+const emailToId = {
   'butts@butts.com': 0
 };
 
@@ -50,10 +50,10 @@ export function get(id) {
 export function getByEmail(email) {
     
     if(config.db.isMocked){
-        if (!byEmail.hasOwnProperty(email)) {
+        if (!emailToId.hasOwnProperty(email)) {
             return Promise.resolve(null);
         }
-        return Promise.resolve(Object.assign({}, fakeStore[byEmail[email]]));
+        return Promise.resolve(Object.assign({}, fakeStore[emailToId[email]]));
     }
     
     let query = "SELECT CONCAT(firstName,' ',lastName) AS name, photo AS avatar, email, password " +

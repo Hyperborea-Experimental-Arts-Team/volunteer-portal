@@ -28,7 +28,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-function maybeLoadData(props) {
+function loadIfNotCached(props) {
   const {
     serviceCall,
     token,
@@ -94,11 +94,11 @@ class DataLoader extends React.Component {
   }
 
   componentWillMount() {
-    maybeLoadData(this.props);
+    loadIfNotCached(this.props);
   }
 
   componentWillReceiveProps(newProps) {
-    maybeLoadData(newProps);
+    loadIfNotCached(newProps);
   }
 }
 
