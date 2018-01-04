@@ -54,7 +54,7 @@ const fakeStore = {
  * @param {number} id - The id of the event to retrieve
  * @returns {Promise<object|null>} Promise resolving to the event, or null if it cannot be found
  */
-export function get(id) {
+export function getById(id) {
 
   return new Promise(resolve => {
     if (id == null) {
