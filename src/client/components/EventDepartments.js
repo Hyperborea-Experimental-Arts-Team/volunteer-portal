@@ -187,7 +187,7 @@ class SearchForm extends React.Component {
     this.state = { search: '' };
   }
 
-  updateSearch(value) {
+  setSearch(value) {
     this.setState(Object.assign({}, this.state, {
       search: value
     }));
@@ -199,7 +199,7 @@ class SearchForm extends React.Component {
           <FormField name="search"
                      icon={searchSvg}
                      value={this.state.search}
-                     onChange={v => this.updateSearch(v)}
+                     onChange={v => this.setSearch(v)}
                      title={<FormattedMessage
                                id="search"
                                defaultMessage="Search" />} />
