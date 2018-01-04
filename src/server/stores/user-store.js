@@ -33,13 +33,36 @@ function validate(password, user) {
   return bcrypt.compareSync(password, user.password);
 }
 
+function runUserQuery(query) {
+  return runQuery(query)
+    .then(rows => {
+        if (rows.length == 0) {
+          return Promise.resolve(null);
+        }
+
+        // Copy from SQL RowDataPacket to generic object
+        const user = Object.assign({}, rows[0]);
+        user.password = String.fromCharCode(...user.password);
+
+        return Promise.resolve(user);
+    });
+}
+
 /**
  * Gets a user by id
  * @param {number} id - The id of the user
  * @returns {Promise.<object|null>} Promise resolving to the user, or null if one cannot be found
  */
-export function get(id) {
-  return Promise.resolve(fakeStore[id] || null);
+export function getById(id) {
+  
+  if (config.db.isMocked) {
+    return Promise.resolve(fakeStore[id] || null); 
+  }
+  
+  const query = "SELECT CONCAT(firstName,' ',lastName) AS name, photo AS avatar, email, password " +
+                "FROM users WHERE id=?";
+  const params = [id];
+  return runUserQuery(mysql.format(query, params));
 }
 
 /**
@@ -56,23 +79,10 @@ export function getByEmail(email) {
         return Promise.resolve(Object.assign({}, fakeStore[emailToId[email]]));
     }
     
-    let query = "SELECT CONCAT(firstName,' ',lastName) AS name, photo AS avatar, email, password " +
+    const query = "SELECT CONCAT(firstName,' ',lastName) AS name, photo AS avatar, email, password " +
                 "FROM users WHERE email=?";
     const params = [email];
-    query = mysql.format(query, params);
-    
-    return runQuery(query)
-    .then(rows => {
-        if (rows.length == 0) {
-            return Promise.resolve(null);
-        }
-
-        // Copy from SQL RowDataPacket to generic object
-        const user = Object.assign({}, rows[0]);
-        user.password = String.fromCharCode(...user.password);
-
-        return Promise.resolve(user);
-    });
+    return runUserQuery(mysql.format(query, params));
 }
 
 /**
