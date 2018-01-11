@@ -2,6 +2,8 @@
  * Loads data from the api, passing the response data as props
  * to the child Component. Uses cached response data if possible.
  *
+ * TODO: Clean up the single/multiple service call stuff. Maybe just remove the single-call case.
+ *
  * @author mtownsend
  * @since Oct 2017
  */
@@ -26,16 +28,29 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-function maybeLoadData(props) {
+function loadIfNotCached(props) {
   const {
-      serviceCall,
-      token,
-      serviceCache,
-      loadData
-      } = props;
-  // Nothing in the cache. Load it.
-  if (serviceCache[serviceCall] == null) {
-    loadData(serviceCall, token);
+    serviceCall,
+    token,
+    serviceCache,
+    loadData
+  } = props;
+
+
+  // Single service call
+  if (typeof serviceCall === 'string') {
+    if (serviceCache[serviceCall] == null) {
+      // Nothing in the cache. Load it.
+      loadData(serviceCall, token);
+    }
+    return;
+  }
+
+  // Multiple service calls
+  for (let call of Object.keys(serviceCall)) {
+    if (serviceCache[call] == null) {
+      loadData(call, token);
+    }
   }
 }
 
@@ -49,30 +64,41 @@ class DataLoader extends React.Component {
       token,
       ...rest
     } = this.props;
-    const data = serviceCache[serviceCall];
 
-    // Loading data. Spin spin spin.
-    if (data == null || data === LOADING) {
-      return <Spinner />;
+    // Single service call. Lemon squeezy.
+    if (typeof serviceCall === 'string') {
+      const data = serviceCache[serviceCall];
+      if (data == null || data === LOADING) {
+        return <Spinner />;
+      }
+      if (data.error) {
+        return <Error message={data.message} />;
+      }
+
+      return <Component {...data} {...rest} />;
     }
 
-    // The data load failed
-    if (data.error) {
-      return <Error message={data.message} />;
+    // Multiple service calls.
+    const responseMap = {};
+    for (let call of Object.keys(serviceCall)) {
+      const data = serviceCache[call];
+      if (data == null || data === LOADING) {
+        return <Spinner />;
+      }
+      if (data.error) {
+        return <Error message={data.message} />;
+      }
+      responseMap[serviceCall[call]] = data;
     }
-
-    // Render the child Component with the response data
-    return (
-        <Component {...data} {...rest} />
-    );
+    return <Component {...responseMap} {...rest} />;
   }
 
   componentWillMount() {
-    maybeLoadData(this.props);
+    loadIfNotCached(this.props);
   }
 
   componentWillReceiveProps(newProps) {
-    maybeLoadData(newProps);
+    loadIfNotCached(newProps);
   }
 }
 

@@ -10,8 +10,9 @@ import passport from 'passport';
 import config from 'config';
 
 import { isLoggedIn } from './auth';
-import { get as getEvent } from './stores/event-store';
+import { getById as getEvent } from './stores/event-store';
 import { getAll as getDepartments } from './stores/department-store';
+import { getById as getUser } from './stores/user-store';
 import fetch from 'isomorphic-fetch';
 
 const HOST = 'localhost';
@@ -67,6 +68,12 @@ const GETS = [
 
   ['/events/:id/departments', isLoggedIn, (request, response) => {
     getDepartments(request.params.id).then(departments => response.json({ departments }));
+  }],
+
+  ['/events/:id/lead', isLoggedIn, (request, response) => {
+    getEvent(request.params.id)
+        .then(event => getUser(event.lead))
+        .then(lead => response.json(lead));
   }]
 ];
 
@@ -83,6 +90,8 @@ function handleResponse(response) {
 router.post('/batch', (request, response) => {
 
   // TODO: Reuse the fetch code from the client when code sharing happens
+  // TODO: Also, it would be more efficient if it didn't actually fire new http requests
+  // TODO: Also, it should consolidate duplicate calls
   const subrequests = request.body.requests.map(subrequest => fetch(
     `http://${HOST}:${config.get('server.port')}/api/${subrequest.endpoint}`,
     {

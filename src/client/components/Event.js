@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import EventMenu from './EventMenu';
 import EventOverview from './EventOverview';
-import EventTeams from './Todo';
+import EventDepartments from './EventDepartments';
 import EventVolunteers from './Todo';
 import EventSchedule from './Todo';
 
@@ -13,7 +13,7 @@ function eventTab(selectedTab, eventId) {
     case 'overview':
       return <EventOverview eventId={eventId} />;
     case 'teams':
-      return <EventTeams />;
+      return <EventDepartments eventId={eventId}/>;
     case 'volunteers':
       return <EventVolunteers />;
     case 'schedule':

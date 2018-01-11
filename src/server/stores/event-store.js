@@ -19,10 +19,7 @@ const fakeStore = {
     address: '123 Christian Hill Drive',
     photo: 'firefly.png',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    lead: {
-      name: 'Pinchy McPinchface',
-      avatar: 'pinchy.jpg'
-    }
+    lead: 0
   },
   1: {
     id: 1,
@@ -35,10 +32,7 @@ const fakeStore = {
     address: '123 Christian Hill Drive',
     photo: 'hrpdrp.png',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    lead: {
-      name: 'Pinchy McPinchface',
-      avatar: 'pinchy.jpg'
-    }
+    lead: 0
   },
   2: {
     id: 2,
@@ -51,14 +45,16 @@ const fakeStore = {
     address: '123 Christian Hill Drive',
     photo: 'decomp.png',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    lead: {
-      name: 'Pinchy McPinchface',
-      avatar: 'pinchy.jpg'
-    }
+    lead: 0
   }
 };
 
-export function get(id) {
+/**
+ * Gets an event by id
+ * @param {number} id - The id of the event to retrieve
+ * @returns {Promise<object|null>} Promise resolving to the event, or null if it cannot be found
+ */
+export function getById(id) {
 
   return new Promise(resolve => {
     if (id == null) {
@@ -66,7 +62,6 @@ export function get(id) {
       resolve(Object.assign({}, fakeStore));
     }
 
-    // TODO: Return event details?
     resolve(fakeStore[id]);
   });
 }

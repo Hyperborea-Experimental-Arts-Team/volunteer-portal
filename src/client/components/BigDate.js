@@ -2,10 +2,11 @@ import React from 'react';
 import BigNumber from './BigNumber';
 import { FormattedDate } from 'react-intl';
 
-export default ({ date, label, className = '', light }) => {
+export default ({ date, label, bigHeader = false, className = '', light }) => {
   const d = new Date(date);
   return (
     <BigNumber
+      bigHeader={bigHeader}
       label={label}
       number={d.getDate()}
       className={className}
