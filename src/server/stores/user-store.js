@@ -37,14 +37,14 @@ function runUserQuery(query) {
   return runQuery(query)
     .then(rows => {
         if (rows.length == 0) {
-          return Promise.resolve(null);
+          return null;
         }
 
         // Copy from SQL RowDataPacket to generic object
         const user = Object.assign({}, rows[0]);
         user.password = String.fromCharCode(...user.password);
 
-        return Promise.resolve(user);
+        return user;
     });
 }
 
@@ -56,7 +56,7 @@ function runUserQuery(query) {
 export function getById(id) {
   
   if (config.db.isMocked) {
-    return Promise.resolve(fakeStore[id] || null); 
+    return fakeStore[id] || null;
   }
   
   const query = "SELECT CONCAT(firstName,' ',lastName) AS name, photo AS avatar, email, password " +
@@ -76,7 +76,7 @@ export function getByEmail(email) {
         if (!emailToId.hasOwnProperty(email)) {
             return Promise.resolve(null);
         }
-        return Promise.resolve(Object.assign({}, fakeStore[emailToId[email]]));
+        return Object.assign({}, fakeStore[emailToId[email]]);
     }
     
     const query = "SELECT CONCAT(firstName,' ',lastName) AS name, photo AS avatar, email, password " +
@@ -94,8 +94,8 @@ export function getByEmail(email) {
 export function authenticate(email, password) {
   return getByEmail(email).then(user => {
     if (!user || !validate(password, user)) {
-      return Promise.resolve(null);
+      return null;
     }
-    return Promise.resolve(user);
+    return user;
   });
 }
