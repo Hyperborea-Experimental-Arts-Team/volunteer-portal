@@ -6,7 +6,7 @@ import DataLoader from '../containers/DataLoader';
 import Image from './Image';
 import UserBadge from './UserBadge';
 import SubMenu from './SubMenu';
-import FormField from './FormField';
+import SearchForm from './SearchForm';
 import Button from './Button';
 import EventDepartmentsList from './EventDepartmentsList';
 import BigNumber from './BigNumber';
@@ -181,38 +181,13 @@ const Departments = ({ eventId }) => (
   </div>
 );
 
-class SearchForm extends React.Component {
-  constructor() {
-    super();
-    this.state = { search: '' };
-  }
 
-  setSearch(value) {
-    this.setState(Object.assign({}, this.state, {
-      search: value
-    }));
-  }
-
-  render() {
-    return (
-        <form className={concat(style.search, theme.txt_lightest)}>
-          <FormField name="search"
-                     icon={searchSvg}
-                     value={this.state.search}
-                     onChange={v => this.setSearch(v)}
-                     title={<FormattedMessage
-                               id="search"
-                               defaultMessage="Search" />} />
-        </form>
-    );
-  }
-}
 
 export default ({ eventId }) => (
   <div>
     <SummaryRow eventId={eventId} />
     <SubMenu>
-      <SearchForm />
+      <SearchForm className={style.search} />
     </SubMenu>
     <Departments eventId={eventId} />
   </div>

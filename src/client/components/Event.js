@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import EventMenu from './EventMenu';
 import EventOverview from './EventOverview';
 import EventDepartments from './EventDepartments';
-import EventVolunteers from './Todo';
+import EventVolunteers from './EventVolunteers';
 import EventSchedule from './Todo';
 
 import style from './Event.less';
@@ -15,7 +15,7 @@ function eventTab(selectedTab, eventId) {
     case 'teams':
       return <EventDepartments eventId={eventId}/>;
     case 'volunteers':
-      return <EventVolunteers />;
+      return <EventVolunteers eventId={eventId}/>;
     case 'schedule':
       return <EventSchedule />;
     default:
