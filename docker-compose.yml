@@ -1,0 +1,20 @@
+version: '3.2'
+services:
+  nyan-app:
+    build: . 
+    ports:
+      - "3000:3001"
+    environment:
+      NODE_CONFIG: '{"db":{"host":"database"}}'
+  database:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    command: --init-file /dbconfig/createSchema.sql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    volumes:
+      - type: bind
+        source: ./src/database
+        target: /dbconfig
+        

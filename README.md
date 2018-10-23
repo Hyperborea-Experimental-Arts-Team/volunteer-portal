@@ -16,6 +16,7 @@ Volunteer portal for community arts festivals, built on React and Node
   - [Filename Conventions](#filename-conventions)
   - [Version Control Integration](#version-control-integration)
   - [Writing Tests](#writing-tests)
+- [Using Docker](#using-docker)
 
 ## Environment Setup
 
@@ -135,3 +136,25 @@ it('sums numbers', () => {
 
 All `expect()` matchers supported by Jest are [extensively documented here](http://facebook.github.io/jest/docs/expect.html).<br>
 You can also use [`jest.fn()` and `expect(fn).toBeCalled()`](http://facebook.github.io/jest/docs/expect.html#tohavebeencalled) to create “spies” or mock functions.
+
+
+## Using Docker
+
+### Build and run the app server in a docker container
+
+```
+$ docker build -t nyan .
+$ docker run -p 3000:3001 -t nyan
+```
+
+### Stand up a app server and database with docker-compose
+
+First time:
+```
+$ docker-compose up
+```
+
+After editing the app server source or Dockerfile:
+```
+$ docker-compose build; docker-compose up
+```
