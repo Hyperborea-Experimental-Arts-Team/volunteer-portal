@@ -8,6 +8,7 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.16.1",
     "express-session": "^1.15.6",
+    "express-validator": "^5.3.0",
     "isomorphic-fetch": "^2.2.1",
     "jsonwebtoken": "^8.1.0",
     "node-mysql": "^0.4.2",

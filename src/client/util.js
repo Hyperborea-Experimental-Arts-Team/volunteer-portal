@@ -13,3 +13,24 @@
 export function concat(...params) {
   return params.join(' ');
 }
+
+export function isInError(field, errors) {
+    if (errors) {
+        var error = errors.find((error) => error.param === field) != null;
+        return error && error != null;
+    }
+    return false;
+}
+
+export function errorFor(field, errors) {
+    if (errors) {
+        const error = errors.find((error) => error.param === field)
+        if (error)
+            return error.msg;
+    }
+    return undefined;
+}
+
+export function labelFor(field, defaultMessage, errors) {
+    return errorFor(field, errors) || defaultMessage;
+}

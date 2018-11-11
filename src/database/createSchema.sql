@@ -24,16 +24,19 @@
 
 /* The work of creating history starts with a blank page. */
 DROP DATABASE IF EXISTS nyanPortal;
-DROP USER nyanCat;
+DROP USER IF EXISTS nyanCat;
 
 /* In the beginning there was Nyan Cat. */
 /* This is the user Node.js will connect as. */
-CREATE USER  'nyanCat'@'%' IDENTIFIED BY 'P!b2BtW8AarP';
+CREATE USER  'nyanCat'@'%' IDENTIFIED WITH mysql_native_password BY 'P!b2BtW8AarP';
 
 /* Make the DB. */
 CREATE DATABASE nyanPortal 
-	/* widest level of Unicode support, supports emoji and Chinese */
-	CHARACTER SET utf8mb4;
+
+/* widest level of Unicode support, supports emoji and Chinese */
+CHARACTER SET utf8mb4;
+
+GRANT ALL PRIVILEGES ON nyanPortal.* TO 'nyanCat'@'%';
 	
 USE nyanPortal;
 
@@ -63,7 +66,7 @@ CREATE TABLE users (
 	password BINARY(60), /* bcrypt hashes */
 	lastName VARCHAR(32),
 	firstName VARCHAR(32),
-	playaName VARCHAR(32),
+	burnName VARCHAR(32),
 	dateOfBirth DATE,
 	isActive BIT DEFAULT 1,
 	photo VARCHAR(256)
@@ -97,7 +100,7 @@ CREATE TABLE ticketStatus (
 );
 
 CREATE TABLE teamLeads (
-	lead INT, FOREIGN KEY (lead) REFERENCES users(id) ON DELETE CASCADE,
+	teamLead INT, FOREIGN KEY (teamLead) REFERENCES users(id) ON DELETE CASCADE,
 	team INT, FOREIGN KEY (team) REFERENCES teams(id) ON DELETE CASCADE,
 	canGrantCoLeads BIT DEFAULT 0
 );

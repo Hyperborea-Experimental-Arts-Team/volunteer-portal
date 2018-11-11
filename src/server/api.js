@@ -12,8 +12,12 @@ import config from 'config';
 import { isLoggedIn } from './auth';
 import { getById as getEvent } from './stores/event-store';
 import { getAll as getDepartments } from './stores/department-store';
-import { getById as getUser } from './stores/user-store';
+import { getById as getUserById } from './stores/user-store';
+import { getByEmail as getUserByEmail } from './stores/user-store';
+import { createUser } from './stores/user-store';
 import fetch from 'isomorphic-fetch';
+
+import { body, validationResult } from 'express-validator/check';
 
 const HOST = 'localhost';
 
@@ -42,12 +46,43 @@ const POSTS = [
     })(request, response);
   }],
 
-  ['/signup', (request, response) => {
-    response.status(418).json({
-      success: false,
-      message: 'Not yet implemented'
-    });
-  }]
+  /* Register a new user */
+  ['/signup', [
+     body('signup.firstName', 'First name is required').exists(),
+     body('signup.lastName', 'Last name is required').exists(),
+     body('signup.email', 'Email is required').exists(),
+     body('signup.email', 'Invalid email').isEmail(),
+     body('signup.email').custom(value => {
+        return getUserByEmail(value).then(user => {
+            if (user)
+                return Promise.reject("This email is already registered");
+        })
+     }),
+     body('signup.dateOfBirth', 'Date of birth is required').exists(),
+     body('signup.dateOfBirth', 'Date must be YYYY-MM-DD').isISO8601(),
+     body('signup.password', 'Password is required').exists(),
+     body('signup.password', 'Password must be at least 8 characters').isLength({ min: 8 }),
+     body('signup.repeatpassword', 'Confirmation password is required').exists(),
+     body('signup.repeatpassword', 'Repeat password does not match password').custom((value, { req }) => {
+        if (value !== req.body.signup.password)
+            throw new Error("Passwords do not match");
+        return value;
+     })
+  ], (request, response) => {
+     const errors = validationResult(request);
+     if (!errors.isEmpty()) {
+        return response.status(422).json({ errors: errors.array() });
+     }
+
+     const { signup } = request.body;
+
+     return createUser(signup).then(result => {
+        return response.status(200).json({});
+     }).catch(error => {
+        console.log("[signup] " + JSON.stringify(error));
+        return response.status(500).json({ reason: "Registration could not complete. Please try again later." });
+     });
+   }]
 ];
 
 const GETS = [
@@ -62,6 +97,10 @@ const GETS = [
     });
   }],
 
+  ['/users/:id?', isLoggedIn, (request, response) => {
+    getUserById(request.params.id).then(users => response.json(users))
+  }],
+
   ['/events/:id?', isLoggedIn, (request, response) => {
     getEvent(request.params.id).then(events => response.json(events));
   }],
@@ -72,7 +111,7 @@ const GETS = [
 
   ['/events/:id/lead', isLoggedIn, (request, response) => {
     getEvent(request.params.id)
-        .then(event => getUser(event.lead))
+        .then(event => getUserById(event.lead))
         .then(lead => response.json(lead));
   }]
 ];

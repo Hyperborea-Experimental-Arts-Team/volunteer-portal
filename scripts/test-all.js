@@ -5,3 +5,4 @@ const child = require('child_process');
 
 child.spawn('yarn', [ 'client:test' ], opts);
 //child.spawn('yarn', [ 'server:test' ], opts);
+

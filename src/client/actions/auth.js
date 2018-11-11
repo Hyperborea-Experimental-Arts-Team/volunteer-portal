@@ -9,13 +9,13 @@ import * as api from '../api';
 
 import { invalidate } from './serviceCache';
 
-export const LOGGING_IN = 'LOGGING_IN';
-export const LOGGED_IN = 'LOGGED_IN';
-export const LOGGED_OUT = 'LOGGED_OUT';
-export const LOGIN_FAILED = 'LOGIN_FAILED';
-export const SIGNING_UP = 'SIGNING_UP';
+export const LOGGING_IN    = 'LOGGING_IN';
+export const LOGGED_IN     = 'LOGGED_IN';
+export const LOGGED_OUT    = 'LOGGED_OUT';
+export const LOGIN_FAILED  = 'LOGIN_FAILED';
+export const SIGNING_UP    = 'SIGNING_UP';
 export const SIGNUP_FAILED = 'SIGNUP_FAILED';
-export const SIGNED_UP = 'SIGNED_UP';
+export const SIGNED_UP     = 'SIGNED_UP';
 
 function loggingIn() {
   return { type: LOGGING_IN };
@@ -41,8 +41,16 @@ function signedUp() {
   return { type: SIGNED_UP };
 }
 
-function signupFailed() {
-  return { type: SIGNUP_FAILED };
+/*
+ * @param reason - Reason for failure
+ * @param errors - Field-level errors, keyed by field id
+ */
+function signupFailed(reason, errors) {
+  return {
+    type: SIGNUP_FAILED,
+    reason: reason,
+    errors: errors
+  };
 }
 
 export function autologin(token) {
@@ -83,15 +91,23 @@ export function logout(redirect) {
   };
 }
 
-export function signup(firstname, lastname, email, password) {
+export function signup(signup) {
   return dispatch => {
     dispatch(signingUp());
-    api.post('signup', null, { firstname, lastname, email, password }).then(response => {
+    // react-datepicker sends full date + time. Scrub that to date-only, unless
+    // it's undefined, because moment will initialize that to today and no error
+    // feedback happens.
+    api.post('signup', null, { signup }).then(response => {
       if (response.status !== 200) {
-        dispatch(signupFailed());
+        dispatch(signupFailed("Please correct the errors below to complete registration.", response.data.errors));
         return;
       }
       dispatch(signedUp());
-    })
+      dispatch(login(signup.email, signup.password));
+    }).catch(error => {
+      dispatch(signupFailed(error));
+    });
   };
 }
+
+

@@ -18,7 +18,9 @@ const emailToId = {
 const fakeStore = {
   0: {
     id: 0,
-    name: 'Pinchy McPinchface',
+    lastName: 'McPinchface',
+    firstName: 'Pinchy',
+    burnName: '',
     avatar: 'pinchy.jpg',
     email: 'butts@butts.com',
     password: hash('buttsRgr8')
@@ -54,7 +56,6 @@ function runUserQuery(query) {
  * @returns {Promise.<object|null>} Promise resolving to the user, or null if one cannot be found
  */
 export function getById(id) {
-  
   if (config.db.isMocked) {
     return fakeStore[id] || null;
   }
@@ -71,18 +72,27 @@ export function getById(id) {
  * @returns {Promise.<object|null>} Promise resolving to the user, or null if one cannot be found
  */
 export function getByEmail(email) {
-    
     if(config.db.isMocked){
         if (!emailToId.hasOwnProperty(email)) {
             return Promise.resolve(null);
         }
         return Object.assign({}, fakeStore[emailToId[email]]);
     }
-    
-    const query = "SELECT CONCAT(firstName,' ',lastName) AS name, photo AS avatar, email, password " +
-                "FROM users WHERE email=?";
-    const params = [email];
-    return runUserQuery(mysql.format(query, params));
+
+    const query = "SELECT CONCAT(firstName,' ',lastName) AS name, photo AS avatar, dateOfBirth, email, password  from users WHERE email=?";
+
+    return runUserQuery(mysql.format(query, [email]));
+}
+
+/**
+ * Create a new user
+ * @param {string} user - User information
+ * @returns {Promise.<object>} Promise resolving to the user, or indicating failure
+ */
+export function createUser(user) {
+    const params = [ user.firstName, user.lastName, user.burnName, user.email, user.dateOfBirth, hash(user.password) ];
+    const query = "INSERT INTO users(firstName, lastName, burnName, email, dateOfBirth, password) VALUES(?, ?, ?, ?, ?, ?)"
+    return runQuery(mysql.format(query, params));
 }
 
 /**

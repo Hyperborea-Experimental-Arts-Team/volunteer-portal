@@ -5,14 +5,16 @@
  * @since Oct 2017
  */
 
-import { LOGGED_IN, LOGGING_IN, LOGGED_OUT, LOGIN_FAILED, SIGNING_UP, SIGNED_UP, SIGNUP_FAILED } from '../actions/auth';
+import {
+  LOGGED_IN, LOGGING_IN, LOGGED_OUT, LOGIN_FAILED, SIGNING_UP, SIGNED_UP, SIGNUP_FAILED
+} from '../actions/auth';
 
 export default (state = { loggedIn: false, token: null, user: null }, action) => {
   switch (action.type) {
     case LOGGING_IN:
-      return Object.assign({}, state, { status: 'LOGGING_IN' });
+      return Object.assign({}, state, { status: LOGGING_IN });
     case LOGGED_IN:
-      if (state.status !== 'LOGGING_IN') {
+      if (state.status !== LOGGING_IN) {
         // Login was aborted on the client-side
         return state;
       }
@@ -20,13 +22,13 @@ export default (state = { loggedIn: false, token: null, user: null }, action) =>
     case LOGGED_OUT:
       return { loggedIn: false, token: null, user: null };
     case LOGIN_FAILED:
-      return { loggedIn: false, token: null, user: null, status: 'LOGIN_FAILED'};
+      return { loggedIn: false, token: null, user: null, status: LOGIN_FAILED};
     case SIGNING_UP:
-      return Object.assign({}, state, { status: 'SIGNING_UP' });
+      return Object.assign({}, state, { status: SIGNING_UP });
     case SIGNED_UP:
-      return Object.assign({}, state, { status: 'SIGNUP_SUCCESS' });
+      return Object.assign({}, state, { status: SIGNED_UP });
     case SIGNUP_FAILED:
-      return Object.assign({}, state, { status: 'SIGNUP_FAILED' });
+      return Object.assign({}, state, { status: SIGNUP_FAILED, reason: action.reason, errors: action.errors });
     default:
       return state;
   }
