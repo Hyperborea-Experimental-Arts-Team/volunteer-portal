@@ -24,7 +24,7 @@
 
 /* The work of creating history starts with a blank page. */
 DROP DATABASE IF EXISTS nyanPortal;
-DROP USER nyanCat;
+DROP USER IF EXISTS nyanCat;
 
 /* In the beginning there was Nyan Cat. */
 /* This is the user Node.js will connect as. */
@@ -133,9 +133,15 @@ CREATE TABLE qualificationGranters (
 	grantingRole INT, FOREIGN KEY (grantingRole) REFERENCES roles(id)
 );
 
+							
+/* Copy this from populateTestData.sql so it can be run in MySQL container init */
+INSERT INTO users (firstName,lastName,email,photo,password) VALUES
+	('Pinchy','McPinchface','butts@butts.com','pinchy.jpg','$2a$08$vuIFiKM3Vxv4sBWzRIgCKuXiAIeqm0l.9TN5OWPOhwXCfDXg.chOu');
+
 /* ************************************************************************* */
 /* Grant powers to Nyan Cat over the tables of Nyan...
  * ...but not too much power! */
 
 GRANT INSERT, SELECT, UPDATE, EXECUTE, DELETE ON nyanPortal.* TO 'nyanCat'@'%';
-							
+
+	
